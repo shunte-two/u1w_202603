@@ -1729,8 +1729,8 @@ MonoBehaviour:
     successStory: {fileID: 11400000, guid: 8479410a7b234fd3aaef46fc32c7df6e, type: 2}
     defaultFailureStory: {fileID: 11400000, guid: 924b1dc5b2f14e4ab5cbcf8b79e10f56, type: 2}
     failureBranches: []
-  openingStory: {fileID: 11400000, guid: 7c62da9b65c54d3996bfbf9a1f2c7d91, type: 2}
-  resultStory: {fileID: 11400000, guid: 2f9a1ce19d0442f798dbd8a602f3454e, type: 2}
+  endingStory: {fileID: 11400000, guid: 36f32cb5cb7d408ba9062f8d66888de3, type: 2}
+  titleSceneName: Title
 --- !u!4 &1503877653
 Transform:
   m_ObjectHideFlags: 0

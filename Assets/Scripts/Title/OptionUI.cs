@@ -10,12 +10,16 @@ namespace U1W.Title
         [SerializeField] private Button closeButton;
 
         private bool listenersBound;
+        private bool openingRequested;
 
         private void Awake()
         {
             ValidateReferences();
             BindListeners();
-            CloseOptionsImmediate();
+            if (!openingRequested)
+            {
+                CloseOptionsImmediate();
+            }
         }
 
         private void OnValidate()
@@ -28,20 +32,6 @@ namespace U1W.Title
             UnbindListeners();
         }
 
-        private void Update()
-        {
-            if (!IsOptionsOpen())
-            {
-                return;
-            }
-
-            Keyboard keyboard = Keyboard.current;
-            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
-            {
-                CloseOptions();
-            }
-        }
-
         public void OpenOptions()
         {
             if (optionPanel == null)
@@ -50,7 +40,9 @@ namespace U1W.Title
                 return;
             }
 
+            openingRequested = true;
             optionPanel.SetActive(true);
+            openingRequested = false;
         }
 
         public void CloseOptions()

@@ -21,6 +21,8 @@
 
 ## 2026-03-18 作業メモ
 
+- Title シーンのオプションボタン初回押下で `OptionsPanel` が開かない不具合を修正する。
+- 原因が `OptionUI` 初期化順とパネル活性化の競合にある場合は、シーン探索を増やさず `SerializeField` 構成のまま制御順だけを見直す。
 - テキスト表示は Unity 標準の Localization パッケージを使う方針に切り替える。
 - 会話パート、操作パート、タイトル画面の表示文言は文字列直書きではなく String Table を参照する。
 - 動的に切り替わる文言は `LocalizedString` を `SerializeField` で保持し、表示先 UI への反映も Unity Localization の仕組みに寄せる。
@@ -34,6 +36,9 @@
 - クリア条件判定は操作パート完了時に評価し、失敗時は判定結果に応じた会話を挟んで同一チャプターの操作パートへ戻す。
 - 成功時は次チャプターへ進み、最終チャプター成功後のみ完了表示へ遷移する。
 - Title シーンから Game シーンへ開始チャプターを渡す際は、永続 GameManager や PlayerPrefs ではなく、次回ロード時に 1 回だけ消費する静的な遷移コンテキストで chapterId を渡す。
+- 最終チャプター成功後は `SequenceManager` でエンディング用 `StoryAsset` を再生し、その完了後に `SceneTransitionManager` 経由で `Title` シーンへ戻す。
+- エンディング導線でもシーン探索は使わず、`SequenceManager` の `SerializeField` でエンディング `StoryAsset` と戻り先シーン名を管理する。
+- `SequenceManager` の Legacy Fallback は廃止し、`chapters` が未設定なら互換動作に落とさず設定エラーとして停止する。
 
 ## 現在使える前提
 

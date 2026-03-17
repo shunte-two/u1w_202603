@@ -31,18 +31,6 @@ namespace U1W.Game
             public StoryAsset OpeningStory => openingStory;
             public StoryAsset SuccessStory => successStory;
 
-            public static ChapterSequenceDefinition CreateLegacy(
-                StoryAsset legacyOpeningStory,
-                StoryAsset legacySuccessStory)
-            {
-                return new ChapterSequenceDefinition
-                {
-                    chapterId = "legacy",
-                    openingStory = legacyOpeningStory,
-                    successStory = legacySuccessStory
-                };
-            }
-
             public StoryAsset ResolveFailureStory(string judgementId)
             {
                 if (!string.IsNullOrWhiteSpace(judgementId) && failureBranches != null)
@@ -77,9 +65,9 @@ namespace U1W.Game
         [SerializeField] private int startChapterIndex;
         [SerializeField] private ChapterSequenceDefinition[] chapters = Array.Empty<ChapterSequenceDefinition>();
 
-        [Header("Legacy Fallback")]
-        [SerializeField] private StoryAsset openingStory;
-        [SerializeField] private StoryAsset resultStory;
+        [Header("Ending")]
+        [SerializeField] private StoryAsset endingStory;
+        [SerializeField] private string titleSceneName = "Title";
 
         private CancellationTokenSource sequenceCancellationTokenSource;
         private int currentChapterIndex;
@@ -115,6 +103,12 @@ namespace U1W.Game
         {
             CancelRunningSequence();
             ApplyIdleView();
+
+            if (!HasValidChapterConfiguration())
+            {
+                return;
+            }
+
             currentChapterIndex = GetInitialChapterIndex();
 
             sequenceCancellationTokenSource =
@@ -130,7 +124,7 @@ namespace U1W.Game
                 ChapterSequenceDefinition[] sequenceChapters = GetPlayableChapters();
                 if (sequenceChapters.Length == 0)
                 {
-                    Debug.LogWarning("SequenceManager has no chapters configured.");
+                    Debug.LogError("SequenceManager requires at least one configured chapter.", this);
                     return;
                 }
 
@@ -141,8 +135,7 @@ namespace U1W.Game
                     await RunChapterAsync(sequenceChapters[currentChapterIndex], cancellationToken);
                 }
 
-                conversationPartManager.Hide();
-                operationPartManager.ShowCompleted();
+                await RunEndingAsync(cancellationToken);
             }
             catch (OperationCanceledException)
             {
@@ -189,6 +182,28 @@ namespace U1W.Game
 
             await conversationPartManager.PlayAsync(storyAsset, cancellationToken);
             conversationPartManager.Hide();
+        }
+
+        private async UniTask RunEndingAsync(CancellationToken cancellationToken)
+        {
+            operationPartManager.Hide();
+            await PlayStoryIfAssignedAsync(endingStory, cancellationToken);
+
+            if (cancellationToken.IsCancellationRequested)
+            {
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(titleSceneName))
+            {
+                Debug.LogWarning(
+                    "SequenceManager ending completed, but titleSceneName is empty. Falling back to completed view.",
+                    this);
+                operationPartManager.ShowCompleted();
+                return;
+            }
+
+            SceneTransitionManager.LoadScene(titleSceneName);
         }
 
         private void ApplyIdleView()
@@ -289,20 +304,12 @@ namespace U1W.Game
 
         private ChapterSequenceDefinition[] GetPlayableChapters()
         {
-            if (chapters != null && chapters.Length > 0)
-            {
-                return chapters;
-            }
+            return chapters ?? Array.Empty<ChapterSequenceDefinition>();
+        }
 
-            if (openingStory == null && resultStory == null)
-            {
-                return Array.Empty<ChapterSequenceDefinition>();
-            }
-
-            return new[]
-            {
-                ChapterSequenceDefinition.CreateLegacy(openingStory, resultStory)
-            };
+        private bool HasValidChapterConfiguration()
+        {
+            return chapters != null && chapters.Length > 0;
         }
 
         private void ValidateReferences()
@@ -310,10 +317,9 @@ namespace U1W.Game
             WarnIfMissing(conversationPartManager, nameof(conversationPartManager));
             WarnIfMissing(operationPartManager, nameof(operationPartManager));
 
-            if (chapters == null || chapters.Length == 0)
+            if (!HasValidChapterConfiguration())
             {
-                WarnIfMissing(openingStory, nameof(openingStory));
-                WarnIfMissing(resultStory, nameof(resultStory));
+                Debug.LogError("SequenceManager requires at least one configured chapter.", this);
             }
         }
 
