@@ -1,5 +1,7 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +29,7 @@ namespace U1W.Game
         [SerializeField] private TextMeshProUGUI phaseTitleText;
         [SerializeField] private TextMeshProUGUI conversationText;
         [SerializeField] private Button nextConversationButton;
+        [SerializeField] private TextMeshProUGUI advanceIndicatorText;
         [SerializeField] private CharacterExpressionBinding[] characterExpressionBindings;
 
         [Header("Display")]
@@ -34,11 +37,16 @@ namespace U1W.Game
         [SerializeField] private string phaseTitleFallback = "会話パート";
         [SerializeField] private LocalizedString emptyConversationMessage;
         [SerializeField] private string emptyConversationMessageFallback = "会話テキストが未設定です。";
+        [SerializeField, Min(0f)] private float conversationCharactersPerSecond = 30f;
+        [SerializeField, Min(0f)] private float advanceIndicatorFadeDuration = 0.5f;
 
         private bool advanceRequested;
+        private bool isAnimatingConversation;
         private bool listenersBound;
         private LocalizedString boundConversationText;
         private LocalizedString boundPhaseTitle;
+        private Tween activeConversationTween;
+        private Tween advanceIndicatorTween;
 
         private void Awake()
         {
@@ -68,6 +76,8 @@ namespace U1W.Game
 
         private void OnDestroy()
         {
+            KillConversationTween(false);
+            KillAdvanceIndicatorTween();
             ReleaseBindings();
             UnbindListeners();
         }
@@ -79,6 +89,9 @@ namespace U1W.Game
 
         public void Hide()
         {
+            KillConversationTween(false);
+            isAnimatingConversation = false;
+            SetAdvanceIndicatorVisible(false);
             SetRootState(false);
             SetButtonState(nextConversationButton, false);
             ReleaseBindings();
@@ -158,6 +171,7 @@ namespace U1W.Game
         {
             SetRootState(true);
             SetButtonState(nextConversationButton, true);
+            SetAdvanceIndicatorVisible(false);
             BindPhaseTitle(phaseTitle, phaseTitleFallback);
         }
 
@@ -225,6 +239,12 @@ namespace U1W.Game
 
         private void RequestAdvance()
         {
+            if (isAnimatingConversation)
+            {
+                CompleteConversationAnimation();
+                return;
+            }
+
             advanceRequested = true;
         }
 
@@ -277,13 +297,15 @@ namespace U1W.Game
 
             if (IsMissing(localizedString))
             {
-                SetConversationText(fallbackValue);
+                await AnimateConversationTextAsync(fallbackValue, cancellationToken);
                 return;
             }
 
             boundConversationText = localizedString;
             boundConversationText.StringChanged += HandleConversationTextChanged;
-            SetConversationText(await ResolveLocalizedStringAsync(localizedString, cancellationToken));
+            await AnimateConversationTextAsync(
+                await ResolveLocalizedStringAsync(localizedString, cancellationToken),
+                cancellationToken);
         }
 
         private void BindPhaseTitle(LocalizedString localizedString, string fallbackValue)
@@ -308,6 +330,9 @@ namespace U1W.Game
 
         private void HandleConversationTextChanged(string value)
         {
+            KillConversationTween(false);
+            isAnimatingConversation = false;
+            SetAdvanceIndicatorVisible(true);
             SetConversationText(value);
         }
 
@@ -324,6 +349,10 @@ namespace U1W.Game
 
         private void ReleaseConversationBinding()
         {
+            KillConversationTween(false);
+            isAnimatingConversation = false;
+            SetAdvanceIndicatorVisible(false);
+
             if (boundConversationText == null)
             {
                 return;
@@ -364,12 +393,130 @@ namespace U1W.Game
             SetPhaseTitle(await ResolveLocalizedStringAsync(localizedString, cancellationToken));
         }
 
+        private async UniTask AnimateConversationTextAsync(string value, CancellationToken cancellationToken)
+        {
+            KillConversationTween(false);
+            isAnimatingConversation = false;
+            SetAdvanceIndicatorVisible(false);
+
+            if (conversationText == null)
+            {
+                return;
+            }
+
+            value ??= string.Empty;
+            SetConversationText(string.Empty);
+
+            if (string.IsNullOrEmpty(value) || conversationCharactersPerSecond <= 0f)
+            {
+                SetConversationText(value);
+                SetAdvanceIndicatorVisible(true);
+                return;
+            }
+
+            isAnimatingConversation = true;
+            float duration = value.Length / conversationCharactersPerSecond;
+            activeConversationTween = conversationText
+                .DOText(value, duration, true, ScrambleMode.None, null)
+                .SetEase(Ease.Linear)
+                .OnKill(HandleConversationTweenFinished)
+                .OnComplete(HandleConversationTweenFinished);
+
+            try
+            {
+                await UniTask.WaitUntil(
+                    () => !isAnimatingConversation,
+                    cancellationToken: cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+                KillConversationTween(false);
+                throw;
+            }
+        }
+
+        private void CompleteConversationAnimation()
+        {
+            if (activeConversationTween == null || !activeConversationTween.IsActive())
+            {
+                isAnimatingConversation = false;
+                SetAdvanceIndicatorVisible(true);
+                return;
+            }
+
+            activeConversationTween.Complete();
+        }
+
+        private void KillConversationTween(bool complete)
+        {
+            if (activeConversationTween == null)
+            {
+                return;
+            }
+
+            Tween tween = activeConversationTween;
+            activeConversationTween = null;
+            if (tween.IsActive())
+            {
+                tween.Kill(complete);
+            }
+        }
+
+        private void HandleConversationTweenFinished()
+        {
+            activeConversationTween = null;
+            isAnimatingConversation = false;
+            SetAdvanceIndicatorVisible(true);
+        }
+
+        private void SetAdvanceIndicatorVisible(bool isVisible)
+        {
+            if (advanceIndicatorText == null)
+            {
+                return;
+            }
+
+            KillAdvanceIndicatorTween();
+            advanceIndicatorText.gameObject.SetActive(isVisible);
+            if (!isVisible)
+            {
+                return;
+            }
+
+            advanceIndicatorText.alpha = 1f;
+            if (advanceIndicatorFadeDuration <= 0f)
+            {
+                return;
+            }
+
+            advanceIndicatorTween = advanceIndicatorText
+                .DOFade(0.2f, advanceIndicatorFadeDuration)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(-1, LoopType.Yoyo);
+        }
+
+        private void KillAdvanceIndicatorTween()
+        {
+            if (advanceIndicatorTween == null)
+            {
+                return;
+            }
+
+            Tween tween = advanceIndicatorTween;
+            advanceIndicatorTween = null;
+            if (tween.IsActive())
+            {
+                tween.Kill(false);
+            }
+        }
+
         private void ValidateReferences()
         {
             WarnIfMissing(conversationRoot, nameof(conversationRoot));
             WarnIfMissing(phaseTitleText, nameof(phaseTitleText));
             WarnIfMissing(conversationText, nameof(conversationText));
             WarnIfMissing(nextConversationButton, nameof(nextConversationButton));
+            WarnIfMissing(advanceIndicatorText, nameof(advanceIndicatorText));
 
             if (characterExpressionBindings == null)
             {

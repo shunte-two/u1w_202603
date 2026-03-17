@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -29,15 +30,17 @@ namespace U1W.Game
         private sealed class ChapterOperationDefinition
         {
             [SerializeField] private string chapterId = "chapter1";
+            [SerializeField] private OperationChapterAsset operationAsset;
             [SerializeField] private LocalizedString phaseTitle;
             [SerializeField] private string phaseTitleFallback = "操作パート";
             [SerializeField] private LocalizedString instruction;
             [SerializeField] [TextArea(2, 4)] private string instructionFallback =
-                "仮の操作パートです。調査やカード操作の代わりに、ボタンか Enter キーで進めます。";
+                "カードをクリックして解釈を切り替え、ドラッグで順番を入れ替えてください。";
             [SerializeField] private string successJudgementId = "success";
-            [SerializeField] private string defaultJudgementIdOnComplete = "success";
+            [SerializeField] private string defaultJudgementIdOnComplete = "incorrect";
 
             public string ChapterId => chapterId;
+            public OperationChapterAsset OperationAsset => operationAsset;
             public LocalizedString PhaseTitle => phaseTitle;
             public string PhaseTitleFallback => phaseTitleFallback;
             public LocalizedString Instruction => instruction;
@@ -50,15 +53,32 @@ namespace U1W.Game
         [SerializeField] private GameObject operationRoot;
         [SerializeField] private TextMeshProUGUI phaseTitleText;
         [SerializeField] private TextMeshProUGUI operationText;
+        [SerializeField] private RectTransform cardAreaRoot;
+        [SerializeField] private OperationCardView cardViewPrefab;
+        [SerializeField] private RectTransform cardDescriptionPopupRoot;
+        [SerializeField] private TextMeshProUGUI cardDescriptionText;
         [SerializeField] private Button completeOperationButton;
         [SerializeField] private Button restartSequenceButton;
+
+        [Header("Card Labels")]
+        [SerializeField] private LocalizedString frontFaceLabel;
+        [SerializeField] private string frontFaceLabelFallback = "表の解釈";
+        [SerializeField] private LocalizedString backFaceLabel;
+        [SerializeField] private string backFaceLabelFallback = "裏の解釈";
+
+        [Header("Card Layout")]
+        [SerializeField] private float cardSpacing = 24f;
+        [SerializeField] private float cardSlideDuration = 0.2f;
+        [SerializeField] private Ease cardSlideEase = Ease.OutCubic;
+        [SerializeField] private float popupVerticalOffset = 180f;
+        [SerializeField] private string emptyDescriptionFallback = "説明は未設定です。";
 
         [Header("Default Display")]
         [SerializeField] private LocalizedString operationPhaseTitle;
         [SerializeField] private string operationPhaseTitleFallback = "操作パート";
         [SerializeField] private LocalizedString operationInstruction;
         [SerializeField] [TextArea(2, 4)] private string operationInstructionFallback =
-            "仮の操作パートです。調査やカード操作の代わりに、ボタンか Enter キーで進めます。";
+            "カードをクリックして解釈を切り替え、ドラッグで順番を入れ替えてください。";
         [SerializeField] private LocalizedString completedPhaseTitle;
         [SerializeField] private string completedPhaseTitleFallback = "進行完了";
         [SerializeField] private LocalizedString completedMessage;
@@ -76,12 +96,14 @@ namespace U1W.Game
         private ChapterOperationDefinition currentChapterDefinition;
         private string currentChapterId = string.Empty;
         private string pendingJudgementId = string.Empty;
+        private OperationCardInteractionController cardInteractionController;
 
         public event Action RestartRequested;
 
         private void Awake()
         {
             ValidateReferences();
+            CreateCardInteractionController();
             BindListeners();
             Hide();
         }
@@ -107,6 +129,7 @@ namespace U1W.Game
 
         private void OnDestroy()
         {
+            cardInteractionController?.Dispose();
             ReleaseBindings();
             UnbindListeners();
         }
@@ -117,6 +140,7 @@ namespace U1W.Game
         {
             PrepareChapter(chapterId);
             await ShowOperationViewAsync(cancellationToken);
+            await BuildCardsAsync(cancellationToken);
             completeRequested = false;
             await UniTask.WaitUntil(() => completeRequested, cancellationToken: cancellationToken);
             return BuildCurrentResult();
@@ -137,22 +161,41 @@ namespace U1W.Game
             pendingJudgementId = ResolveDefaultJudgementId(currentChapterDefinition);
         }
 
-        private async UniTask ShowCompletedAsync(CancellationToken cancellationToken)
-        {
-            SetRootState(true);
-            SetButtonState(completeOperationButton, false);
-            SetButtonState(restartSequenceButton, true);
-            BindPhaseTitle(completedPhaseTitle, completedPhaseTitleFallback);
-            await SetOperationTextAsync(completedMessage, completedMessageFallback, cancellationToken);
-        }
-
         public void Hide()
         {
             SetRootState(false);
             SetButtonState(completeOperationButton, false);
             SetButtonState(restartSequenceButton, false);
             ReleaseBindings();
+            cardInteractionController?.HideCardDescription();
+            cardInteractionController?.Clear();
             SetOperationText(string.Empty);
+        }
+
+        private void CreateCardInteractionController()
+        {
+            cardInteractionController?.Dispose();
+            cardInteractionController = new OperationCardInteractionController(
+                cardAreaRoot,
+                cardViewPrefab,
+                cardDescriptionPopupRoot,
+                cardDescriptionText,
+                cardSpacing,
+                cardSlideDuration,
+                cardSlideEase,
+                popupVerticalOffset,
+                emptyDescriptionFallback);
+        }
+
+        private async UniTask ShowCompletedAsync(CancellationToken cancellationToken)
+        {
+            SetRootState(true);
+            SetButtonState(completeOperationButton, false);
+            SetButtonState(restartSequenceButton, true);
+            cardInteractionController?.Clear();
+            cardInteractionController?.HideCardDescription();
+            BindPhaseTitle(completedPhaseTitle, completedPhaseTitleFallback);
+            await SetOperationTextAsync(completedMessage, completedMessageFallback, cancellationToken);
         }
 
         private async UniTask ShowOperationViewAsync(CancellationToken cancellationToken)
@@ -200,6 +243,7 @@ namespace U1W.Game
 
         private void RequestComplete()
         {
+            pendingJudgementId = ResolveJudgementIdOnComplete();
             completeRequested = true;
         }
 
@@ -324,24 +368,32 @@ namespace U1W.Game
             boundPhaseTitle = null;
         }
 
-        private static bool IsMissing(LocalizedString localizedString)
+        private async UniTask BuildCardsAsync(CancellationToken cancellationToken)
         {
-            return localizedString == null || localizedString.IsEmpty;
+            string resolvedFrontFaceLabel = await ResolveTextAsync(
+                frontFaceLabel,
+                frontFaceLabelFallback,
+                cancellationToken);
+            string resolvedBackFaceLabel = await ResolveTextAsync(
+                backFaceLabel,
+                backFaceLabelFallback,
+                cancellationToken);
+
+            await cardInteractionController.InitializeAsync(
+                currentChapterDefinition?.OperationAsset,
+                resolvedFrontFaceLabel,
+                resolvedBackFaceLabel,
+                ResolveTextAsync,
+                cancellationToken);
         }
 
-        private static async UniTask<string> ResolveLocalizedStringAsync(
-            LocalizedString localizedString,
-            CancellationToken cancellationToken)
+        private string ResolveJudgementIdOnComplete()
         {
-            return await localizedString.GetLocalizedStringAsync().Task.AsUniTask()
-                .AttachExternalCancellation(cancellationToken);
-        }
-
-        private async UniTask RefreshPhaseTitleAsync(
-            LocalizedString localizedString,
-            CancellationToken cancellationToken)
-        {
-            SetPhaseTitle(await ResolveLocalizedStringAsync(localizedString, cancellationToken));
+            string successJudgementId = ResolveSuccessJudgementId(currentChapterDefinition);
+            string defaultJudgementId = ResolveDefaultJudgementId(currentChapterDefinition);
+            return cardInteractionController == null
+                ? defaultJudgementId
+                : cardInteractionController.ResolveJudgementId(successJudgementId, defaultJudgementId);
         }
 
         private ChapterOperationDefinition FindChapterDefinition(string chapterId)
@@ -376,7 +428,7 @@ namespace U1W.Game
                 return definition.DefaultJudgementIdOnComplete;
             }
 
-            return "success";
+            return "incorrect";
         }
 
         private static string ResolveSuccessJudgementId(ChapterOperationDefinition definition)
@@ -395,6 +447,10 @@ namespace U1W.Game
             WarnIfMissing(operationRoot, nameof(operationRoot));
             WarnIfMissing(phaseTitleText, nameof(phaseTitleText));
             WarnIfMissing(operationText, nameof(operationText));
+            WarnIfMissing(cardAreaRoot, nameof(cardAreaRoot));
+            WarnIfMissing(cardViewPrefab, nameof(cardViewPrefab));
+            WarnIfMissing(cardDescriptionPopupRoot, nameof(cardDescriptionPopupRoot));
+            WarnIfMissing(cardDescriptionText, nameof(cardDescriptionText));
             WarnIfMissing(completeOperationButton, nameof(completeOperationButton));
             WarnIfMissing(restartSequenceButton, nameof(restartSequenceButton));
         }
@@ -448,6 +504,51 @@ namespace U1W.Game
                 Debug.LogWarning(
                     $"OperationPartManager requires {fieldName} to be assigned via SerializeField.");
             }
+        }
+
+        private static bool IsMissing(LocalizedString localizedString)
+        {
+            return localizedString == null || localizedString.IsEmpty;
+        }
+
+        private static async UniTask<string> ResolveLocalizedStringAsync(
+            LocalizedString localizedString,
+            CancellationToken cancellationToken)
+        {
+            return await localizedString.GetLocalizedStringAsync().Task.AsUniTask()
+                .AttachExternalCancellation(cancellationToken);
+        }
+
+        private async UniTask<string> ResolveTextAsync(
+            LocalizedTextReference textReference,
+            CancellationToken cancellationToken)
+        {
+            if (textReference == null || textReference.IsMissing)
+            {
+                return textReference?.Fallback ?? string.Empty;
+            }
+
+            return await ResolveLocalizedStringAsync(textReference.LocalizedString, cancellationToken);
+        }
+
+        private async UniTask<string> ResolveTextAsync(
+            LocalizedString localizedString,
+            string fallbackValue,
+            CancellationToken cancellationToken)
+        {
+            if (IsMissing(localizedString))
+            {
+                return fallbackValue;
+            }
+
+            return await ResolveLocalizedStringAsync(localizedString, cancellationToken);
+        }
+
+        private async UniTask RefreshPhaseTitleAsync(
+            LocalizedString localizedString,
+            CancellationToken cancellationToken)
+        {
+            SetPhaseTitle(await ResolveLocalizedStringAsync(localizedString, cancellationToken));
         }
     }
 }
