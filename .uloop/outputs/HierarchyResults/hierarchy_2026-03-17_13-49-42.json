@@ -1,0 +1,300 @@
+{
+  "ExportTimestamp": "2026-03-17 13:49:42",
+  "Context": {
+    "sceneType": "editor",
+    "sceneName": "Game",
+    "nodeCount": 18,
+    "maxDepth": 3
+  },
+  "Hierarchy": [
+    {
+      "sceneName": "Game",
+      "stats": {
+        "rootCount": 7,
+        "nodeCount": 18,
+        "maxDepth": 3
+      },
+      "componentsLut": [
+        "Transform",
+        "Camera",
+        "AudioListener",
+        "UniversalAdditionalCameraData",
+        "Light2D",
+        "EventSystem",
+        "InputSystemUIInputModule",
+        "AudioManager",
+        "SceneTransitionManager",
+        "RectTransform",
+        "Canvas",
+        "CanvasScaler",
+        "GraphicRaycaster",
+        "CanvasRenderer",
+        "TextMeshProUGUI",
+        "Image",
+        "Button",
+        "SequenceManager"
+      ],
+      "roots": [
+        {
+          "name": "Main Camera",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "siblingIndex": 0,
+          "tag": "MainCamera",
+          "layer": 0,
+          "path": "Main Camera",
+          "children": []
+        },
+        {
+          "name": "Global Light 2D",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            4
+          ],
+          "siblingIndex": 1,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "Global Light 2D",
+          "children": []
+        },
+        {
+          "name": "EventSystem",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            5,
+            6
+          ],
+          "siblingIndex": 2,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "EventSystem",
+          "children": []
+        },
+        {
+          "name": "AudioManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            7
+          ],
+          "siblingIndex": 3,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "AudioManager",
+          "children": []
+        },
+        {
+          "name": "SceneTransitionManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            8
+          ],
+          "siblingIndex": 4,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "SceneTransitionManager",
+          "children": []
+        },
+        {
+          "name": "Canvas",
+          "isActive": true,
+          "componentsIdx": [
+            9,
+            10,
+            11,
+            12
+          ],
+          "siblingIndex": 5,
+          "tag": "Untagged",
+          "layer": 5,
+          "path": "Canvas",
+          "children": [
+            {
+              "name": "PhaseTitleText",
+              "isActive": true,
+              "componentsIdx": [
+                9,
+                13,
+                14
+              ],
+              "siblingIndex": 0,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/PhaseTitleText",
+              "children": []
+            },
+            {
+              "name": "ConversationPanel",
+              "isActive": true,
+              "componentsIdx": [
+                9,
+                13,
+                15
+              ],
+              "siblingIndex": 1,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/ConversationPanel",
+              "children": [
+                {
+                  "name": "ConversationBodyText",
+                  "isActive": true,
+                  "componentsIdx": [
+                    9,
+                    13,
+                    14
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/ConversationPanel/ConversationBodyText",
+                  "children": []
+                },
+                {
+                  "name": "NextConversationButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    9,
+                    13,
+                    15,
+                    16
+                  ],
+                  "siblingIndex": 1,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/ConversationPanel/NextConversationButton",
+                  "children": [
+                    {
+                      "name": "NextConversationLabel",
+                      "isActive": true,
+                      "componentsIdx": [
+                        9,
+                        13,
+                        14
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 5,
+                      "path": "Canvas/ConversationPanel/NextConversationButton/NextConversationLabel",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "OperationPanel",
+              "isActive": true,
+              "componentsIdx": [
+                9,
+                13,
+                15
+              ],
+              "siblingIndex": 2,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/OperationPanel",
+              "children": [
+                {
+                  "name": "OperationBodyText",
+                  "isActive": true,
+                  "componentsIdx": [
+                    9,
+                    13,
+                    14
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/OperationBodyText",
+                  "children": []
+                },
+                {
+                  "name": "CompleteOperationButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    9,
+                    13,
+                    15,
+                    16
+                  ],
+                  "siblingIndex": 1,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/CompleteOperationButton",
+                  "children": [
+                    {
+                      "name": "CompleteOperationLabel",
+                      "isActive": true,
+                      "componentsIdx": [
+                        9,
+                        13,
+                        14
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 5,
+                      "path": "Canvas/OperationPanel/CompleteOperationButton/CompleteOperationLabel",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "RestartSequenceButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    9,
+                    13,
+                    15,
+                    16
+                  ],
+                  "siblingIndex": 2,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/RestartSequenceButton",
+                  "children": [
+                    {
+                      "name": "RestartSequenceLabel",
+                      "isActive": true,
+                      "componentsIdx": [
+                        9,
+                        13,
+                        14
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 5,
+                      "path": "Canvas/OperationPanel/RestartSequenceButton/RestartSequenceLabel",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "SequenceManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            17
+          ],
+          "siblingIndex": 6,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "SequenceManager",
+          "children": []
+        }
+      ]
+    }
+  ]
+}

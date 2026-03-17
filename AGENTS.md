@@ -16,6 +16,8 @@
 - `Assets/Scenes/Game.unity` に大まかな進行制御用の `SequenceManager` を配置し、会話パートと操作パートを往復する仮実装を追加する。
 - 進行制御は `UniTask` を使った状態遷移で構成し、新規実装では `Coroutine` を使わない。
 - シーン内参照はコード探索で補完せず、`SequenceManager` から必要な UI と制御対象を `SerializeField` で明示参照する。
+- `SequenceManager` は進行状態の切り替えだけを担当し、会話パートと操作パートの表示・入力待ちは別 Manager に分離する。
+- `Game` シーンには `ConversationPartManager` と `OperationPartManager` を個別配置し、`SequenceManager` から `SerializeField` 参照で接続する。
 
 ## 現在使える前提
 
@@ -321,6 +323,9 @@
 テーマに合わせて広げるのではなく、まず遊べる芯を作り、既存アセットで短く強い体験に寄せる。
 
 ## Async Rule
+
+- Unity Editor の確認、階層取得、スクリーンショット、ログ確認、コンパイル、テスト、PlayMode 操作など、Codex からの Unity 操作は今後 `uloop` を優先して使う
+- Unity 用の MCP / 自動操作手段を選べる場合も、まず `uloop` のスキルと CLI を確認し、特別な理由がない限り `uloop` を第一候補にする
 
 - 非同期処理は必ず UniTask を使う
 - `Coroutine`、`IEnumerator`、`StartCoroutine` は新規実装で使わない
