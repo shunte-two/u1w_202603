@@ -4,12 +4,48 @@ using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Localization;
 using UnityEngine.UI;
 
 namespace U1W.Game
 {
+    public readonly struct OperationPartResult
+    {
+        public OperationPartResult(string chapterId, string judgementId, bool isSuccess)
+        {
+            ChapterId = chapterId;
+            JudgementId = judgementId;
+            IsSuccess = isSuccess;
+        }
+
+        public string ChapterId { get; }
+        public string JudgementId { get; }
+        public bool IsSuccess { get; }
+    }
+
     public sealed class OperationPartManager : MonoBehaviour
     {
+        [Serializable]
+        private sealed class ChapterOperationDefinition
+        {
+            [SerializeField] private string chapterId = "chapter1";
+            [SerializeField] private LocalizedString phaseTitle;
+            [SerializeField] private string phaseTitleFallback = "操作パート";
+            [SerializeField] private LocalizedString instruction;
+            [SerializeField] [TextArea(2, 4)] private string instructionFallback =
+                "仮の操作パートです。調査やカード操作の代わりに、ボタンか Enter キーで進めます。";
+            [SerializeField] private string successJudgementId = "success";
+            [SerializeField] private string defaultJudgementIdOnComplete = "success";
+
+            public string ChapterId => chapterId;
+            public LocalizedString PhaseTitle => phaseTitle;
+            public string PhaseTitleFallback => phaseTitleFallback;
+            public LocalizedString Instruction => instruction;
+            public string InstructionFallback => instructionFallback;
+            public string SuccessJudgementId => successJudgementId;
+            public string DefaultJudgementIdOnComplete => defaultJudgementIdOnComplete;
+        }
+
         [Header("References")]
         [SerializeField] private GameObject operationRoot;
         [SerializeField] private TextMeshProUGUI phaseTitleText;
@@ -17,16 +53,29 @@ namespace U1W.Game
         [SerializeField] private Button completeOperationButton;
         [SerializeField] private Button restartSequenceButton;
 
-        [Header("Display")]
-        [SerializeField] private string operationPhaseTitle = "操作パート";
-        [SerializeField] [TextArea(2, 4)] private string operationInstruction =
+        [Header("Default Display")]
+        [SerializeField] private LocalizedString operationPhaseTitle;
+        [SerializeField] private string operationPhaseTitleFallback = "操作パート";
+        [SerializeField] private LocalizedString operationInstruction;
+        [SerializeField] [TextArea(2, 4)] private string operationInstructionFallback =
             "仮の操作パートです。調査やカード操作の代わりに、ボタンか Enter キーで進めます。";
-        [SerializeField] private string completedPhaseTitle = "進行完了";
-        [SerializeField] [TextArea(2, 4)] private string completedMessage =
-            "仮シーケンス完了。Restart で会話パートから再確認できます。";
+        [SerializeField] private LocalizedString completedPhaseTitle;
+        [SerializeField] private string completedPhaseTitleFallback = "進行完了";
+        [SerializeField] private LocalizedString completedMessage;
+        [SerializeField] [TextArea(2, 4)] private string completedMessageFallback =
+            "全チャプター完了です。Restart で最初から確認できます。";
+
+        [Header("Chapter Definitions")]
+        [SerializeField] private ChapterOperationDefinition[] chapterDefinitions =
+            Array.Empty<ChapterOperationDefinition>();
 
         private bool completeRequested;
         private bool listenersBound;
+        private LocalizedString boundOperationText;
+        private LocalizedString boundPhaseTitle;
+        private ChapterOperationDefinition currentChapterDefinition;
+        private string currentChapterId = string.Empty;
+        private string pendingJudgementId = string.Empty;
 
         public event Action RestartRequested;
 
@@ -58,23 +107,43 @@ namespace U1W.Game
 
         private void OnDestroy()
         {
+            ReleaseBindings();
             UnbindListeners();
         }
 
-        public async UniTask PlayAsync(CancellationToken cancellationToken)
+        public async UniTask<OperationPartResult> PlayAsync(
+            string chapterId,
+            CancellationToken cancellationToken)
         {
-            ShowOperationView();
+            PrepareChapter(chapterId);
+            await ShowOperationViewAsync(cancellationToken);
             completeRequested = false;
             await UniTask.WaitUntil(() => completeRequested, cancellationToken: cancellationToken);
+            return BuildCurrentResult();
         }
 
         public void ShowCompleted()
         {
+            ShowCompletedAsync(destroyCancellationToken).Forget();
+        }
+
+        public void SetPendingJudgementId(string judgementId)
+        {
+            pendingJudgementId = judgementId ?? string.Empty;
+        }
+
+        public void ResetPendingJudgementId()
+        {
+            pendingJudgementId = ResolveDefaultJudgementId(currentChapterDefinition);
+        }
+
+        private async UniTask ShowCompletedAsync(CancellationToken cancellationToken)
+        {
             SetRootState(true);
             SetButtonState(completeOperationButton, false);
             SetButtonState(restartSequenceButton, true);
-            SetOperationText(completedMessage);
-            SetPhaseTitle(completedPhaseTitle);
+            BindPhaseTitle(completedPhaseTitle, completedPhaseTitleFallback);
+            await SetOperationTextAsync(completedMessage, completedMessageFallback, cancellationToken);
         }
 
         public void Hide()
@@ -82,16 +151,43 @@ namespace U1W.Game
             SetRootState(false);
             SetButtonState(completeOperationButton, false);
             SetButtonState(restartSequenceButton, false);
+            ReleaseBindings();
             SetOperationText(string.Empty);
         }
 
-        private void ShowOperationView()
+        private async UniTask ShowOperationViewAsync(CancellationToken cancellationToken)
         {
             SetRootState(true);
             SetButtonState(completeOperationButton, true);
             SetButtonState(restartSequenceButton, false);
-            SetOperationText(operationInstruction);
-            SetPhaseTitle(operationPhaseTitle);
+            BindPhaseTitle(
+                currentChapterDefinition?.PhaseTitle ?? operationPhaseTitle,
+                currentChapterDefinition?.PhaseTitleFallback ?? operationPhaseTitleFallback);
+            await SetOperationTextAsync(
+                currentChapterDefinition?.Instruction ?? operationInstruction,
+                currentChapterDefinition?.InstructionFallback ?? operationInstructionFallback,
+                cancellationToken);
+        }
+
+        private void PrepareChapter(string chapterId)
+        {
+            currentChapterId = chapterId ?? string.Empty;
+            currentChapterDefinition = FindChapterDefinition(currentChapterId);
+            ResetPendingJudgementId();
+        }
+
+        private OperationPartResult BuildCurrentResult()
+        {
+            string resolvedJudgementId = string.IsNullOrWhiteSpace(pendingJudgementId)
+                ? ResolveDefaultJudgementId(currentChapterDefinition)
+                : pendingJudgementId;
+            string successJudgementId = ResolveSuccessJudgementId(currentChapterDefinition);
+            bool isSuccess = string.Equals(
+                resolvedJudgementId,
+                successJudgementId,
+                StringComparison.Ordinal);
+
+            return new OperationPartResult(currentChapterId, resolvedJudgementId, isSuccess);
         }
 
         private bool IsAwaitingComplete()
@@ -145,6 +241,153 @@ namespace U1W.Game
             {
                 phaseTitleText.text = value;
             }
+        }
+
+        private async UniTask SetOperationTextAsync(
+            LocalizedString localizedString,
+            string fallbackValue,
+            CancellationToken cancellationToken)
+        {
+            ReleaseOperationTextBinding();
+
+            if (operationText == null)
+            {
+                return;
+            }
+
+            if (IsMissing(localizedString))
+            {
+                SetOperationText(fallbackValue);
+                return;
+            }
+
+            boundOperationText = localizedString;
+            boundOperationText.StringChanged += HandleOperationTextChanged;
+            SetOperationText(await ResolveLocalizedStringAsync(localizedString, cancellationToken));
+        }
+
+        private void BindPhaseTitle(LocalizedString localizedString, string fallbackValue)
+        {
+            ReleasePhaseTitleBinding();
+
+            if (phaseTitleText == null)
+            {
+                return;
+            }
+
+            if (IsMissing(localizedString))
+            {
+                SetPhaseTitle(fallbackValue);
+                return;
+            }
+
+            boundPhaseTitle = localizedString;
+            boundPhaseTitle.StringChanged += HandlePhaseTitleChanged;
+            RefreshPhaseTitleAsync(localizedString, destroyCancellationToken).Forget();
+        }
+
+        private void HandleOperationTextChanged(string value)
+        {
+            SetOperationText(value);
+        }
+
+        private void HandlePhaseTitleChanged(string value)
+        {
+            SetPhaseTitle(value);
+        }
+
+        private void ReleaseBindings()
+        {
+            ReleaseOperationTextBinding();
+            ReleasePhaseTitleBinding();
+        }
+
+        private void ReleaseOperationTextBinding()
+        {
+            if (boundOperationText == null)
+            {
+                return;
+            }
+
+            boundOperationText.StringChanged -= HandleOperationTextChanged;
+            boundOperationText = null;
+        }
+
+        private void ReleasePhaseTitleBinding()
+        {
+            if (boundPhaseTitle == null)
+            {
+                return;
+            }
+
+            boundPhaseTitle.StringChanged -= HandlePhaseTitleChanged;
+            boundPhaseTitle = null;
+        }
+
+        private static bool IsMissing(LocalizedString localizedString)
+        {
+            return localizedString == null || localizedString.IsEmpty;
+        }
+
+        private static async UniTask<string> ResolveLocalizedStringAsync(
+            LocalizedString localizedString,
+            CancellationToken cancellationToken)
+        {
+            return await localizedString.GetLocalizedStringAsync().Task.AsUniTask()
+                .AttachExternalCancellation(cancellationToken);
+        }
+
+        private async UniTask RefreshPhaseTitleAsync(
+            LocalizedString localizedString,
+            CancellationToken cancellationToken)
+        {
+            SetPhaseTitle(await ResolveLocalizedStringAsync(localizedString, cancellationToken));
+        }
+
+        private ChapterOperationDefinition FindChapterDefinition(string chapterId)
+        {
+            if (string.IsNullOrWhiteSpace(chapterId) || chapterDefinitions == null)
+            {
+                return null;
+            }
+
+            for (int i = 0; i < chapterDefinitions.Length; i++)
+            {
+                ChapterOperationDefinition definition = chapterDefinitions[i];
+                if (definition == null)
+                {
+                    continue;
+                }
+
+                if (string.Equals(definition.ChapterId, chapterId, StringComparison.Ordinal))
+                {
+                    return definition;
+                }
+            }
+
+            return null;
+        }
+
+        private static string ResolveDefaultJudgementId(ChapterOperationDefinition definition)
+        {
+            if (definition != null &&
+                !string.IsNullOrWhiteSpace(definition.DefaultJudgementIdOnComplete))
+            {
+                return definition.DefaultJudgementIdOnComplete;
+            }
+
+            return "success";
+        }
+
+        private static string ResolveSuccessJudgementId(ChapterOperationDefinition definition)
+        {
+            if (definition != null &&
+                !string.IsNullOrWhiteSpace(definition.SuccessJudgementId))
+            {
+                return definition.SuccessJudgementId;
+            }
+
+            return "success";
         }
 
         private void ValidateReferences()

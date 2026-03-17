@@ -740,9 +740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e139dcf4e76a37489444ac1824ec42a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Title.TitleManager
-  newGameSceneName: Game
-  chapter2SceneName: 
-  chapter3SceneName: 
+  gameSceneName: Game
   rootCanvas: {fileID: 297963044}
   optionUI: {fileID: 1393083799}
   newGameButton: {fileID: 128885722}
@@ -1323,7 +1321,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 663552348}
   m_OnClick:
     m_PersistentCalls:
@@ -1662,7 +1660,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 806460463}
   m_OnClick:
     m_PersistentCalls:

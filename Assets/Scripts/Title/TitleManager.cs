@@ -6,10 +6,13 @@ namespace U1W.Title
 {
     public sealed class TitleManager : MonoBehaviour
     {
+        private const string Chapter1Id = "chapter1";
+        private const string Chapter2Id = "chapter2";
+        private const string Chapter3Id = "chapter3";
+
         [Header("Scene Names")]
-        [SerializeField] private string newGameSceneName = "Game";
-        [SerializeField] private string chapter2SceneName = string.Empty;
-        [SerializeField] private string chapter3SceneName = string.Empty;
+        [SerializeField] private string gameSceneName = "Game";
+
 
         [Header("UI")]
         [SerializeField] private Canvas rootCanvas;
@@ -42,17 +45,17 @@ namespace U1W.Title
 
         public void StartNewGame()
         {
-            LoadScene(newGameSceneName);
+            StartChapter(gameSceneName, Chapter1Id);
         }
 
         public void StartChapter2()
         {
-            LoadScene(chapter2SceneName);
+            StartChapter(gameSceneName, Chapter2Id);
         }
 
         public void StartChapter3()
         {
-            LoadScene(chapter3SceneName);
+            StartChapter(gameSceneName, Chapter3Id);
         }
 
         private void ValidateReferences()
@@ -80,8 +83,8 @@ namespace U1W.Title
 
         private void ApplyButtonState()
         {
-            ConfigureChapterButton(chapter2Button, chapter2SceneName);
-            ConfigureChapterButton(chapter3Button, chapter3SceneName);
+            ConfigureChapterButton(chapter2Button, gameSceneName);
+            ConfigureChapterButton(chapter3Button, gameSceneName);
         }
 
         private void ConfigureChapterButton(Button button, string sceneName)
@@ -128,14 +131,25 @@ namespace U1W.Title
             listenersBound = false;
         }
 
-        private void LoadScene(string sceneName)
+        private static bool CanLoadScene(string sceneName)
         {
             if (string.IsNullOrWhiteSpace(sceneName))
             {
                 Debug.LogWarning("TitleManager.LoadScene skipped: target scene name is empty.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private void StartChapter(string sceneName, string chapterId)
+        {
+            if (!CanLoadScene(sceneName))
+            {
                 return;
             }
 
+            GameSceneStartContext.SetRequestedChapter(chapterId);
             SceneTransitionManager.LoadScene(sceneName);
         }
 

@@ -19,6 +19,22 @@
 - `SequenceManager` は進行状態の切り替えだけを担当し、会話パートと操作パートの表示・入力待ちは別 Manager に分離する。
 - `Game` シーンには `ConversationPartManager` と `OperationPartManager` を個別配置し、`SequenceManager` から `SerializeField` 参照で接続する。
 
+## 2026-03-18 作業メモ
+
+- テキスト表示は Unity 標準の Localization パッケージを使う方針に切り替える。
+- 会話パート、操作パート、タイトル画面の表示文言は文字列直書きではなく String Table を参照する。
+- 動的に切り替わる文言は `LocalizedString` を `SerializeField` で保持し、表示先 UI への反映も Unity Localization の仕組みに寄せる。
+- Localization 関連アセットは `Assets/Localize` 配下に集約し、`Localization Settings.asset` と Locale、String Table をこの配下で管理する。
+- 会話再生は `LocalizedString[]` の直列指定から `StoryAsset` 指定へ切り替える。
+- `StoryAsset` は `ScriptableObject` として作成し、1 つのアセット内で文章表示、キャラクター表情変更、文章間ウェイトを順番に構成できるようにする。
+- 会話 UI 側は `StoryAsset` の各ステップを順に再生するだけに留め、表示文や表情差分の実データは `StoryAsset` に寄せる。
+- 表情変更対象もシーン探索ではなく `SerializeField` 参照で受け取り、`StoryAsset` 側では切り替え先の Sprite を明示参照する。
+- ゲームシーケンスにチャプター概念を追加し、`SequenceManager` が現在チャプターを保持して進行する。
+- 各チャプターは開始会話、成功会話、失敗分岐会話を `SerializeField` 参照で持てる構成にする。
+- クリア条件判定は操作パート完了時に評価し、失敗時は判定結果に応じた会話を挟んで同一チャプターの操作パートへ戻す。
+- 成功時は次チャプターへ進み、最終チャプター成功後のみ完了表示へ遷移する。
+- Title シーンから Game シーンへ開始チャプターを渡す際は、永続 GameManager や PlayerPrefs ではなく、次回ロード時に 1 回だけ消費する静的な遷移コンテキストで chapterId を渡す。
+
 ## 現在使える前提
 
 - Unity 6 `6000.3.2f1`
@@ -39,6 +55,7 @@
 - `Assets/Prefabs/Systems`: ゲーム管理、カメラ、スポナー、UI 以外の共通機能
 - `Assets/Prefabs/UI`: HUD、メニュー、リザルト
 - `Assets/ScriptableObjects/Databases`: バランス値や定義データ
+- `Assets/ScriptableObjects/Stories`: 会話、演出、進行用の `StoryAsset` データ
 - `Assets/Sprites`, `Assets/Animations`, `Assets/Materials`, `Assets/Audio` or `Assets/Sounds`: 素材格納
 
 ## 入力の前提

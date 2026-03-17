@@ -1717,6 +1717,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.SequenceManager
   conversationPartManager: {fileID: 2100000002}
   operationPartManager: {fileID: 2100000012}
+  startChapterIndex: 0
+  chapters:
+  - chapterId: chapter1
+    openingStory: {fileID: 11400000, guid: 7c62da9b65c54d3996bfbf9a1f2c7d91, type: 2}
+    successStory: {fileID: 11400000, guid: 2f9a1ce19d0442f798dbd8a602f3454e, type: 2}
+    defaultFailureStory: {fileID: 11400000, guid: 41fb51ee4d6246f7b478f911cf59f191, type: 2}
+    failureBranches: []
+  - chapterId: chapter2
+    openingStory: {fileID: 11400000, guid: 802abc5afacb4eb396bf6537eaecbd23, type: 2}
+    successStory: {fileID: 11400000, guid: 8479410a7b234fd3aaef46fc32c7df6e, type: 2}
+    defaultFailureStory: {fileID: 11400000, guid: 924b1dc5b2f14e4ab5cbcf8b79e10f56, type: 2}
+    failureBranches: []
+  openingStory: {fileID: 11400000, guid: 7c62da9b65c54d3996bfbf9a1f2c7d91, type: 2}
+  resultStory: {fileID: 11400000, guid: 2f9a1ce19d0442f798dbd8a602f3454e, type: 2}
 --- !u!4 &1503877653
 Transform:
   m_ObjectHideFlags: 0
@@ -1724,116 +1738,6 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503877651}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2100000001
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2100000003}
-  - component: {fileID: 2100000002}
-  m_Layer: 0
-  m_Name: ConversationPartManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2100000002
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100000001}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2e8e9c64cc73740b470eabd54cebb6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.ConversationPartManager
-  conversationRoot: {fileID: 1978805989}
-  phaseTitleText: {fileID: 807137793}
-  conversationText: {fileID: 1291123148}
-  nextConversationButton: {fileID: 1422330392}
-  phaseTitle: "\u4F1A\u8A71\u30D1\u30FC\u30C8"
-  openingConversationLines:
-  - "\u73FE\u5834\u306E\u8CC7\u6599\u306F\u305D\u308D\u3063\u305F\u3002\u307E\u305A\u306F\u8B66\u5BDF\u306E\u898B\u7ACB\u3066\u3092\u6574\u7406\u3057\u3088\u3046\u3002"
-  - "\u5BB9\u7591\u8005\u306E\u884C\u52D5\u306F\u4E0D\u5BE9\u306B\u898B\u3048\u308B\u304C\u3001\u307E\u3060\u65AD\u5B9A\u306F\u65E9\u3044\u3002"
-  - "\u6B21\u306F\u73FE\u5834\u306E\u72B6\u6CC1\u3092\u64CD\u4F5C\u3057\u3066\u3001\u77DB\u76FE\u304C\u3069\u3053\u3067\u751F\u307E\u308C\u308B\u304B\u3092\u78BA\u304B\u3081\u308B\u3002"
-  resultConversationLines:
-  - "\u8868\u9762\u7684\u306A\u63A8\u7406\u3060\u3051\u3067\u306F\u3001\u307E\u3060\u7B4B\u304C\u901A\u3089\u306A\u3044\u3002"
-  - "\u6B21\u306F\u30AB\u30FC\u30C9\u306E\u89E3\u91C8\u53CD\u8EE2\u3084\u6642\u7CFB\u5217\u6574\u7406\u306B\u7E4B\u304C\u308B\u64CD\u4F5C\u3092\u5DEE\u3057\u8FBC\u3081\u308B\u72B6\u614B\u306B\u306A\u3063\u305F\u3002"
---- !u!4 &2100000003
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100000001}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2100000011
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2100000013}
-  - component: {fileID: 2100000012}
-  m_Layer: 0
-  m_Name: OperationPartManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2100000012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100000011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01e67c56780ce544fa39afa699a27ab4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.OperationPartManager
-  operationRoot: {fileID: 305488208}
-  phaseTitleText: {fileID: 807137793}
-  operationText: {fileID: 1127969288}
-  completeOperationButton: {fileID: 1229908146}
-  restartSequenceButton: {fileID: 314076407}
-  operationPhaseTitle: "\u64CD\u4F5C\u30D1\u30FC\u30C8"
-  operationInstruction: "\u4EEE\u306E\u64CD\u4F5C\u30D1\u30FC\u30C8\u3067\u3059\u3002\u8ABF\u67FB\u3084\u30AB\u30FC\u30C9\u64CD\u4F5C\u306E\u4EE3\u308F\u308A\u306B\u3001\u30DC\u30BF\u30F3\u304B
-    Enter \u30AD\u30FC\u3067\u9032\u3081\u307E\u3059\u3002"
-  completedPhaseTitle: "\u9032\u884C\u5B8C\u4E86"
-  completedMessage: "\u4EEE\u30B7\u30FC\u30B1\u30F3\u30B9\u5B8C\u4E86\u3002Restart \u3067\u4F1A\u8A71\u30D1\u30FC\u30C8\u304B\u3089\u518D\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002"
---- !u!4 &2100000013
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2100000011}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2197,6 +2101,219 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978805989}
   m_CullTransparentMesh: 1
+--- !u!1 &2100000001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100000003}
+  - component: {fileID: 2100000002}
+  m_Layer: 0
+  m_Name: ConversationPartManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2100000002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d2e8e9c64cc73740b470eabd54cebb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.ConversationPartManager
+  conversationRoot: {fileID: 1978805989}
+  phaseTitleText: {fileID: 807137793}
+  conversationText: {fileID: 1291123148}
+  nextConversationButton: {fileID: 1422330392}
+  characterExpressionBindings: []
+  phaseTitle:
+    m_TableReference:
+      m_TableCollectionName: GameText
+    m_TableEntryReference:
+      m_KeyId: 1000000000001
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  phaseTitleFallback: "\u4F1A\u8A71\u30D1\u30FC\u30C8"
+  emptyConversationMessage:
+    m_TableReference:
+      m_TableCollectionName: GameText
+    m_TableEntryReference:
+      m_KeyId: 1000000000002
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  emptyConversationMessageFallback: "\u4F1A\u8A71\u30C6\u30AD\u30B9\u30C8\u304C\u672A\u8A2D\u5B9A\u3067\u3059\u3002"
+  references:
+    version: 2
+    RefIds: []
+--- !u!4 &2100000003
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000001}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2100000011
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100000013}
+  - component: {fileID: 2100000012}
+  m_Layer: 0
+  m_Name: OperationPartManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2100000012
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01e67c56780ce544fa39afa699a27ab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.OperationPartManager
+  operationRoot: {fileID: 305488208}
+  phaseTitleText: {fileID: 807137793}
+  operationText: {fileID: 1127969288}
+  completeOperationButton: {fileID: 1229908146}
+  restartSequenceButton: {fileID: 314076407}
+  operationPhaseTitle:
+    m_TableReference:
+      m_TableCollectionName: GameText
+    m_TableEntryReference:
+      m_KeyId: 1000000000008
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  operationPhaseTitleFallback: "\u64CD\u4F5C\u30D1\u30FC\u30C8"
+  operationInstruction:
+    m_TableReference:
+      m_TableCollectionName: GameText
+    m_TableEntryReference:
+      m_KeyId: 1000000000009
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  operationInstructionFallback: "\u4EEE\u306E\u64CD\u4F5C\u30D1\u30FC\u30C8\u3067\u3059\u3002\u8ABF\u67FB\u3084\u30AB\u30FC\u30C9\u64CD\u4F5C\u306E\u4EE3\u308F\u308A\u306B\u3001\u30DC\u30BF\u30F3\u304B
+    Enter \u30AD\u30FC\u3067\u9032\u3081\u307E\u3059\u3002"
+  completedPhaseTitle:
+    m_TableReference:
+      m_TableCollectionName: GameText
+    m_TableEntryReference:
+      m_KeyId: 1000000000010
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  completedPhaseTitleFallback: "\u9032\u884C\u5B8C\u4E86"
+  completedMessage:
+    m_TableReference:
+      m_TableCollectionName: GameText
+    m_TableEntryReference:
+      m_KeyId: 1000000000011
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  completedMessageFallback: "\u5168\u30C1\u30E3\u30D7\u30BF\u30FC\u5B8C\u4E86\u3067\u3059\u3002Restart
+    \u3067\u6700\u521D\u304B\u3089\u78BA\u8A8D\u3067\u304D\u307E\u3059\u3002"
+  chapterDefinitions:
+  - chapterId: chapter1
+    phaseTitle:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    phaseTitleFallback: "\u64CD\u4F5C\u30D1\u30FC\u30C8 1"
+    instruction:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    instructionFallback: "\u7B2C1\u30C1\u30E3\u30D7\u30BF\u30FC\u3067\u3059\u3002\u307E\u305A\u306F\u8B66\u5BDF\u306E\u63A8\u7406\u306E\u77DB\u76FE\u3092\u898B\u3064\u3051\u308B\u60F3\u5B9A\u3067\u9032\u884C\u3057\u307E\u3059\u3002"
+    successJudgementId: success
+    defaultJudgementIdOnComplete: success
+  - chapterId: chapter2
+    phaseTitle:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    phaseTitleFallback: "\u64CD\u4F5C\u30D1\u30FC\u30C8 2"
+    instruction:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    instructionFallback: "\u7B2C2\u30C1\u30E3\u30D7\u30BF\u30FC\u3067\u3059\u3002\u884C\u52D5\u306E\u610F\u5473\u3068\u6642\u7CFB\u5217\u306E\u4E21\u65B9\u3092\u63C3\u3048\u308B\u60F3\u5B9A\u3067\u9032\u884C\u3057\u307E\u3059\u3002"
+    successJudgementId: success
+    defaultJudgementIdOnComplete: success
+  references:
+    version: 2
+    RefIds: []
+--- !u!4 &2100000013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000011}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6372068617903500927
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2265,3 +2382,5 @@ SceneRoots:
   - {fileID: 6372068617903500927}
   - {fileID: 297963045}
   - {fileID: 1503877653}
+  - {fileID: 2100000003}
+  - {fileID: 2100000013}

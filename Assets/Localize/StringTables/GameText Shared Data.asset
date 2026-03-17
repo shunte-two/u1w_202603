@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: GameText Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: GameText
+  m_TableCollectionNameGuidString: d3af9fdb4c9346a985c9a4f0a4e671cd
+  m_Entries:
+  - m_Id: 1000000000001
+    m_Key: ui_conversation_phase_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000002
+    m_Key: ui_conversation_empty
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000003
+    m_Key: st_chapter0_opening_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000004
+    m_Key: st_chapter0_opening_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000005
+    m_Key: st_chapter0_opening_2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000006
+    m_Key: st_chapter0_result_0
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000007
+    m_Key: st_chapter0_result_1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000008
+    m_Key: ui_operation_phase_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000009
+    m_Key: ui_operation_instruction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000010
+    m_Key: ui_operation_phase_complete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000011
+    m_Key: ui_operation_phase_complete_desc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: 0
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1742252400000
