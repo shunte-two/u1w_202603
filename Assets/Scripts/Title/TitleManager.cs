@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using U1W.SceneManagement;
 
@@ -14,12 +13,11 @@ namespace U1W.Title
 
         [Header("UI")]
         [SerializeField] private Canvas rootCanvas;
-        [SerializeField] private GameObject optionsPanel;
+        [SerializeField] private OptionUI optionUI;
         [SerializeField] private Button newGameButton;
         [SerializeField] private Button chapter2Button;
         [SerializeField] private Button chapter3Button;
         [SerializeField] private Button settingsButton;
-        [SerializeField] private Button closeOptionsButton;
         [SerializeField] private bool hideUnavailableChapterButtons;
 
         private bool listenersBound;
@@ -29,7 +27,6 @@ namespace U1W.Title
             ValidateReferences();
             ApplyButtonState();
             BindListeners();
-            CloseOptionsImmediate();
         }
 
         private void OnValidate()
@@ -41,20 +38,6 @@ namespace U1W.Title
         private void OnDestroy()
         {
             UnbindListeners();
-        }
-
-        private void Update()
-        {
-            if (!IsOptionsOpen())
-            {
-                return;
-            }
-
-            Keyboard keyboard = Keyboard.current;
-            if (keyboard != null && keyboard.escapeKey.wasPressedThisFrame)
-            {
-                CloseOptions();
-            }
         }
 
         public void StartNewGame()
@@ -72,38 +55,6 @@ namespace U1W.Title
             LoadScene(chapter3SceneName);
         }
 
-        public void OpenOptions()
-        {
-            if (optionsPanel == null)
-            {
-                Debug.LogWarning("TitleManager.OpenOptions skipped: OptionsPanel was not found.");
-                return;
-            }
-
-            optionsPanel.SetActive(true);
-        }
-
-        public void CloseOptions()
-        {
-            if (optionsPanel == null)
-            {
-                return;
-            }
-
-            optionsPanel.SetActive(false);
-        }
-
-        public void ToggleOptions()
-        {
-            if (IsOptionsOpen())
-            {
-                CloseOptions();
-                return;
-            }
-
-            OpenOptions();
-        }
-
         private void ValidateReferences()
         {
             if (rootCanvas == null)
@@ -111,9 +62,9 @@ namespace U1W.Title
                 Debug.LogWarning("TitleManager requires Root Canvas to be assigned via SerializeField.", this);
             }
 
-            if (optionsPanel == null)
+            if (optionUI == null)
             {
-                Debug.LogWarning("TitleManager requires Options Panel to be assigned via SerializeField.", this);
+                Debug.LogWarning("TitleManager requires Option UI to be assigned via SerializeField.", this);
             }
 
             if (newGameButton == null)
@@ -160,7 +111,6 @@ namespace U1W.Title
             BindButton(chapter2Button, StartChapter2);
             BindButton(chapter3Button, StartChapter3);
             BindButton(settingsButton, ToggleOptions);
-            BindButton(closeOptionsButton, CloseOptions);
             listenersBound = true;
         }
 
@@ -175,7 +125,6 @@ namespace U1W.Title
             UnbindButton(chapter2Button, StartChapter2);
             UnbindButton(chapter3Button, StartChapter3);
             UnbindButton(settingsButton, ToggleOptions);
-            UnbindButton(closeOptionsButton, CloseOptions);
             listenersBound = false;
         }
 
@@ -190,17 +139,15 @@ namespace U1W.Title
             SceneTransitionManager.LoadScene(sceneName);
         }
 
-        private bool IsOptionsOpen()
+        private void ToggleOptions()
         {
-            return optionsPanel != null && optionsPanel.activeSelf;
-        }
-
-        private void CloseOptionsImmediate()
-        {
-            if (optionsPanel != null)
+            if (optionUI == null)
             {
-                optionsPanel.SetActive(false);
+                Debug.LogWarning("TitleManager.ToggleOptions skipped: OptionUI was not assigned.");
+                return;
             }
+
+            optionUI.ToggleOptions();
         }
 
         private static void BindButton(Button button, UnityEngine.Events.UnityAction action)

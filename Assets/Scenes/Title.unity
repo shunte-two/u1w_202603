@@ -744,12 +744,11 @@ MonoBehaviour:
   chapter2SceneName: 
   chapter3SceneName: 
   rootCanvas: {fileID: 297963044}
-  optionsPanel: {fileID: 1393083795}
+  optionUI: {fileID: 1393083799}
   newGameButton: {fileID: 128885722}
   chapter2Button: {fileID: 806460462}
   chapter3Button: {fileID: 663552347}
   settingsButton: {fileID: 1005643642}
-  closeOptionsButton: {fileID: 1629431416}
   hideUnavailableChapterButtons: 0
 --- !u!1 &452337783
 GameObject:
@@ -2484,6 +2483,7 @@ GameObject:
   - component: {fileID: 1393083796}
   - component: {fileID: 1393083798}
   - component: {fileID: 1393083797}
+  - component: {fileID: 1393083799}
   m_Layer: 5
   m_Name: OptionsPanel
   m_TagString: Untagged
@@ -2550,6 +2550,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1393083795}
   m_CullTransparentMesh: 1
+--- !u!114 &1393083799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1393083795}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2012fb312564d7945bd9f5012aad070c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::U1W.Title.OptionUI
+  optionPanel: {fileID: 1393083795}
+  closeButton: {fileID: 1629431416}
 --- !u!1 &1629431414
 GameObject:
   m_ObjectHideFlags: 0
