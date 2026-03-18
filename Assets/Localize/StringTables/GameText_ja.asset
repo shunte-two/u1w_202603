@@ -62,5 +62,9 @@ MonoBehaviour:
     m_Localized: 仮シーケンス完了。Restart で会話パートから再確認できます。
     m_Metadata:
       m_Items: []
+  - m_Id: 1000000000012
+    m_Localized: 初期配置に戻す
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

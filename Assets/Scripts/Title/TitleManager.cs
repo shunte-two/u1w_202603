@@ -12,6 +12,7 @@ namespace U1W.Title
 
         [Header("Scene Names")]
         [SerializeField] private string gameSceneName = "Game";
+        [SerializeField] [Min(0f)] private float gameSceneTransitionBlackoutDuration;
 
 
         [Header("UI")]
@@ -150,7 +151,9 @@ namespace U1W.Title
             }
 
             GameSceneStartContext.SetRequestedChapter(chapterId);
-            SceneTransitionManager.LoadScene(sceneName);
+            SceneTransitionManager.LoadScene(
+                sceneName,
+                blackoutDuration: gameSceneTransitionBlackoutDuration);
         }
 
         private void ToggleOptions()

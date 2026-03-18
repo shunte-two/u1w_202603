@@ -21,6 +21,22 @@ namespace U1W.Game
         Wait
     }
 
+    public enum StoryCharacterId
+    {
+        None,
+        FortuneTeller
+    }
+
+    public enum StoryExpressionId
+    {
+        None,
+        Normal,
+        Joy,
+        Angry,
+        Sad,
+        Surprised
+    }
+
     [Serializable]
     public sealed class StoryStep
     {
@@ -28,20 +44,18 @@ namespace U1W.Game
         [SerializeField] private LocalizedString message;
         [SerializeField] [TextArea(2, 4)] private string messageFallback;
         [SerializeField] private bool waitForAdvance = true;
-        [SerializeField] private string characterId;
-        [SerializeField] private Sprite expressionSprite;
-        [SerializeField] private bool setNativeSize;
-        [SerializeField] private bool hideWhenSpriteMissing = true;
+        [SerializeField] private StoryCharacterId characterId = StoryCharacterId.None;
+        [SerializeField] private StoryExpressionId expressionId = StoryExpressionId.Normal;
+        [SerializeField] private bool hideCharacterWhenExpressionMissing;
         [SerializeField] [Min(0f)] private float waitSeconds;
 
         public StoryStepType StepType => stepType;
         public LocalizedString Message => message;
         public string MessageFallback => messageFallback;
         public bool WaitForAdvance => waitForAdvance;
-        public string CharacterId => characterId;
-        public Sprite ExpressionSprite => expressionSprite;
-        public bool SetNativeSize => setNativeSize;
-        public bool HideWhenSpriteMissing => hideWhenSpriteMissing;
+        public StoryCharacterId CharacterId => characterId;
+        public StoryExpressionId ExpressionId => expressionId;
+        public bool HideCharacterWhenExpressionMissing => hideCharacterWhenExpressionMissing;
         public float WaitSeconds => waitSeconds;
     }
 }

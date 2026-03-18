@@ -12,25 +12,14 @@ namespace U1W.Game
 {
     public sealed class ConversationPartManager : MonoBehaviour
     {
-        [System.Serializable]
-        private sealed class CharacterExpressionBinding
-        {
-            [SerializeField] private string characterId;
-            [SerializeField] private Image targetImage;
-            [SerializeField] private bool hideWhenSpriteMissing = true;
-
-            public string CharacterId => characterId;
-            public Image TargetImage => targetImage;
-            public bool HideWhenSpriteMissing => hideWhenSpriteMissing;
-        }
-
         [Header("References")]
         [SerializeField] private GameObject conversationRoot;
         [SerializeField] private TextMeshProUGUI phaseTitleText;
         [SerializeField] private TextMeshProUGUI conversationText;
         [SerializeField] private Button nextConversationButton;
         [SerializeField] private TextMeshProUGUI advanceIndicatorText;
-        [SerializeField] private CharacterExpressionBinding[] characterExpressionBindings;
+        [SerializeField] private StoryCharacterPortrait[] characterPortraits;
+        [SerializeField] private ConversationLogPanel conversationLogPanel;
 
         [Header("Display")]
         [SerializeField] private LocalizedString phaseTitle;
@@ -177,52 +166,47 @@ namespace U1W.Game
 
         private void ApplyExpression(StoryStep step)
         {
-            CharacterExpressionBinding binding = FindCharacterBinding(step.CharacterId);
-            if (binding == null || binding.TargetImage == null)
+            StoryCharacterPortrait portrait = FindCharacterPortrait(step.CharacterId);
+            if (portrait == null)
             {
-                if (!string.IsNullOrWhiteSpace(step.CharacterId))
+                if (step.CharacterId != StoryCharacterId.None)
                 {
                     Debug.LogWarning(
-                        $"ConversationPartManager could not resolve character expression target: {step.CharacterId}");
+                        $"ConversationPartManager could not resolve character portrait target: {step.CharacterId}");
                 }
 
                 return;
             }
 
-            Image targetImage = binding.TargetImage;
-            targetImage.sprite = step.ExpressionSprite;
-
-            bool hasSprite = step.ExpressionSprite != null;
-            bool hideWhenMissing = step.HideWhenSpriteMissing || binding.HideWhenSpriteMissing;
-            if (hideWhenMissing)
+            bool applied = portrait.ApplyExpression(
+                step.ExpressionId,
+                step.HideCharacterWhenExpressionMissing);
+            if (!applied)
             {
-                targetImage.enabled = hasSprite;
-            }
-
-            if (hasSprite && step.SetNativeSize)
-            {
-                targetImage.SetNativeSize();
+                Debug.LogWarning(
+                    $"ConversationPartManager could not resolve expression '{step.ExpressionId}' for character '{step.CharacterId}'.",
+                    this);
             }
         }
 
-        private CharacterExpressionBinding FindCharacterBinding(string characterId)
+        private StoryCharacterPortrait FindCharacterPortrait(StoryCharacterId characterId)
         {
-            if (string.IsNullOrWhiteSpace(characterId) || characterExpressionBindings == null)
+            if (characterId == StoryCharacterId.None || characterPortraits == null)
             {
                 return null;
             }
 
-            for (int i = 0; i < characterExpressionBindings.Length; i++)
+            for (int i = 0; i < characterPortraits.Length; i++)
             {
-                CharacterExpressionBinding binding = characterExpressionBindings[i];
-                if (binding == null)
+                StoryCharacterPortrait portrait = characterPortraits[i];
+                if (portrait == null)
                 {
                     continue;
                 }
 
-                if (string.Equals(binding.CharacterId, characterId, System.StringComparison.Ordinal))
+                if (portrait.CharacterId == characterId)
                 {
-                    return binding;
+                    return portrait;
                 }
             }
 
@@ -297,15 +281,22 @@ namespace U1W.Game
 
             if (IsMissing(localizedString))
             {
+                AppendConversationLogEntry(fallbackValue);
                 await AnimateConversationTextAsync(fallbackValue, cancellationToken);
                 return;
             }
 
             boundConversationText = localizedString;
             boundConversationText.StringChanged += HandleConversationTextChanged;
-            await AnimateConversationTextAsync(
-                await ResolveLocalizedStringAsync(localizedString, cancellationToken),
-                cancellationToken);
+            string resolvedValue =
+                await ResolveLocalizedStringAsync(localizedString, cancellationToken);
+            AppendConversationLogEntry(resolvedValue);
+            await AnimateConversationTextAsync(resolvedValue, cancellationToken);
+        }
+
+        public void ResetConversationLog()
+        {
+            conversationLogPanel?.ClearMessages();
         }
 
         private void BindPhaseTitle(LocalizedString localizedString, string fallbackValue)
@@ -517,21 +508,22 @@ namespace U1W.Game
             WarnIfMissing(conversationText, nameof(conversationText));
             WarnIfMissing(nextConversationButton, nameof(nextConversationButton));
             WarnIfMissing(advanceIndicatorText, nameof(advanceIndicatorText));
+            WarnIfMissing(conversationLogPanel, nameof(conversationLogPanel));
 
-            if (characterExpressionBindings == null)
+            if (characterPortraits == null)
             {
                 return;
             }
 
-            for (int i = 0; i < characterExpressionBindings.Length; i++)
+            for (int i = 0; i < characterPortraits.Length; i++)
             {
-                CharacterExpressionBinding binding = characterExpressionBindings[i];
-                if (binding == null || string.IsNullOrWhiteSpace(binding.CharacterId))
+                StoryCharacterPortrait portrait = characterPortraits[i];
+                if (portrait == null || portrait.CharacterId == StoryCharacterId.None)
                 {
                     continue;
                 }
 
-                WarnIfMissing(binding.TargetImage, $"{nameof(characterExpressionBindings)}[{i}]");
+                WarnIfMissing(portrait, $"{nameof(characterPortraits)}[{i}]");
             }
         }
 
@@ -565,6 +557,11 @@ namespace U1W.Game
                 Debug.LogWarning(
                     $"ConversationPartManager requires {fieldName} to be assigned via SerializeField.");
             }
+        }
+
+        private void AppendConversationLogEntry(string value)
+        {
+            conversationLogPanel?.AppendMessage(value);
         }
     }
 }

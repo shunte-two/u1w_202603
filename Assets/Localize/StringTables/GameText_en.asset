@@ -62,5 +62,9 @@ MonoBehaviour:
     m_Localized: Temporary sequence complete. Use Restart to review the conversation phase again.
     m_Metadata:
       m_Items: []
+  - m_Id: 1000000000012
+    m_Localized: Reset Layout
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

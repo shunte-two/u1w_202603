@@ -20,7 +20,6 @@ namespace U1W.Game
         [SerializeField] private Image backgroundImage;
         [SerializeField] private TextMeshProUGUI factText;
         [SerializeField] private TextMeshProUGUI interpretationText;
-        [SerializeField] private TextMeshProUGUI faceLabelText;
 
         [Header("Visuals")]
         [SerializeField] private Color frontColor = new(0.231f, 0.243f, 0.349f, 0.98f);
@@ -57,7 +56,6 @@ namespace U1W.Game
         public void SetContent(
             string fact,
             string interpretation,
-            string faceLabel,
             bool isFlipped,
             bool isFlipEnabled,
             bool isReorderEnabled)
@@ -73,11 +71,6 @@ namespace U1W.Game
             if (interpretationText != null)
             {
                 interpretationText.text = interpretation;
-            }
-
-            if (faceLabelText != null)
-            {
-                faceLabelText.text = faceLabel;
             }
 
             if (backgroundImage != null)

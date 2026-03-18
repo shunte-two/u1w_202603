@@ -8,6 +8,8 @@ namespace U1W.SceneManagement
     [DefaultExecutionOrder(-1000)]
     public sealed class SceneTransitionManager : MonoBehaviour
     {
+        private const float DefaultBlackoutDuration = 0f;
+
         private static SceneTransitionManager instance;
 
         [Header("Fade")]
@@ -16,13 +18,17 @@ namespace U1W.SceneManagement
         [SerializeField] [Min(0f)] private float fadeInDuration = 0.35f;
 
         private CanvasGroup canvasGroup;
+        private Image inputBlockerImage;
         private Image fadeImage;
         private int transitionVersion;
         private bool isTransitioning;
 
         public static bool IsTransitioning => instance != null && instance.isTransitioning;
 
-        public static void LoadScene(string sceneName, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        public static void LoadScene(
+            string sceneName,
+            LoadSceneMode loadSceneMode = LoadSceneMode.Single,
+            float blackoutDuration = DefaultBlackoutDuration)
         {
             if (string.IsNullOrWhiteSpace(sceneName))
             {
@@ -36,10 +42,13 @@ namespace U1W.SceneManagement
                 return;
             }
 
-            manager.StartTransition(new SceneLoadRequest(sceneName, loadSceneMode));
+            manager.StartTransition(new SceneLoadRequest(sceneName, loadSceneMode, blackoutDuration));
         }
 
-        public static void LoadScene(int buildIndex, LoadSceneMode loadSceneMode = LoadSceneMode.Single)
+        public static void LoadScene(
+            int buildIndex,
+            LoadSceneMode loadSceneMode = LoadSceneMode.Single,
+            float blackoutDuration = DefaultBlackoutDuration)
         {
             SceneTransitionManager manager = EnsureInstance();
             if (manager == null)
@@ -47,13 +56,13 @@ namespace U1W.SceneManagement
                 return;
             }
 
-            manager.StartTransition(new SceneLoadRequest(buildIndex, loadSceneMode));
+            manager.StartTransition(new SceneLoadRequest(buildIndex, loadSceneMode, blackoutDuration));
         }
 
-        public static void ReloadCurrentScene()
+        public static void ReloadCurrentScene(float blackoutDuration = DefaultBlackoutDuration)
         {
             Scene currentScene = SceneManager.GetActiveScene();
-            LoadScene(currentScene.buildIndex);
+            LoadScene(currentScene.buildIndex, blackoutDuration: blackoutDuration);
         }
 
         public static SceneTransitionManager EnsureInstance()
@@ -98,14 +107,14 @@ namespace U1W.SceneManagement
         {
             DontDestroyOnLoad(gameObject);
 
-            if (canvasGroup != null && fadeImage != null)
+            if (canvasGroup != null && fadeImage != null && inputBlockerImage != null)
             {
                 return;
             }
 
             CreateOverlay();
             SetOverlayAlpha(0f);
-            canvasGroup.blocksRaycasts = false;
+            SetInputBlockerActive(false);
         }
 
         private void CreateOverlay()
@@ -135,20 +144,39 @@ namespace U1W.SceneManagement
                 canvasGroup = canvas.gameObject.AddComponent<CanvasGroup>();
             }
 
-            fadeImage = canvas.GetComponentInChildren<Image>(true);
+            Image[] overlayImages = canvas.GetComponentsInChildren<Image>(true);
+            for (int i = 0; i < overlayImages.Length; i++)
+            {
+                Image image = overlayImages[i];
+                if (image == null)
+                {
+                    continue;
+                }
+
+                if (image.name == "InputBlocker")
+                {
+                    inputBlockerImage = image;
+                    continue;
+                }
+
+                if (image.name == "FadeImage")
+                {
+                    fadeImage = image;
+                }
+            }
+
+            if (inputBlockerImage == null)
+            {
+                inputBlockerImage = CreateOverlayImage(canvas.transform, "InputBlocker");
+            }
+
             if (fadeImage == null)
             {
-                GameObject imageObject = new GameObject("FadeImage");
-                imageObject.transform.SetParent(canvas.transform, false);
-
-                RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
-                rectTransform.anchorMin = Vector2.zero;
-                rectTransform.anchorMax = Vector2.one;
-                rectTransform.offsetMin = Vector2.zero;
-                rectTransform.offsetMax = Vector2.zero;
-
-                fadeImage = imageObject.AddComponent<Image>();
+                fadeImage = CreateOverlayImage(canvas.transform, "FadeImage");
             }
+
+            inputBlockerImage.color = new Color(0f, 0f, 0f, 0f);
+            inputBlockerImage.raycastTarget = true;
 
             fadeImage.color = fadeColor;
             fadeImage.raycastTarget = false;
@@ -190,10 +218,16 @@ namespace U1W.SceneManagement
         private async UniTaskVoid RunTransitionAsync(SceneLoadRequest request, int version)
         {
             isTransitioning = true;
-            canvasGroup.blocksRaycasts = true;
             fadeImage.color = fadeColor;
+            SetInputBlockerActive(true);
 
             await FadeAsync(0f, 1f, fadeOutDuration, version);
+            if (!IsCurrentTransition(version))
+            {
+                return;
+            }
+
+            await WaitBlackoutAsync(request.BlackoutDuration, version);
             if (!IsCurrentTransition(version))
             {
                 return;
@@ -258,6 +292,40 @@ namespace U1W.SceneManagement
             SetOverlayAlpha(to);
         }
 
+        private static Image CreateOverlayImage(Transform parent, string objectName)
+        {
+            GameObject imageObject = new GameObject(objectName);
+            imageObject.transform.SetParent(parent, false);
+
+            RectTransform rectTransform = imageObject.AddComponent<RectTransform>();
+            rectTransform.anchorMin = Vector2.zero;
+            rectTransform.anchorMax = Vector2.one;
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+
+            return imageObject.AddComponent<Image>();
+        }
+
+        private async UniTask WaitBlackoutAsync(float duration, int version)
+        {
+            if (duration <= 0f)
+            {
+                return;
+            }
+
+            float elapsed = 0f;
+            while (elapsed < duration)
+            {
+                if (!IsCurrentTransition(version))
+                {
+                    return;
+                }
+
+                elapsed += Time.unscaledDeltaTime;
+                await UniTask.Yield(PlayerLoopTiming.Update);
+            }
+        }
+
         private void SetOverlayAlpha(float alpha)
         {
             canvasGroup.alpha = alpha;
@@ -265,8 +333,18 @@ namespace U1W.SceneManagement
 
         private void CompleteTransition()
         {
-            canvasGroup.blocksRaycasts = false;
+            SetInputBlockerActive(false);
             isTransitioning = false;
+        }
+
+        private void SetInputBlockerActive(bool isActive)
+        {
+            canvasGroup.blocksRaycasts = isActive;
+
+            if (inputBlockerImage != null)
+            {
+                inputBlockerImage.enabled = isActive;
+            }
         }
 
         private bool IsCurrentTransition(int version)
@@ -276,23 +354,32 @@ namespace U1W.SceneManagement
 
         private readonly struct SceneLoadRequest
         {
-            public SceneLoadRequest(string sceneName, LoadSceneMode loadSceneMode)
+            public SceneLoadRequest(
+                string sceneName,
+                LoadSceneMode loadSceneMode,
+                float blackoutDuration)
             {
                 SceneName = sceneName;
                 BuildIndex = -1;
                 LoadSceneMode = loadSceneMode;
+                BlackoutDuration = Mathf.Max(0f, blackoutDuration);
             }
 
-            public SceneLoadRequest(int buildIndex, LoadSceneMode loadSceneMode)
+            public SceneLoadRequest(
+                int buildIndex,
+                LoadSceneMode loadSceneMode,
+                float blackoutDuration)
             {
                 SceneName = null;
                 BuildIndex = buildIndex;
                 LoadSceneMode = loadSceneMode;
+                BlackoutDuration = Mathf.Max(0f, blackoutDuration);
             }
 
             public string SceneName { get; }
             public int BuildIndex { get; }
             public LoadSceneMode LoadSceneMode { get; }
+            public float BlackoutDuration { get; }
         }
     }
 }

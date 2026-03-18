@@ -25,6 +25,7 @@ namespace U1W.Game
         {
             public OperationCardDefinition Definition;
             public OperationCardView View;
+            public int InitialOrderIndex;
             public bool IsFlipped;
             public string FactText;
             public string FrontInterpretation;
@@ -42,9 +43,7 @@ namespace U1W.Game
         private readonly float popupVerticalOffset;
         private readonly string emptyDescriptionFallback;
         private readonly List<CardRuntime> activeCards = new();
-
-        private string frontFaceLabel;
-        private string backFaceLabel;
+        
         private CardRuntime draggedCard;
         private Tween popupTween;
 
@@ -88,9 +87,6 @@ namespace U1W.Game
             Clear();
             HideCardDescription();
 
-            frontFaceLabel = frontLabel;
-            backFaceLabel = backLabel;
-
             if (operationAsset == null || operationAsset.Cards == null || operationAsset.Cards.Length == 0)
             {
                 return;
@@ -111,6 +107,7 @@ namespace U1W.Game
                 {
                     Definition = definition,
                     View = view,
+                    InitialOrderIndex = i,
                     IsFlipped = definition.StartsFlipped,
                     FactText = await resolveTextAsync(definition.FactText, cancellationToken),
                     FrontInterpretation = await resolveTextAsync(definition.FrontInterpretation, cancellationToken),
@@ -139,6 +136,33 @@ namespace U1W.Game
             }
 
             activeCards.Clear();
+        }
+
+        public void ResetToChapterStartLayout()
+        {
+            if (activeCards.Count == 0)
+            {
+                return;
+            }
+
+            HideCardDescription();
+            draggedCard = null;
+            activeCards.Sort(CompareByInitialOrder);
+
+            for (int i = 0; i < activeCards.Count; i++)
+            {
+                CardRuntime card = activeCards[i];
+                if (card?.Definition == null)
+                {
+                    continue;
+                }
+
+                card.IsFlipped = card.Definition.StartsFlipped;
+                card.View?.SetDragging(false);
+                RefreshCardContent(card);
+            }
+
+            AnimateCardsToLayout(null);
         }
 
         public string ResolveJudgementId(string successJudgementId, string defaultJudgementId)
@@ -283,11 +307,9 @@ namespace U1W.Game
             }
 
             string interpretation = card.IsFlipped ? card.BackInterpretation : card.FrontInterpretation;
-            string faceLabel = card.IsFlipped ? backFaceLabel : frontFaceLabel;
             card.View.SetContent(
                 card.FactText,
                 interpretation,
-                faceLabel,
                 card.IsFlipped,
                 card.Definition.CanFlip,
                 card.Definition.CanReorder);
@@ -469,6 +491,41 @@ namespace U1W.Game
             popupTween?.Kill();
             cardDescriptionPopupRoot.localScale = Vector3.one * 0.96f;
             popupTween = cardDescriptionPopupRoot.DOScale(1f, 0.12f).SetEase(Ease.OutBack);
+        }
+
+        private static int CompareByInitialOrder(CardRuntime left, CardRuntime right)
+        {
+            if (ReferenceEquals(left, right))
+            {
+                return 0;
+            }
+
+            if (left == null)
+            {
+                return -1;
+            }
+
+            if (right == null)
+            {
+                return 1;
+            }
+
+            if (ReferenceEquals(left.Definition, right.Definition))
+            {
+                return 0;
+            }
+
+            if (left.Definition == null)
+            {
+                return -1;
+            }
+
+            if (right.Definition == null)
+            {
+                return 1;
+            }
+
+            return left.InitialOrderIndex.CompareTo(right.InitialOrderIndex);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using UnityEngine;
 using U1W.SceneManagement;
 
@@ -68,9 +69,20 @@ namespace U1W.Game
         [Header("Ending")]
         [SerializeField] private StoryAsset endingStory;
         [SerializeField] private string titleSceneName = "Title";
+        [SerializeField] [Min(0f)] private float endingTransitionBlackoutDuration;
+
+        [Header("Character Focus")]
+        [SerializeField] private Transform characterFocusRoot;
+        [SerializeField] private Vector3 operationCharacterLocalOffset = new(0f, 2.25f, 0f);
+        [SerializeField] [Min(0f)] private float characterFocusMoveDuration = 0.45f;
+        [SerializeField] private Ease characterFocusMoveEase = Ease.InOutSine;
+        [SerializeField] [Min(0f)] private float characterFocusSkipDistance = 0.001f;
 
         private CancellationTokenSource sequenceCancellationTokenSource;
+        private Tween characterFocusTween;
         private int currentChapterIndex;
+        private Vector3 defaultCharacterLocalPosition;
+        private bool hasDefaultCharacterLocalPosition;
         private string requestedStartChapterId;
 
         public int CurrentChapterIndex => currentChapterIndex;
@@ -78,6 +90,7 @@ namespace U1W.Game
         private void Awake()
         {
             ConsumeStartContext();
+            CacheCharacterDefaultPosition();
             ValidateReferences();
             BindListeners();
             ApplyIdleView();
@@ -97,12 +110,14 @@ namespace U1W.Game
         {
             UnbindListeners();
             CancelRunningSequence();
+            KillCharacterFocusTween(false);
         }
 
         public void RestartSequence()
         {
             CancelRunningSequence();
             ApplyIdleView();
+            conversationPartManager?.ResetConversationLog();
 
             if (!HasValidChapterConfiguration())
             {
@@ -155,16 +170,18 @@ namespace U1W.Game
 
             while (!cancellationToken.IsCancellationRequested)
             {
+                await TransitionToOperationAsync(cancellationToken);
                 OperationPartResult result =
                     await operationPartManager.PlayAsync(chapter.ChapterId, cancellationToken);
-                operationPartManager.Hide();
 
                 if (result.IsSuccess)
                 {
+                    operationPartManager.Hide();
                     await PlayStoryIfAssignedAsync(chapter.SuccessStory, cancellationToken);
                     return;
                 }
 
+                operationPartManager.Hide(clearCardState: false);
                 StoryAsset failureStory = chapter.ResolveFailureStory(result.JudgementId);
                 await PlayStoryIfAssignedAsync(failureStory, cancellationToken);
             }
@@ -174,6 +191,8 @@ namespace U1W.Game
             StoryAsset storyAsset,
             CancellationToken cancellationToken)
         {
+            await TransitionToConversationAsync(cancellationToken);
+
             if (storyAsset == null)
             {
                 conversationPartManager.Hide();
@@ -203,13 +222,16 @@ namespace U1W.Game
                 return;
             }
 
-            SceneTransitionManager.LoadScene(titleSceneName);
+            SceneTransitionManager.LoadScene(
+                titleSceneName,
+                blackoutDuration: endingTransitionBlackoutDuration);
         }
 
         private void ApplyIdleView()
         {
             conversationPartManager?.Hide();
             operationPartManager?.Hide();
+            MoveCharacterToDefaultImmediate();
         }
 
         private void BindListeners()
@@ -243,6 +265,103 @@ namespace U1W.Game
             sequenceCancellationTokenSource.Cancel();
             sequenceCancellationTokenSource.Dispose();
             sequenceCancellationTokenSource = null;
+        }
+
+        private void CacheCharacterDefaultPosition()
+        {
+            if (characterFocusRoot == null)
+            {
+                hasDefaultCharacterLocalPosition = false;
+                defaultCharacterLocalPosition = Vector3.zero;
+                return;
+            }
+
+            defaultCharacterLocalPosition = characterFocusRoot.localPosition;
+            hasDefaultCharacterLocalPosition = true;
+        }
+
+        private void MoveCharacterToDefaultImmediate()
+        {
+            if (!hasDefaultCharacterLocalPosition || characterFocusRoot == null)
+            {
+                return;
+            }
+
+            KillCharacterFocusTween(false);
+            characterFocusRoot.localPosition = defaultCharacterLocalPosition;
+        }
+
+        private UniTask TransitionToConversationAsync(CancellationToken cancellationToken)
+        {
+            return AnimateCharacterFocusAsync(defaultCharacterLocalPosition, cancellationToken);
+        }
+
+        private UniTask TransitionToOperationAsync(CancellationToken cancellationToken)
+        {
+            return AnimateCharacterFocusAsync(
+                defaultCharacterLocalPosition + operationCharacterLocalOffset,
+                cancellationToken);
+        }
+
+        private async UniTask AnimateCharacterFocusAsync(
+            Vector3 targetLocalPosition,
+            CancellationToken cancellationToken)
+        {
+            if (!hasDefaultCharacterLocalPosition || characterFocusRoot == null)
+            {
+                return;
+            }
+
+            KillCharacterFocusTween(false);
+
+            if ((characterFocusRoot.localPosition - targetLocalPosition).sqrMagnitude <=
+                characterFocusSkipDistance * characterFocusSkipDistance)
+            {
+                characterFocusRoot.localPosition = targetLocalPosition;
+                return;
+            }
+
+            if (characterFocusMoveDuration <= 0f)
+            {
+                characterFocusRoot.localPosition = targetLocalPosition;
+                return;
+            }
+
+            bool completed = false;
+            characterFocusTween = characterFocusRoot
+                .DOLocalMove(targetLocalPosition, characterFocusMoveDuration)
+                .SetEase(characterFocusMoveEase)
+                .OnComplete(() => completed = true)
+                .OnKill(() =>
+                {
+                    characterFocusTween = null;
+                    completed = true;
+                });
+
+            try
+            {
+                await UniTask.WaitUntil(() => completed, cancellationToken: cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+                KillCharacterFocusTween(false);
+                throw;
+            }
+        }
+
+        private void KillCharacterFocusTween(bool complete)
+        {
+            if (characterFocusTween == null)
+            {
+                return;
+            }
+
+            Tween tween = characterFocusTween;
+            characterFocusTween = null;
+            if (tween.IsActive())
+            {
+                tween.Kill(complete);
+            }
         }
 
         private int GetInitialChapterIndex()
@@ -316,6 +435,7 @@ namespace U1W.Game
         {
             WarnIfMissing(conversationPartManager, nameof(conversationPartManager));
             WarnIfMissing(operationPartManager, nameof(operationPartManager));
+            WarnIfMissing(characterFocusRoot, nameof(characterFocusRoot));
 
             if (!HasValidChapterConfiguration())
             {

@@ -1,0 +1,49 @@
+{
+  "ExportTimestamp": "2026-03-18 17:04:48",
+  "Context": {
+    "sceneType": "editor",
+    "sceneName": "Game",
+    "nodeCount": 2,
+    "maxDepth": 1
+  },
+  "Hierarchy": [
+    {
+      "sceneName": "Game",
+      "stats": {
+        "rootCount": 1,
+        "nodeCount": 2,
+        "maxDepth": 1
+      },
+      "roots": [
+        {
+          "name": "CharacterPortraitsRoot",
+          "isActive": true,
+          "components": [
+            "Transform"
+          ],
+          "siblingIndex": 9,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "CharacterPortraitsRoot",
+          "children": [
+            {
+              "name": "FortuneTellerPortrait",
+              "isActive": true,
+              "components": [
+                "Transform",
+                "SpriteRenderer",
+                "Animator",
+                "StoryCharacterPortrait"
+              ],
+              "siblingIndex": 0,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "CharacterPortraitsRoot/FortuneTellerPortrait",
+              "children": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

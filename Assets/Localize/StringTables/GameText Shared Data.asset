@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: ui_operation_phase_complete_desc
     m_Metadata:
       m_Items: []
+  - m_Id: 1000000000012
+    m_Key: ui_operation_reset_cards
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

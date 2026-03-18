@@ -25,10 +25,9 @@ MonoBehaviour:
       m_LocalVariables: []
     messageFallback: "\u6D41\u308C\u306E\u9014\u4E2D\u3067\u56E0\u679C\u304C\u5207\u308C\u3066\u3044\u308B\u3002\u3053\u306E\u9806\u756A\u3060\u3068\u3001\u5B88\u308B\u305F\u3081\u306E\u884C\u52D5\u3068\u3057\u3066\u8AAC\u660E\u3057\u304D\u308C\u306A\u3044\u3002"
     waitForAdvance: 1
-    characterId: 
-    expressionSprite: {fileID: 0}
-    setNativeSize: 0
-    hideWhenSpriteMissing: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
   - stepType: 0
     message:
@@ -42,8 +41,7 @@ MonoBehaviour:
       m_LocalVariables: []
     messageFallback: "\u3082\u3046\u4E00\u5EA6\u64CD\u4F5C\u30D1\u30FC\u30C8\u306B\u623B\u3063\u3066\u3001\u30AB\u30FC\u30C9\u306E\u524D\u5F8C\u95A2\u4FC2\u3068\u610F\u56F3\u306E\u53CD\u8EE2\u3092\u5408\u308F\u305B\u76F4\u305D\u3046\u3002"
     waitForAdvance: 1
-    characterId: 
-    expressionSprite: {fileID: 0}
-    setNativeSize: 0
-    hideWhenSpriteMissing: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0

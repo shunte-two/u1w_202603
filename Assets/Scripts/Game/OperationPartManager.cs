@@ -58,6 +58,8 @@ namespace U1W.Game
         [SerializeField] private RectTransform cardDescriptionPopupRoot;
         [SerializeField] private TextMeshProUGUI cardDescriptionText;
         [SerializeField] private Button completeOperationButton;
+        [SerializeField] private Button resetCardsButton;
+        [SerializeField] private TextMeshProUGUI resetCardsButtonLabelText;
         [SerializeField] private Button restartSequenceButton;
 
         [Header("Card Labels")]
@@ -65,6 +67,8 @@ namespace U1W.Game
         [SerializeField] private string frontFaceLabelFallback = "表の解釈";
         [SerializeField] private LocalizedString backFaceLabel;
         [SerializeField] private string backFaceLabelFallback = "裏の解釈";
+        [SerializeField] private LocalizedString resetCardsButtonLabel;
+        [SerializeField] private string resetCardsButtonLabelFallback = "初期配置に戻す";
 
         [Header("Card Layout")]
         [SerializeField] private float cardSpacing = 24f;
@@ -95,6 +99,7 @@ namespace U1W.Game
         private LocalizedString boundPhaseTitle;
         private ChapterOperationDefinition currentChapterDefinition;
         private string currentChapterId = string.Empty;
+        private string loadedChapterId = string.Empty;
         private string pendingJudgementId = string.Empty;
         private OperationCardInteractionController cardInteractionController;
 
@@ -140,7 +145,11 @@ namespace U1W.Game
         {
             PrepareChapter(chapterId);
             await ShowOperationViewAsync(cancellationToken);
-            await BuildCardsAsync(cancellationToken);
+            if (ShouldRebuildCards())
+            {
+                await BuildCardsAsync(cancellationToken);
+            }
+
             completeRequested = false;
             await UniTask.WaitUntil(() => completeRequested, cancellationToken: cancellationToken);
             return BuildCurrentResult();
@@ -161,14 +170,21 @@ namespace U1W.Game
             pendingJudgementId = ResolveDefaultJudgementId(currentChapterDefinition);
         }
 
-        public void Hide()
+        public void Hide(bool clearCardState = true)
         {
             SetRootState(false);
             SetButtonState(completeOperationButton, false);
+            SetButtonState(resetCardsButton, false);
             SetButtonState(restartSequenceButton, false);
             ReleaseBindings();
             cardInteractionController?.HideCardDescription();
-            cardInteractionController?.Clear();
+
+            if (clearCardState)
+            {
+                cardInteractionController?.Clear();
+                loadedChapterId = string.Empty;
+            }
+
             SetOperationText(string.Empty);
         }
 
@@ -191,6 +207,7 @@ namespace U1W.Game
         {
             SetRootState(true);
             SetButtonState(completeOperationButton, false);
+            SetButtonState(resetCardsButton, false);
             SetButtonState(restartSequenceButton, true);
             cardInteractionController?.Clear();
             cardInteractionController?.HideCardDescription();
@@ -202,7 +219,9 @@ namespace U1W.Game
         {
             SetRootState(true);
             SetButtonState(completeOperationButton, true);
+            SetButtonState(resetCardsButton, true);
             SetButtonState(restartSequenceButton, false);
+            await SetResetCardsButtonLabelAsync(cancellationToken);
             BindPhaseTitle(
                 currentChapterDefinition?.PhaseTitle ?? operationPhaseTitle,
                 currentChapterDefinition?.PhaseTitleFallback ?? operationPhaseTitleFallback);
@@ -250,6 +269,11 @@ namespace U1W.Game
         private void RequestRestart()
         {
             RestartRequested?.Invoke();
+        }
+
+        private void RequestResetCards()
+        {
+            cardInteractionController?.ResetToChapterStartLayout();
         }
 
         private void SetRootState(bool isActive)
@@ -385,6 +409,14 @@ namespace U1W.Game
                 resolvedBackFaceLabel,
                 ResolveTextAsync,
                 cancellationToken);
+            loadedChapterId = currentChapterId;
+        }
+
+        private bool ShouldRebuildCards()
+        {
+            return cardInteractionController == null ||
+                   !cardInteractionController.HasCards ||
+                   !string.Equals(loadedChapterId, currentChapterId, StringComparison.Ordinal);
         }
 
         private string ResolveJudgementIdOnComplete()
@@ -452,6 +484,8 @@ namespace U1W.Game
             WarnIfMissing(cardDescriptionPopupRoot, nameof(cardDescriptionPopupRoot));
             WarnIfMissing(cardDescriptionText, nameof(cardDescriptionText));
             WarnIfMissing(completeOperationButton, nameof(completeOperationButton));
+            WarnIfMissing(resetCardsButton, nameof(resetCardsButton));
+            WarnIfMissing(resetCardsButtonLabelText, nameof(resetCardsButtonLabelText));
             WarnIfMissing(restartSequenceButton, nameof(restartSequenceButton));
         }
 
@@ -474,6 +508,12 @@ namespace U1W.Game
                 restartSequenceButton.onClick.AddListener(RequestRestart);
             }
 
+            if (resetCardsButton != null)
+            {
+                resetCardsButton.onClick.RemoveListener(RequestResetCards);
+                resetCardsButton.onClick.AddListener(RequestResetCards);
+            }
+
             listenersBound = true;
         }
 
@@ -492,6 +532,11 @@ namespace U1W.Game
             if (restartSequenceButton != null)
             {
                 restartSequenceButton.onClick.RemoveListener(RequestRestart);
+            }
+
+            if (resetCardsButton != null)
+            {
+                resetCardsButton.onClick.RemoveListener(RequestResetCards);
             }
 
             listenersBound = false;
@@ -542,6 +587,19 @@ namespace U1W.Game
             }
 
             return await ResolveLocalizedStringAsync(localizedString, cancellationToken);
+        }
+
+        private async UniTask SetResetCardsButtonLabelAsync(CancellationToken cancellationToken)
+        {
+            if (resetCardsButtonLabelText == null)
+            {
+                return;
+            }
+
+            resetCardsButtonLabelText.text = await ResolveTextAsync(
+                resetCardsButtonLabel,
+                resetCardsButtonLabelFallback,
+                cancellationToken);
         }
 
         private async UniTask RefreshPhaseTitleAsync(
