@@ -1,5 +1,4 @@
-using System;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace U1W.Audio
@@ -17,6 +16,8 @@ namespace U1W.Audio
         private AudioSource bgmSource;
         private AudioSource seSource;
         private float currentBgmVolume = 1f;
+        private float bgmFadeMultiplier = 1f;
+        private Tween bgmFadeTween;
 
         public static string CurrentBgmKey { get; private set; }
 
@@ -55,16 +56,15 @@ namespace U1W.Audio
             manager.PlayBgmInternal(key, clip, volume, loop);
         }
 
-        public static void StopBgm()
+        public static void StopBgm(float fadeSeconds = 0f)
         {
-            if (instance == null)
+            AudioManager manager = EnsureInstance();
+            if (manager == null)
             {
                 return;
             }
 
-            instance.bgmSource.Stop();
-            instance.bgmSource.clip = null;
-            CurrentBgmKey = null;
+            manager.StopBgmInternal(fadeSeconds);
         }
 
         public static void PauseBgm()
@@ -166,6 +166,8 @@ namespace U1W.Audio
 
         private void OnDestroy()
         {
+            KillBgmFadeTween(false);
+
             if (instance == this)
             {
                 instance = null;
@@ -217,6 +219,8 @@ namespace U1W.Audio
 
         private void PlayBgmInternal(string key, AudioClip clip, float volume, bool loop)
         {
+            KillBgmFadeTween(false);
+            bgmFadeMultiplier = 1f;
             currentBgmVolume = Mathf.Clamp01(volume);
             CurrentBgmKey = key;
             bgmSource.clip = clip;
@@ -225,9 +229,72 @@ namespace U1W.Audio
             bgmSource.Play();
         }
 
+        private void StopBgmInternal(float fadeSeconds)
+        {
+            if (bgmSource == null || bgmSource.clip == null)
+            {
+                return;
+            }
+
+            KillBgmFadeTween(false);
+
+            if (fadeSeconds <= 0f || !bgmSource.isPlaying)
+            {
+                CompleteBgmStop();
+                return;
+            }
+
+            bgmFadeTween = DOTween.To(
+                    () => bgmFadeMultiplier,
+                    value =>
+                    {
+                        bgmFadeMultiplier = value;
+                        ApplyBgmVolume();
+                    },
+                    0f,
+                    fadeSeconds)
+                .SetEase(Ease.OutSine)
+                .OnComplete(() =>
+                {
+                    bgmFadeTween = null;
+                    CompleteBgmStop();
+                })
+                .OnKill(() => bgmFadeTween = null);
+        }
+
+        private void CompleteBgmStop()
+        {
+            KillBgmFadeTween(false);
+            bgmSource.Stop();
+            bgmSource.clip = null;
+            bgmFadeMultiplier = 1f;
+            ApplyBgmVolume();
+            CurrentBgmKey = null;
+        }
+
         private void ApplyBgmVolume()
         {
-            bgmSource.volume = currentBgmVolume * bgmMasterVolume;
+            if (bgmSource == null)
+            {
+                return;
+            }
+
+            bgmSource.volume = currentBgmVolume * bgmMasterVolume * bgmFadeMultiplier;
+        }
+
+        private void KillBgmFadeTween(bool complete)
+        {
+            if (bgmFadeTween == null)
+            {
+                return;
+            }
+
+            Tween tween = bgmFadeTween;
+            bgmFadeTween = null;
+            if (tween.IsActive())
+            {
+                tween.Kill(complete);
+            }
         }
 
         private AudioSource GetOrAddAudioSource(string childName)
@@ -246,61 +313,5 @@ namespace U1W.Audio
             source.spatialBlend = 0f;
             return source;
         }
-    }
-
-    public abstract class AudioTableBase : ScriptableObject
-    {
-        [SerializeField] private List<Entry> entries = new();
-
-        private Dictionary<string, AudioClip> clipByKey;
-
-        public bool TryGetClip(string key, out AudioClip clip)
-        {
-            if (string.IsNullOrWhiteSpace(key))
-            {
-                clip = null;
-                return false;
-            }
-
-            EnsureCache();
-            return clipByKey.TryGetValue(key, out clip);
-        }
-
-        private void EnsureCache()
-        {
-            if (clipByKey != null)
-            {
-                return;
-            }
-
-            clipByKey = new Dictionary<string, AudioClip>(StringComparer.Ordinal);
-
-            foreach (Entry entry in entries)
-            {
-                if (string.IsNullOrWhiteSpace(entry.Key) || entry.Clip == null)
-                {
-                    continue;
-                }
-
-                clipByKey[entry.Key] = entry.Clip;
-            }
-        }
-
-        [Serializable]
-        private struct Entry
-        {
-            public string Key;
-            public AudioClip Clip;
-        }
-    }
-
-    [CreateAssetMenu(fileName = "BGMTable", menuName = "Audio/BGM Table")]
-    public sealed class BgmTable : AudioTableBase
-    {
-    }
-
-    [CreateAssetMenu(fileName = "SETable", menuName = "Audio/SE Table")]
-    public sealed class SeTable : AudioTableBase
-    {
     }
 }

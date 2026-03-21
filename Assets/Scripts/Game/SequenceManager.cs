@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Localization;
 using U1W.SceneManagement;
 
 namespace U1W.Game
@@ -23,12 +24,16 @@ namespace U1W.Game
         private sealed class ChapterSequenceDefinition
         {
             [SerializeField] private string chapterId = "chapter1";
+            [SerializeField] private LocalizedString chapterTitle;
+            [SerializeField] private string chapterTitleFallback = string.Empty;
             [SerializeField] private StoryAsset openingStory;
             [SerializeField] private StoryAsset successStory;
             [SerializeField] private StoryAsset defaultFailureStory;
             [SerializeField] private ChapterFailureBranch[] failureBranches = Array.Empty<ChapterFailureBranch>();
 
             public string ChapterId => chapterId;
+            public LocalizedString ChapterTitle => chapterTitle;
+            public string ChapterTitleFallback => chapterTitleFallback;
             public StoryAsset OpeningStory => openingStory;
             public StoryAsset SuccessStory => successStory;
 
@@ -61,6 +66,7 @@ namespace U1W.Game
         [Header("Managers")]
         [SerializeField] private ConversationPartManager conversationPartManager;
         [SerializeField] private OperationPartManager operationPartManager;
+        [SerializeField] private ChapterIntroOverlay chapterIntroOverlay;
 
         [Header("Chapter Sequence")]
         [SerializeField] private StoryAsset openingStory;
@@ -172,6 +178,7 @@ namespace U1W.Game
                 return;
             }
 
+            await PlayChapterIntroAsync(chapter, currentChapterIndex, cancellationToken);
             await PlayStoryIfAssignedAsync(chapter.OpeningStory, cancellationToken);
 
             while (!cancellationToken.IsCancellationRequested)
@@ -209,6 +216,22 @@ namespace U1W.Game
             conversationPartManager.Hide();
         }
 
+        private async UniTask PlayChapterIntroAsync(
+            ChapterSequenceDefinition chapter,
+            int chapterIndex,
+            CancellationToken cancellationToken)
+        {
+            if (chapterIntroOverlay == null || chapter == null)
+            {
+                return;
+            }
+
+            await chapterIntroOverlay.PlayAsync(
+                chapter.ChapterTitle,
+                ResolveChapterTitleFallback(chapter, chapterIndex),
+                cancellationToken);
+        }
+
         private async UniTask RunEndingAsync(CancellationToken cancellationToken)
         {
             operationPartManager.Hide();
@@ -237,6 +260,7 @@ namespace U1W.Game
         {
             conversationPartManager?.Hide();
             operationPartManager?.Hide();
+            chapterIntroOverlay?.HideImmediate();
             MoveCharacterToDefaultImmediate();
         }
 
@@ -443,6 +467,7 @@ namespace U1W.Game
         {
             WarnIfMissing(conversationPartManager, nameof(conversationPartManager));
             WarnIfMissing(operationPartManager, nameof(operationPartManager));
+            WarnIfMissing(chapterIntroOverlay, nameof(chapterIntroOverlay));
             WarnIfMissing(characterFocusRoot, nameof(characterFocusRoot));
 
             if (!HasValidChapterConfiguration())
@@ -457,6 +482,18 @@ namespace U1W.Game
             {
                 Debug.LogWarning($"SequenceManager requires {fieldName} to be assigned via SerializeField.");
             }
+        }
+
+        private static string ResolveChapterTitleFallback(
+            ChapterSequenceDefinition chapter,
+            int chapterIndex)
+        {
+            if (chapter != null && !string.IsNullOrWhiteSpace(chapter.ChapterTitleFallback))
+            {
+                return chapter.ChapterTitleFallback;
+            }
+
+            return $"CHAPTER {chapterIndex + 1}";
         }
     }
 }

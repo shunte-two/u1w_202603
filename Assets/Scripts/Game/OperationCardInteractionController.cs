@@ -6,6 +6,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using U1W.Audio;
 
 namespace U1W.Game
 {
@@ -21,6 +22,9 @@ namespace U1W.Game
 
     public sealed class OperationCardInteractionController : IOperationCardInteractionHandler, IDisposable
     {
+        private const string FlipCardSeKey = "FlipCard";
+        private const string ReplaceCardSeKey = "ReplaceCard";
+
         private sealed class CardRuntime
         {
             public OperationCardDefinition Definition;
@@ -164,7 +168,7 @@ namespace U1W.Game
 
                 if (shouldAnimateFlip)
                 {
-                    PlayCardFlip(card);
+                    PlayCardFlip(card, playSe: false);
                     continue;
                 }
 
@@ -212,7 +216,7 @@ namespace U1W.Game
             }
 
             card.IsFlipped = !card.IsFlipped;
-            PlayCardFlip(card);
+            PlayCardFlip(card, playSe: true);
 
             if (cardDescriptionPopupRoot != null && cardDescriptionPopupRoot.gameObject.activeSelf)
             {
@@ -282,6 +286,7 @@ namespace U1W.Game
             }
 
             ApplyReorderableCardOrder(reorderableIndices, currentMovableSlotIndex, targetMovableSlotIndex);
+            AudioManager.PlaySe(ReplaceCardSeKey);
             AnimateCardsToLayout(card);
         }
 
@@ -323,11 +328,16 @@ namespace U1W.Game
                 card.Definition.CanReorder);
         }
 
-        private void PlayCardFlip(CardRuntime card)
+        private void PlayCardFlip(CardRuntime card, bool playSe)
         {
             if (card?.View == null)
             {
                 return;
+            }
+
+            if (playSe)
+            {
+                AudioManager.PlaySe(FlipCardSeKey);
             }
 
             string interpretation = card.IsFlipped ? card.BackInterpretation : card.FrontInterpretation;

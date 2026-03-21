@@ -9,7 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 1da4311c08d18ee46b9142495b466ed8, type: 3}
   m_Name: SETable
-  m_EditorClassIdentifier: Assembly-CSharp:U1W.Audio:SeTable
-  entries: []
+  m_EditorClassIdentifier: 
+  entries:
+  - Key: Conversation
+    Clip: {fileID: 8300000, guid: 52ce89e647e45c843836b512a8515cd2, type: 3}
+  - Key: TitleCall
+    Clip: {fileID: 8300000, guid: c2368ab6bd08ae44f8f91eea6c52a726, type: 3}
+  - Key: FlipCard
+    Clip: {fileID: 8300000, guid: 13b93b072cdd8154db709a7cff847e9d, type: 3}
+  - Key: ReplaceCard
+    Clip: {fileID: 8300000, guid: 71d85df4fb7ef9840bdd19ae4012b659, type: 3}
+  - Key: ChapterStart
+    Clip: {fileID: 8300000, guid: 6e2fa684522cc2b45927c3b9cc5c8dc0, type: 3}

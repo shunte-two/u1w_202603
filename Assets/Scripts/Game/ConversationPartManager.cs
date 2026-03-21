@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Localization;
 using UnityEngine.UI;
+using U1W.Audio;
 
 namespace U1W.Game
 {
@@ -30,6 +31,9 @@ namespace U1W.Game
         [SerializeField] private LocalizedString emptyConversationMessage;
         [SerializeField] private string emptyConversationMessageFallback = "会話テキストが未設定です。";
         [SerializeField, Min(0f)] private float conversationCharactersPerSecond = 30f;
+        [SerializeField] private string conversationTypewriterSeKey = "Conversation";
+        [SerializeField, Range(0f, 1f)] private float conversationTypewriterSeVolume = 0.25f;
+        [SerializeField, Min(0f)] private float conversationTypewriterSeIntervalSeconds = 0.045f;
         [SerializeField, Min(0f)] private float advanceIndicatorFadeDuration = 0.5f;
         [SerializeField, Min(0f)] private float titleSpriteFadeOutDuration = 0.35f;
 
@@ -42,6 +46,8 @@ namespace U1W.Game
         private Tween advanceIndicatorTween;
         private Tween titleSpriteFadeTween;
         private bool showAdvanceIndicatorWhenConversationCompletes;
+        private int previousTypewriterTextLength;
+        private float lastTypewriterSeTime = float.NegativeInfinity;
 
         private void Awake()
         {
@@ -166,6 +172,18 @@ namespace U1W.Game
                     await WaitAsync(step.WaitSeconds, cancellationToken);
                     await HideTitleSpriteAsync(cancellationToken);
                     SetConversationWindowVisible(true);
+                    break;
+
+                case StoryStepType.PlayBgm:
+                    AudioManager.PlayBgm(step.AudioKey, step.AudioVolume, step.LoopBgm);
+                    break;
+
+                case StoryStepType.StopBgm:
+                    AudioManager.StopBgm(step.AudioFadeSeconds);
+                    break;
+
+                case StoryStepType.PlaySe:
+                    AudioManager.PlaySe(step.AudioKey, step.AudioVolume);
                     break;
             }
         }
@@ -421,6 +439,7 @@ namespace U1W.Game
             KillConversationTween(false);
             isAnimatingConversation = false;
             SetAdvanceIndicatorVisible(true);
+            ResetConversationTypewriterSeState();
             SetConversationText(value);
         }
 
@@ -486,6 +505,7 @@ namespace U1W.Game
             KillConversationTween(false);
             isAnimatingConversation = false;
             SetAdvanceIndicatorVisible(false);
+            ResetConversationTypewriterSeState();
 
             if (conversationText == null)
             {
@@ -507,6 +527,7 @@ namespace U1W.Game
             activeConversationTween = conversationText
                 .DOText(value, duration, true, ScrambleMode.None, null)
                 .SetEase(Ease.Linear)
+                .OnUpdate(HandleConversationTypewriterUpdated)
                 .OnKill(HandleConversationTweenFinished)
                 .OnComplete(HandleConversationTweenFinished);
 
@@ -554,7 +575,54 @@ namespace U1W.Game
         {
             activeConversationTween = null;
             isAnimatingConversation = false;
+            ResetConversationTypewriterSeState();
             SetAdvanceIndicatorVisible(showAdvanceIndicatorWhenConversationCompletes);
+        }
+
+        private void HandleConversationTypewriterUpdated()
+        {
+            if (conversationText == null)
+            {
+                return;
+            }
+
+            string currentText = conversationText.text ?? string.Empty;
+            int currentLength = currentText.Length;
+            if (currentLength <= previousTypewriterTextLength)
+            {
+                return;
+            }
+
+            bool hasNewAudibleCharacter = false;
+            for (int i = previousTypewriterTextLength; i < currentLength; i++)
+            {
+                if (!char.IsWhiteSpace(currentText[i]))
+                {
+                    hasNewAudibleCharacter = true;
+                    break;
+                }
+            }
+
+            previousTypewriterTextLength = currentLength;
+            if (!hasNewAudibleCharacter || string.IsNullOrWhiteSpace(conversationTypewriterSeKey))
+            {
+                return;
+            }
+
+            float currentTime = Time.unscaledTime;
+            if (currentTime - lastTypewriterSeTime < conversationTypewriterSeIntervalSeconds)
+            {
+                return;
+            }
+
+            lastTypewriterSeTime = currentTime;
+            AudioManager.PlaySe(conversationTypewriterSeKey, conversationTypewriterSeVolume);
+        }
+
+        private void ResetConversationTypewriterSeState()
+        {
+            previousTypewriterTextLength = 0;
+            lastTypewriterSeTime = float.NegativeInfinity;
         }
 
         private void SetAdvanceIndicatorVisible(bool isVisible)

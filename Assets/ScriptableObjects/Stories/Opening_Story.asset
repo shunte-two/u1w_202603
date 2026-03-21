@@ -13,6 +13,28 @@ MonoBehaviour:
   m_Name: Opening_Story
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
   steps:
+  - stepType: 4
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    audioKey: Opening
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 1
     message:
       m_TableReference:
@@ -31,6 +53,10 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -49,6 +75,10 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -67,6 +97,10 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -85,6 +119,32 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 5
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    audioKey: TitleCall
+    audioVolume: 1
+    audioFadeSeconds: 1.5
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -96,6 +156,28 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     messageFallback: "\u3055\u3042\u3001\u4ED5\u4E8B\u3092\u59CB\u3081\u3088\u3046\u304B"
+    waitForAdvance: 0
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 2
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 6
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -103,6 +185,10 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: TitleCall
+    audioVolume: 1
+    audioFadeSeconds: 0.6
+    loopBgm: 1
   - stepType: 3
     message:
       m_TableReference:
@@ -121,6 +207,10 @@ MonoBehaviour:
     waitSeconds: 2
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 21300000, guid: df9a3742866288248990901e9beca817, type: 3}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 2
     message:
       m_TableReference:
@@ -139,6 +229,32 @@ MonoBehaviour:
     waitSeconds: 1
     showConversationWindowDuringWait: 0
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 4
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 2
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 21300000, guid: df9a3742866288248990901e9beca817, type: 3}
+    audioKey: Main
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -155,7 +271,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -172,7 +293,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -189,7 +315,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -206,7 +337,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -223,7 +359,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -240,7 +381,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -257,7 +403,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -274,7 +425,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -291,7 +447,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -308,7 +469,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -325,7 +491,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -342,7 +513,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -359,7 +535,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -376,7 +557,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -393,7 +579,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -410,7 +601,12 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   references:
     version: 2
     RefIds: []

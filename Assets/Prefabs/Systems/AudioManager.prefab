@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 114fbafa08b103d4eaa462552d372b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Audio.AudioManager
-  bgmTable: {fileID: 11400000, guid: d237f3ef957035c4d960ae1e887aa154, type: 2}
-  seTable: {fileID: 11400000, guid: 86f597083a61e5a42afab0db00597ca9, type: 2}
+  bgmTable: {fileID: 11400000, guid: b5b9d78d94954d6faff6711da4a3f9dc, type: 2}
+  seTable: {fileID: 11400000, guid: 2d00638986744bfaa330be17ded3758e, type: 2}
   bgmMasterVolume: 1
   seMasterVolume: 1

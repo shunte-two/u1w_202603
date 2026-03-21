@@ -19,7 +19,10 @@ namespace U1W.Game
         ShowMessage,
         ChangeExpression,
         Wait,
-        ShowTitleSprite
+        ShowTitleSprite,
+        PlayBgm,
+        StopBgm,
+        PlaySe
     }
 
     public enum StoryCharacterId
@@ -51,6 +54,10 @@ namespace U1W.Game
         [SerializeField] [Min(0f)] private float waitSeconds;
         [SerializeField] private bool showConversationWindowDuringWait = true;
         [SerializeField] private Sprite titleSprite;
+        [SerializeField] private string audioKey;
+        [SerializeField] [Range(0f, 1f)] private float audioVolume = 1f;
+        [SerializeField] [Min(0f)] private float audioFadeSeconds;
+        [SerializeField] private bool loopBgm = true;
 
         public StoryStepType StepType => stepType;
         public LocalizedString Message => message;
@@ -62,5 +69,9 @@ namespace U1W.Game
         public float WaitSeconds => waitSeconds;
         public bool ShowConversationWindowDuringWait => showConversationWindowDuringWait;
         public Sprite TitleSprite => titleSprite;
+        public string AudioKey => audioKey;
+        public float AudioVolume => audioVolume;
+        public float AudioFadeSeconds => audioFadeSeconds;
+        public bool LoopBgm => loopBgm;
     }
 }
