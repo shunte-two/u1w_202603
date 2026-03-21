@@ -66,5 +66,33 @@ MonoBehaviour:
     m_Localized: Reset Layout
     m_Metadata:
       m_Items: []
+  - m_Id: 1000000000013
+    m_Localized: Options
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000014
+    m_Localized: Audio Volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000015
+    m_Localized: Japanese
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000016
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000017
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000018
+    m_Localized: "Unity 6\\nTextMesh Pro\\nDOTween Pro\\nUniTask\\nMaruMonica Font"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000019
+    m_Localized: Language
+    m_Metadata:
+      m_Items: []
   references:
     version: 1

@@ -157,8 +157,17 @@ namespace U1W.Game
                     continue;
                 }
 
-                card.IsFlipped = card.Definition.StartsFlipped;
                 card.View?.SetDragging(false);
+                bool resetIsFlipped = card.Definition.StartsFlipped;
+                bool shouldAnimateFlip = card.IsFlipped != resetIsFlipped;
+                card.IsFlipped = resetIsFlipped;
+
+                if (shouldAnimateFlip)
+                {
+                    PlayCardFlip(card);
+                    continue;
+                }
+
                 RefreshCardContent(card);
             }
 
@@ -203,8 +212,7 @@ namespace U1W.Game
             }
 
             card.IsFlipped = !card.IsFlipped;
-            RefreshCardContent(card);
-            card.View.PlayFlipFeedback();
+            PlayCardFlip(card);
 
             if (cardDescriptionPopupRoot != null && cardDescriptionPopupRoot.gameObject.activeSelf)
             {
@@ -308,6 +316,22 @@ namespace U1W.Game
 
             string interpretation = card.IsFlipped ? card.BackInterpretation : card.FrontInterpretation;
             card.View.SetContent(
+                card.FactText,
+                interpretation,
+                card.IsFlipped,
+                card.Definition.CanFlip,
+                card.Definition.CanReorder);
+        }
+
+        private void PlayCardFlip(CardRuntime card)
+        {
+            if (card?.View == null)
+            {
+                return;
+            }
+
+            string interpretation = card.IsFlipped ? card.BackInterpretation : card.FrontInterpretation;
+            card.View.PlayFlipFeedback(
                 card.FactText,
                 interpretation,
                 card.IsFlipped,

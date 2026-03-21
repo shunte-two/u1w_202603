@@ -19,6 +19,7 @@ namespace U1W.Title
         [SerializeField] private Canvas rootCanvas;
         [SerializeField] private OptionUI optionUI;
         [SerializeField] private Button newGameButton;
+        [SerializeField] private Button chapter1Button;
         [SerializeField] private Button chapter2Button;
         [SerializeField] private Button chapter3Button;
         [SerializeField] private Button settingsButton;
@@ -46,17 +47,22 @@ namespace U1W.Title
 
         public void StartNewGame()
         {
-            StartChapter(gameSceneName, Chapter1Id);
+            StartChapter(gameSceneName, Chapter1Id, skipOpeningStory: false);
         }
 
+        public void StartChapter1()
+        {
+            StartChapter(gameSceneName, Chapter1Id, skipOpeningStory: true);
+        }
+        
         public void StartChapter2()
         {
-            StartChapter(gameSceneName, Chapter2Id);
+            StartChapter(gameSceneName, Chapter2Id, skipOpeningStory: true);
         }
 
         public void StartChapter3()
         {
-            StartChapter(gameSceneName, Chapter3Id);
+            StartChapter(gameSceneName, Chapter3Id, skipOpeningStory: true);
         }
 
         private void ValidateReferences()
@@ -84,6 +90,7 @@ namespace U1W.Title
 
         private void ApplyButtonState()
         {
+            ConfigureChapterButton(chapter1Button, gameSceneName);
             ConfigureChapterButton(chapter2Button, gameSceneName);
             ConfigureChapterButton(chapter3Button, gameSceneName);
         }
@@ -112,6 +119,7 @@ namespace U1W.Title
             }
 
             BindButton(newGameButton, StartNewGame);
+            BindButton(chapter1Button, StartChapter1);
             BindButton(chapter2Button, StartChapter2);
             BindButton(chapter3Button, StartChapter3);
             BindButton(settingsButton, ToggleOptions);
@@ -126,6 +134,7 @@ namespace U1W.Title
             }
 
             UnbindButton(newGameButton, StartNewGame);
+            UnbindButton(chapter1Button, StartChapter1);
             UnbindButton(chapter2Button, StartChapter2);
             UnbindButton(chapter3Button, StartChapter3);
             UnbindButton(settingsButton, ToggleOptions);
@@ -143,14 +152,14 @@ namespace U1W.Title
             return true;
         }
 
-        private void StartChapter(string sceneName, string chapterId)
+        private void StartChapter(string sceneName, string chapterId, bool skipOpeningStory)
         {
             if (!CanLoadScene(sceneName))
             {
                 return;
             }
 
-            GameSceneStartContext.SetRequestedChapter(chapterId);
+            GameSceneStartContext.SetRequestedChapter(chapterId, skipOpeningStory);
             SceneTransitionManager.LoadScene(
                 sceneName,
                 blackoutDuration: gameSceneTransitionBlackoutDuration);

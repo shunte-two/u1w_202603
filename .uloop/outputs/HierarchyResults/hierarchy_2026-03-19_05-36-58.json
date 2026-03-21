@@ -1,0 +1,301 @@
+{
+  "ExportTimestamp": "2026-03-19 05:36:58",
+  "Context": {
+    "sceneType": "editor",
+    "sceneName": "Title",
+    "nodeCount": 19,
+    "maxDepth": 3
+  },
+  "Hierarchy": [
+    {
+      "sceneName": "Title",
+      "stats": {
+        "rootCount": 1,
+        "nodeCount": 19,
+        "maxDepth": 3
+      },
+      "componentsLut": [
+        "RectTransform",
+        "CanvasRenderer",
+        "Image",
+        "OptionUI",
+        "TextMeshProUGUI",
+        "Button",
+        "Slider"
+      ],
+      "roots": [
+        {
+          "name": "OptionsPanel",
+          "isActive": false,
+          "componentsIdx": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "siblingIndex": 3,
+          "tag": "Untagged",
+          "layer": 5,
+          "path": "OptionsPanel",
+          "children": [
+            {
+              "name": "Text (TMP)",
+              "isActive": true,
+              "componentsIdx": [
+                0,
+                1,
+                4
+              ],
+              "siblingIndex": 0,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "OptionsPanel/Text (TMP)",
+              "children": []
+            },
+            {
+              "name": "Panel",
+              "isActive": true,
+              "componentsIdx": [
+                0,
+                1,
+                2
+              ],
+              "siblingIndex": 1,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "OptionsPanel/Panel",
+              "children": [
+                {
+                  "name": "Text (TMP)",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    4
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/Text (TMP)",
+                  "children": []
+                },
+                {
+                  "name": "CloseButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    2,
+                    5
+                  ],
+                  "siblingIndex": 1,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/CloseButton",
+                  "children": [
+                    {
+                      "name": "Text (TMP)",
+                      "isActive": true,
+                      "componentsIdx": [
+                        0,
+                        1,
+                        4
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 5,
+                      "path": "OptionsPanel/Panel/CloseButton/Text (TMP)",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "AudioVolumeLabel",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    4
+                  ],
+                  "siblingIndex": 2,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/AudioVolumeLabel",
+                  "children": []
+                },
+                {
+                  "name": "AudioVolumeValueText",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    4
+                  ],
+                  "siblingIndex": 3,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/AudioVolumeValueText",
+                  "children": []
+                },
+                {
+                  "name": "LanguageLabel",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    4
+                  ],
+                  "siblingIndex": 4,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/LanguageLabel",
+                  "children": []
+                },
+                {
+                  "name": "CreditsLabel",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    4
+                  ],
+                  "siblingIndex": 5,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/CreditsLabel",
+                  "children": []
+                },
+                {
+                  "name": "CreditsBodyText",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    4
+                  ],
+                  "siblingIndex": 6,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/CreditsBodyText",
+                  "children": []
+                },
+                {
+                  "name": "AudioVolumeSlider",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    6
+                  ],
+                  "siblingIndex": 7,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "OptionsPanel/Panel/AudioVolumeSlider",
+                  "children": [
+                    {
+                      "name": "Background",
+                      "isActive": true,
+                      "componentsIdx": [
+                        0,
+                        1,
+                        2
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 0,
+                      "path": "OptionsPanel/Panel/AudioVolumeSlider/Background",
+                      "children": []
+                    },
+                    {
+                      "name": "Fill Area",
+                      "isActive": true,
+                      "componentsIdx": [
+                        0
+                      ],
+                      "siblingIndex": 1,
+                      "tag": "Untagged",
+                      "layer": 0,
+                      "path": "OptionsPanel/Panel/AudioVolumeSlider/Fill Area",
+                      "children": []
+                    },
+                    {
+                      "name": "Handle Slide Area",
+                      "isActive": true,
+                      "componentsIdx": [
+                        0
+                      ],
+                      "siblingIndex": 2,
+                      "tag": "Untagged",
+                      "layer": 0,
+                      "path": "OptionsPanel/Panel/AudioVolumeSlider/Handle Slide Area",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "JapaneseButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    2,
+                    5
+                  ],
+                  "siblingIndex": 8,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/JapaneseButton",
+                  "children": [
+                    {
+                      "name": "Text (TMP)",
+                      "isActive": true,
+                      "componentsIdx": [
+                        0,
+                        1,
+                        4
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 5,
+                      "path": "OptionsPanel/Panel/JapaneseButton/Text (TMP)",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "EnglishButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    1,
+                    2,
+                    5
+                  ],
+                  "siblingIndex": 9,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "OptionsPanel/Panel/EnglishButton",
+                  "children": [
+                    {
+                      "name": "Text (TMP)",
+                      "isActive": true,
+                      "componentsIdx": [
+                        0,
+                        1,
+                        4
+                      ],
+                      "siblingIndex": 0,
+                      "tag": "Untagged",
+                      "layer": 5,
+                      "path": "OptionsPanel/Panel/EnglishButton/Text (TMP)",
+                      "children": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -63,6 +63,34 @@ MonoBehaviour:
     m_Key: ui_operation_reset_cards
     m_Metadata:
       m_Items: []
+  - m_Id: 1000000000013
+    m_Key: ui_title_options_title
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000014
+    m_Key: ui_title_options_audio_volume
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000015
+    m_Key: ui_title_options_language_ja
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000016
+    m_Key: ui_title_options_language_en
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000017
+    m_Key: ui_title_options_credits_label
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000018
+    m_Key: ui_title_options_credits_body
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000019
+    m_Key: ui_title_options_language_label
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

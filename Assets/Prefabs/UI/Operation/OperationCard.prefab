@@ -69,9 +69,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -5126341438661402560, guid: 3e0f6d4aab35e77498856c9493db4342, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -108,11 +108,17 @@ MonoBehaviour:
   backgroundImage: {fileID: 100003}
   factText: {fileID: 100023}
   interpretationText: {fileID: 100033}
-  frontColor: {r: 0.231, g: 0.243, b: 0.349, a: 0.98}
-  backColor: {r: 0.396, g: 0.231, b: 0.133, a: 0.98}
+  frontSprite: {fileID: 21300000, guid: 3e0f6d4aab35e77498856c9493db4342, type: 3}
+  backSprite: {fileID: 21300000, guid: 11fa13c712ae1014084cb67d5b4d4a16, type: 3}
+  frontColor: {r: 1, g: 1, b: 1, a: 0.98}
+  backColor: {r: 1, g: 1, b: 1, a: 0.98}
+  frontFactTextColor: {r: 0.9528302, g: 0, b: 0.4021997, a: 1}
+  backFactTextColor: {r: 1, g: 0.37254903, b: 0.6392157, a: 1}
+  frontInterpretationTextColor: {r: 0.10840156, g: 0.13565773, b: 0.26415092, a: 1}
+  backInterpretationTextColor: {r: 1, g: 1, b: 1, a: 1}
   disabledAlpha: 0.72
-  flipPunchScale: 0.06
-  flipDuration: 0.18
+  flipDuration: 0.24
+  flipEase: 4
 --- !u!1 &100020
 GameObject:
   m_ObjectHideFlags: 0

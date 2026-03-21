@@ -14,10 +14,13 @@ namespace U1W.Game
     {
         [Header("References")]
         [SerializeField] private GameObject conversationRoot;
+        [SerializeField] private GameObject conversationWindowRoot;
         [SerializeField] private TextMeshProUGUI phaseTitleText;
         [SerializeField] private TextMeshProUGUI conversationText;
         [SerializeField] private Button nextConversationButton;
         [SerializeField] private TextMeshProUGUI advanceIndicatorText;
+        [SerializeField] private GameObject titleSpriteRoot;
+        [SerializeField] private Image titleSpriteImage;
         [SerializeField] private StoryCharacterPortrait[] characterPortraits;
         [SerializeField] private ConversationLogPanel conversationLogPanel;
 
@@ -28,6 +31,7 @@ namespace U1W.Game
         [SerializeField] private string emptyConversationMessageFallback = "会話テキストが未設定です。";
         [SerializeField, Min(0f)] private float conversationCharactersPerSecond = 30f;
         [SerializeField, Min(0f)] private float advanceIndicatorFadeDuration = 0.5f;
+        [SerializeField, Min(0f)] private float titleSpriteFadeOutDuration = 0.35f;
 
         private bool advanceRequested;
         private bool isAnimatingConversation;
@@ -36,6 +40,8 @@ namespace U1W.Game
         private LocalizedString boundPhaseTitle;
         private Tween activeConversationTween;
         private Tween advanceIndicatorTween;
+        private Tween titleSpriteFadeTween;
+        private bool showAdvanceIndicatorWhenConversationCompletes;
 
         private void Awake()
         {
@@ -67,6 +73,7 @@ namespace U1W.Game
         {
             KillConversationTween(false);
             KillAdvanceIndicatorTween();
+            KillTitleSpriteFadeTween(false);
             ReleaseBindings();
             UnbindListeners();
         }
@@ -81,6 +88,8 @@ namespace U1W.Game
             KillConversationTween(false);
             isAnimatingConversation = false;
             SetAdvanceIndicatorVisible(false);
+            SetTitleSprite(null);
+            SetConversationWindowVisible(true);
             SetRootState(false);
             SetButtonState(nextConversationButton, false);
             ReleaseBindings();
@@ -118,13 +127,25 @@ namespace U1W.Game
 
         private async UniTask PlayStepAsync(StoryStep step, CancellationToken cancellationToken)
         {
+            if (step.StepType != StoryStepType.ShowMessage)
+            {
+                showAdvanceIndicatorWhenConversationCompletes = false;
+                SetAdvanceIndicatorVisible(false);
+            }
+
             switch (step.StepType)
             {
                 case StoryStepType.ShowMessage:
+                    showAdvanceIndicatorWhenConversationCompletes = step.WaitForAdvance;
                     await SetConversationTextAsync(step.Message, step.MessageFallback, cancellationToken);
                     if (step.WaitForAdvance)
                     {
                         await WaitForAdvanceAsync(cancellationToken);
+                    }
+                    else
+                    {
+                        SetAdvanceIndicatorVisible(false);
+                        await WaitAsync(step.WaitSeconds, cancellationToken);
                     }
 
                     break;
@@ -134,7 +155,17 @@ namespace U1W.Game
                     break;
 
                 case StoryStepType.Wait:
+                    SetConversationWindowVisible(step.ShowConversationWindowDuringWait);
                     await WaitAsync(step.WaitSeconds, cancellationToken);
+                    SetConversationWindowVisible(true);
+                    break;
+
+                case StoryStepType.ShowTitleSprite:
+                    SetConversationWindowVisible(false);
+                    SetTitleSprite(step.TitleSprite);
+                    await WaitAsync(step.WaitSeconds, cancellationToken);
+                    await HideTitleSpriteAsync(cancellationToken);
+                    SetConversationWindowVisible(true);
                     break;
             }
         }
@@ -161,7 +192,73 @@ namespace U1W.Game
             SetRootState(true);
             SetButtonState(nextConversationButton, true);
             SetAdvanceIndicatorVisible(false);
+            SetConversationWindowVisible(true);
+            SetTitleSprite(null);
             BindPhaseTitle(phaseTitle, phaseTitleFallback);
+        }
+
+        private void SetConversationWindowVisible(bool isVisible)
+        {
+            if (conversationWindowRoot != null)
+            {
+                conversationWindowRoot.SetActive(isVisible);
+            }
+        }
+
+        private void SetTitleSprite(Sprite sprite)
+        {
+            KillTitleSpriteFadeTween(false);
+
+            if (titleSpriteImage != null)
+            {
+                titleSpriteImage.sprite = sprite;
+                titleSpriteImage.color = new Color(
+                    titleSpriteImage.color.r,
+                    titleSpriteImage.color.g,
+                    titleSpriteImage.color.b,
+                    sprite != null ? 1f : 0f);
+                titleSpriteImage.enabled = sprite != null;
+            }
+
+            if (titleSpriteRoot != null)
+            {
+                titleSpriteRoot.SetActive(sprite != null);
+            }
+        }
+
+        private async UniTask HideTitleSpriteAsync(CancellationToken cancellationToken)
+        {
+            if (titleSpriteImage == null ||
+                !titleSpriteImage.enabled ||
+                titleSpriteImage.sprite == null ||
+                titleSpriteFadeOutDuration <= 0f)
+            {
+                SetTitleSprite(null);
+                return;
+            }
+
+            bool completed = false;
+            titleSpriteFadeTween = titleSpriteImage
+                .DOFade(0f, titleSpriteFadeOutDuration)
+                .SetEase(Ease.OutSine)
+                .OnComplete(() => completed = true)
+                .OnKill(() =>
+                {
+                    titleSpriteFadeTween = null;
+                    completed = true;
+                });
+
+            try
+            {
+                await UniTask.WaitUntil(() => completed, cancellationToken: cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+                KillTitleSpriteFadeTween(false);
+                throw;
+            }
+
+            SetTitleSprite(null);
         }
 
         private void ApplyExpression(StoryStep step)
@@ -401,7 +498,7 @@ namespace U1W.Game
             if (string.IsNullOrEmpty(value) || conversationCharactersPerSecond <= 0f)
             {
                 SetConversationText(value);
-                SetAdvanceIndicatorVisible(true);
+                SetAdvanceIndicatorVisible(showAdvanceIndicatorWhenConversationCompletes);
                 return;
             }
 
@@ -431,7 +528,7 @@ namespace U1W.Game
             if (activeConversationTween == null || !activeConversationTween.IsActive())
             {
                 isAnimatingConversation = false;
-                SetAdvanceIndicatorVisible(true);
+                SetAdvanceIndicatorVisible(showAdvanceIndicatorWhenConversationCompletes);
                 return;
             }
 
@@ -457,7 +554,7 @@ namespace U1W.Game
         {
             activeConversationTween = null;
             isAnimatingConversation = false;
-            SetAdvanceIndicatorVisible(true);
+            SetAdvanceIndicatorVisible(showAdvanceIndicatorWhenConversationCompletes);
         }
 
         private void SetAdvanceIndicatorVisible(bool isVisible)
@@ -501,13 +598,31 @@ namespace U1W.Game
             }
         }
 
+        private void KillTitleSpriteFadeTween(bool complete)
+        {
+            if (titleSpriteFadeTween == null)
+            {
+                return;
+            }
+
+            Tween tween = titleSpriteFadeTween;
+            titleSpriteFadeTween = null;
+            if (tween.IsActive())
+            {
+                tween.Kill(complete);
+            }
+        }
+
         private void ValidateReferences()
         {
             WarnIfMissing(conversationRoot, nameof(conversationRoot));
+            WarnIfMissing(conversationWindowRoot, nameof(conversationWindowRoot));
             WarnIfMissing(phaseTitleText, nameof(phaseTitleText));
             WarnIfMissing(conversationText, nameof(conversationText));
             WarnIfMissing(nextConversationButton, nameof(nextConversationButton));
             WarnIfMissing(advanceIndicatorText, nameof(advanceIndicatorText));
+            WarnIfMissing(titleSpriteRoot, nameof(titleSpriteRoot));
+            WarnIfMissing(titleSpriteImage, nameof(titleSpriteImage));
             WarnIfMissing(conversationLogPanel, nameof(conversationLogPanel));
 
             if (characterPortraits == null)

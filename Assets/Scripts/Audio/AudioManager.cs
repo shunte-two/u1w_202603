@@ -99,6 +99,20 @@ namespace U1W.Audio
             manager.ApplyBgmVolume();
         }
 
+        public static void SetMasterVolume(float volume)
+        {
+            AudioManager manager = EnsureInstance();
+            if (manager == null)
+            {
+                return;
+            }
+
+            float clampedVolume = Mathf.Clamp01(volume);
+            manager.bgmMasterVolume = clampedVolume;
+            manager.seMasterVolume = clampedVolume;
+            manager.ApplyBgmVolume();
+        }
+
         public static void SetSeMasterVolume(float volume)
         {
             AudioManager manager = EnsureInstance();
@@ -161,6 +175,9 @@ namespace U1W.Audio
         private void Initialize()
         {
             DontDestroyOnLoad(gameObject);
+            float storedMasterVolume = AudioSettingsStore.LoadMasterVolume();
+            bgmMasterVolume = storedMasterVolume;
+            seMasterVolume = storedMasterVolume;
 
             if (bgmSource == null)
             {

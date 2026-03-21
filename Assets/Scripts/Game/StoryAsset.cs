@@ -18,7 +18,8 @@ namespace U1W.Game
     {
         ShowMessage,
         ChangeExpression,
-        Wait
+        Wait,
+        ShowTitleSprite
     }
 
     public enum StoryCharacterId
@@ -48,6 +49,8 @@ namespace U1W.Game
         [SerializeField] private StoryExpressionId expressionId = StoryExpressionId.Normal;
         [SerializeField] private bool hideCharacterWhenExpressionMissing;
         [SerializeField] [Min(0f)] private float waitSeconds;
+        [SerializeField] private bool showConversationWindowDuringWait = true;
+        [SerializeField] private Sprite titleSprite;
 
         public StoryStepType StepType => stepType;
         public LocalizedString Message => message;
@@ -57,5 +60,7 @@ namespace U1W.Game
         public StoryExpressionId ExpressionId => expressionId;
         public bool HideCharacterWhenExpressionMissing => hideCharacterWhenExpressionMissing;
         public float WaitSeconds => waitSeconds;
+        public bool ShowConversationWindowDuringWait => showConversationWindowDuringWait;
+        public Sprite TitleSprite => titleSprite;
     }
 }

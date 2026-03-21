@@ -1,0 +1,232 @@
+{
+  "ExportTimestamp": "2026-03-19 05:44:44",
+  "Context": {
+    "sceneType": "editor",
+    "sceneName": "Title",
+    "nodeCount": 15,
+    "maxDepth": 2
+  },
+  "Hierarchy": [
+    {
+      "sceneName": "Title",
+      "stats": {
+        "rootCount": 1,
+        "nodeCount": 15,
+        "maxDepth": 2
+      },
+      "roots": [
+        {
+          "name": "Panel",
+          "isActive": true,
+          "components": [
+            "RectTransform",
+            "CanvasRenderer",
+            "Image"
+          ],
+          "siblingIndex": 0,
+          "tag": "Untagged",
+          "layer": 5,
+          "path": "Panel",
+          "children": [
+            {
+              "name": "Text (TMP)",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "TextMeshProUGUI"
+              ],
+              "siblingIndex": 0,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/Text (TMP)",
+              "children": []
+            },
+            {
+              "name": "CloseButton",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "Button"
+              ],
+              "siblingIndex": 1,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/CloseButton",
+              "children": [
+                {
+                  "name": "Text (TMP)",
+                  "isActive": true,
+                  "components": [
+                    "RectTransform",
+                    "CanvasRenderer",
+                    "TextMeshProUGUI"
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Panel/CloseButton/Text (TMP)",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "AudioVolumeLabel",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "TextMeshProUGUI"
+              ],
+              "siblingIndex": 2,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/AudioVolumeLabel",
+              "children": []
+            },
+            {
+              "name": "AudioVolumeValueText",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "TextMeshProUGUI"
+              ],
+              "siblingIndex": 3,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/AudioVolumeValueText",
+              "children": []
+            },
+            {
+              "name": "LanguageLabel",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "TextMeshProUGUI"
+              ],
+              "siblingIndex": 4,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/LanguageLabel",
+              "children": []
+            },
+            {
+              "name": "CreditsLabel",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "TextMeshProUGUI"
+              ],
+              "siblingIndex": 5,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/CreditsLabel",
+              "children": []
+            },
+            {
+              "name": "CreditsBodyText",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "TextMeshProUGUI"
+              ],
+              "siblingIndex": 6,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/CreditsBodyText",
+              "children": []
+            },
+            {
+              "name": "AudioVolumeSlider",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "Slider"
+              ],
+              "siblingIndex": 7,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "Panel/AudioVolumeSlider",
+              "children": [
+                {
+                  "name": "Background",
+                  "isActive": true,
+                  "components": [
+                    "RectTransform",
+                    "CanvasRenderer",
+                    "Image"
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "Panel/AudioVolumeSlider/Background",
+                  "children": []
+                },
+                {
+                  "name": "Fill Area",
+                  "isActive": true,
+                  "components": [
+                    "RectTransform"
+                  ],
+                  "siblingIndex": 1,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "Panel/AudioVolumeSlider/Fill Area",
+                  "children": []
+                },
+                {
+                  "name": "Handle Slide Area",
+                  "isActive": true,
+                  "components": [
+                    "RectTransform"
+                  ],
+                  "siblingIndex": 2,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "Panel/AudioVolumeSlider/Handle Slide Area",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "LanguageToggleButton",
+              "isActive": true,
+              "components": [
+                "RectTransform",
+                "CanvasRenderer",
+                "Image",
+                "Button"
+              ],
+              "siblingIndex": 8,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Panel/LanguageToggleButton",
+              "children": [
+                {
+                  "name": "Text (TMP)",
+                  "isActive": true,
+                  "components": [
+                    "RectTransform",
+                    "CanvasRenderer",
+                    "TextMeshProUGUI"
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Panel/LanguageToggleButton/Text (TMP)",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

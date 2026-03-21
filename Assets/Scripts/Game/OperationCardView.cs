@@ -20,13 +20,19 @@ namespace U1W.Game
         [SerializeField] private Image backgroundImage;
         [SerializeField] private TextMeshProUGUI factText;
         [SerializeField] private TextMeshProUGUI interpretationText;
+        [SerializeField] private Sprite frontSprite;
+        [SerializeField] private Sprite backSprite;
 
         [Header("Visuals")]
         [SerializeField] private Color frontColor = new(0.231f, 0.243f, 0.349f, 0.98f);
         [SerializeField] private Color backColor = new(0.396f, 0.231f, 0.133f, 0.98f);
+        [SerializeField] private Color frontFactTextColor = Color.white;
+        [SerializeField] private Color backFactTextColor = Color.white;
+        [SerializeField] private Color frontInterpretationTextColor = Color.white;
+        [SerializeField] private Color backInterpretationTextColor = Color.white;
         [SerializeField] private float disabledAlpha = 0.72f;
-        [SerializeField] private float flipPunchScale = 0.06f;
-        [SerializeField] private float flipDuration = 0.18f;
+        [SerializeField] private float flipDuration = 0.24f;
+        [SerializeField] private Ease flipEase = Ease.OutCubic;
 
         private IOperationCardInteractionHandler owner;
         private bool canFlip = true;
@@ -83,6 +89,8 @@ namespace U1W.Game
                 canvasGroup.alpha = (canFlip || canReorder) ? 1f : disabledAlpha;
                 canvasGroup.interactable = canFlip || canReorder;
             }
+
+            ApplyVisualState(isFlipped);
         }
 
         public void SetAnchoredPosition(Vector2 position)
@@ -114,16 +122,24 @@ namespace U1W.Game
             canvasGroup.alpha = isDragging ? 0.92f : ((canFlip || canReorder) ? 1f : disabledAlpha);
         }
 
-        public void PlayFlipFeedback()
+        public void PlayFlipFeedback(
+            string fact,
+            string interpretation,
+            bool isFlipped,
+            bool isFlipEnabled,
+            bool isReorderEnabled)
         {
             flipTween?.Kill();
+
+            canFlip = isFlipEnabled;
+            canReorder = isReorderEnabled;
             transform.localScale = Vector3.one;
-            flipTween = transform.DOPunchScale(
-                    Vector3.one * flipPunchScale,
-                    flipDuration,
-                    1,
-                    0.4f)
-                .SetUpdate(true);
+
+            Sequence sequence = DOTween.Sequence().SetUpdate(true);
+            sequence.Append(transform.DOScaleX(0f, flipDuration * 0.5f).SetEase(flipEase));
+            sequence.AppendCallback(() => SetContent(fact, interpretation, isFlipped, isFlipEnabled, isReorderEnabled));
+            sequence.Append(transform.DOScaleX(1f, flipDuration * 0.5f).SetEase(flipEase));
+            flipTween = sequence;
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -182,6 +198,33 @@ namespace U1W.Game
 
             suppressNextClick = false;
             owner?.HandleCardEndDrag(this, eventData);
+        }
+
+        private void ApplyVisualState(bool isFlipped)
+        {
+            if (backgroundImage != null)
+            {
+                backgroundImage.color = isFlipped ? backColor : frontColor;
+
+                Sprite targetSprite = isFlipped ? backSprite : frontSprite;
+                if (targetSprite != null)
+                {
+                    backgroundImage.sprite = targetSprite;
+                    backgroundImage.preserveAspect = true;
+                }
+            }
+
+            if (factText != null)
+            {
+                factText.color = isFlipped ? backFactTextColor : frontFactTextColor;
+            }
+
+            if (interpretationText != null)
+            {
+                interpretationText.color = isFlipped
+                    ? backInterpretationTextColor
+                    : frontInterpretationTextColor;
+            }
         }
     }
 }

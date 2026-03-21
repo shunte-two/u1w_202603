@@ -63,6 +63,7 @@ namespace U1W.Game
         [SerializeField] private OperationPartManager operationPartManager;
 
         [Header("Chapter Sequence")]
+        [SerializeField] private StoryAsset openingStory;
         [SerializeField] private int startChapterIndex;
         [SerializeField] private ChapterSequenceDefinition[] chapters = Array.Empty<ChapterSequenceDefinition>();
 
@@ -84,6 +85,7 @@ namespace U1W.Game
         private Vector3 defaultCharacterLocalPosition;
         private bool hasDefaultCharacterLocalPosition;
         private string requestedStartChapterId;
+        private bool shouldSkipOpeningStory;
 
         public int CurrentChapterIndex => currentChapterIndex;
 
@@ -144,6 +146,10 @@ namespace U1W.Game
                 }
 
                 await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+                if (!shouldSkipOpeningStory)
+                {
+                    await PlayStoryIfAssignedAsync(openingStory, cancellationToken);
+                }
 
                 for (; currentChapterIndex < sequenceChapters.Length; currentChapterIndex++)
                 {
@@ -386,6 +392,8 @@ namespace U1W.Game
             {
                 requestedStartChapterId = chapterId;
             }
+
+            shouldSkipOpeningStory = GameSceneStartContext.TryConsumeShouldSkipOpeningStory();
         }
 
         private bool TryResolveRequestedStartChapterIndex(

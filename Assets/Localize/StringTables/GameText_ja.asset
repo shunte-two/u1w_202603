@@ -66,5 +66,33 @@ MonoBehaviour:
     m_Localized: 初期配置に戻す
     m_Metadata:
       m_Items: []
+  - m_Id: 1000000000013
+    m_Localized: オプション
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000014
+    m_Localized: 音量
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000015
+    m_Localized: 日本語
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000016
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000017
+    m_Localized: クレジット
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000018
+    m_Localized: "Unity 6\\nTextMesh Pro\\nDOTween Pro\\nUniTask\\nMaruMonica フォント"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1000000000019
+    m_Localized: 言語
+    m_Metadata:
+      m_Items: []
   references:
     version: 1
