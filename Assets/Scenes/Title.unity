@@ -1027,6 +1027,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Title.TitleManager
   gameSceneName: Game
   gameSceneTransitionBlackoutDuration: 2
+  titleBgmKey: Title
+  titleBgmVolume: 1
+  titleBgmLoop: 1
   rootCanvas: {fileID: 297963044}
   optionUI: {fileID: 1393083799}
   newGameButton: {fileID: 128885722}

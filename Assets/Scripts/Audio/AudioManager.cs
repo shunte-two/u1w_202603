@@ -21,6 +21,13 @@ namespace U1W.Audio
 
         public static string CurrentBgmKey { get; private set; }
 
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void ResetStaticState()
+        {
+            instance = null;
+            CurrentBgmKey = null;
+        }
+
         public static AudioManager EnsureInstance()
         {
             if (instance != null)
@@ -54,6 +61,20 @@ namespace U1W.Audio
             }
 
             manager.PlayBgmInternal(key, clip, volume, loop);
+        }
+
+        public static bool IsBgmPlaying(string key)
+        {
+            AudioManager manager = EnsureInstance();
+            if (manager == null || string.IsNullOrWhiteSpace(key))
+            {
+                return false;
+            }
+
+            return CurrentBgmKey == key
+                && manager.bgmSource != null
+                && manager.bgmSource.clip != null
+                && manager.bgmSource.isPlaying;
         }
 
         public static void StopBgm(float fadeSeconds = 0f)

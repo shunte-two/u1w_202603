@@ -55,6 +55,7 @@ namespace U1W.Game
         [SerializeField] private TextMeshProUGUI operationText;
         [SerializeField] private RectTransform cardAreaRoot;
         [SerializeField] private OperationCardView cardViewPrefab;
+        [SerializeField] private GameObject timelineMarkerPrefab;
         [SerializeField] private RectTransform cardDescriptionPopupRoot;
         [SerializeField] private TextMeshProUGUI cardDescriptionText;
         [SerializeField] private Button completeOperationButton;
@@ -194,6 +195,7 @@ namespace U1W.Game
             cardInteractionController = new OperationCardInteractionController(
                 cardAreaRoot,
                 cardViewPrefab,
+                timelineMarkerPrefab,
                 cardDescriptionPopupRoot,
                 cardDescriptionText,
                 cardSpacing,
@@ -481,6 +483,7 @@ namespace U1W.Game
             WarnIfMissing(operationText, nameof(operationText));
             WarnIfMissing(cardAreaRoot, nameof(cardAreaRoot));
             WarnIfMissing(cardViewPrefab, nameof(cardViewPrefab));
+            WarnIfMissing(timelineMarkerPrefab, nameof(timelineMarkerPrefab));
             WarnIfMissing(cardDescriptionPopupRoot, nameof(cardDescriptionPopupRoot));
             WarnIfMissing(cardDescriptionText, nameof(cardDescriptionText));
             WarnIfMissing(completeOperationButton, nameof(completeOperationButton));

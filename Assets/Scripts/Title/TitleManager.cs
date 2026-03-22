@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using U1W.Audio;
 using U1W.SceneManagement;
 
 namespace U1W.Title
@@ -14,6 +15,10 @@ namespace U1W.Title
         [SerializeField] private string gameSceneName = "Game";
         [SerializeField] [Min(0f)] private float gameSceneTransitionBlackoutDuration;
 
+        [Header("Audio")]
+        [SerializeField] private string titleBgmKey = "Key";
+        [SerializeField] [Range(0f, 1f)] private float titleBgmVolume = 1f;
+        [SerializeField] private bool titleBgmLoop = true;
 
         [Header("UI")]
         [SerializeField] private Canvas rootCanvas;
@@ -32,6 +37,11 @@ namespace U1W.Title
             ValidateReferences();
             ApplyButtonState();
             BindListeners();
+        }
+
+        private void Start()
+        {
+            PlayTitleBgmIfNeeded();
         }
 
         private void OnValidate()
@@ -174,6 +184,22 @@ namespace U1W.Title
             }
 
             optionUI.ToggleOptions();
+        }
+
+        private void PlayTitleBgmIfNeeded()
+        {
+            if (string.IsNullOrWhiteSpace(titleBgmKey))
+            {
+                Debug.LogWarning("TitleManager requires Title BGM Key to be assigned via SerializeField.", this);
+                return;
+            }
+
+            if (AudioManager.IsBgmPlaying(titleBgmKey))
+            {
+                return;
+            }
+
+            AudioManager.PlayBgm(titleBgmKey, titleBgmVolume, titleBgmLoop);
         }
 
         private static void BindButton(Button button, UnityEngine.Events.UnityAction action)

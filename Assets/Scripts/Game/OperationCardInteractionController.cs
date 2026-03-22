@@ -39,6 +39,7 @@ namespace U1W.Game
 
         private readonly RectTransform cardAreaRoot;
         private readonly OperationCardView cardViewPrefab;
+        private readonly GameObject timelineMarkerPrefab;
         private readonly RectTransform cardDescriptionPopupRoot;
         private readonly TextMeshProUGUI cardDescriptionText;
         private readonly float cardSpacing;
@@ -47,6 +48,7 @@ namespace U1W.Game
         private readonly float popupVerticalOffset;
         private readonly string emptyDescriptionFallback;
         private readonly List<CardRuntime> activeCards = new();
+        private readonly List<RectTransform> timelineMarkers = new();
         
         private CardRuntime draggedCard;
         private Tween popupTween;
@@ -54,6 +56,7 @@ namespace U1W.Game
         public OperationCardInteractionController(
             RectTransform cardAreaRoot,
             OperationCardView cardViewPrefab,
+            GameObject timelineMarkerPrefab,
             RectTransform cardDescriptionPopupRoot,
             TextMeshProUGUI cardDescriptionText,
             float cardSpacing,
@@ -64,6 +67,7 @@ namespace U1W.Game
         {
             this.cardAreaRoot = cardAreaRoot;
             this.cardViewPrefab = cardViewPrefab;
+            this.timelineMarkerPrefab = timelineMarkerPrefab;
             this.cardDescriptionPopupRoot = cardDescriptionPopupRoot;
             this.cardDescriptionText = cardDescriptionText;
             this.cardSpacing = cardSpacing;
@@ -123,6 +127,7 @@ namespace U1W.Game
                 RefreshCardContent(card);
             }
 
+            RebuildTimelineMarkers();
             SnapCardsToLayout();
         }
 
@@ -140,6 +145,7 @@ namespace U1W.Game
             }
 
             activeCards.Clear();
+            ClearTimelineMarkers();
         }
 
         public void ResetToChapterStartLayout()
@@ -175,6 +181,7 @@ namespace U1W.Game
                 RefreshCardContent(card);
             }
 
+            SnapTimelineMarkersToLayout();
             AnimateCardsToLayout(null);
         }
 
@@ -287,6 +294,7 @@ namespace U1W.Game
 
             ApplyReorderableCardOrder(reorderableIndices, currentMovableSlotIndex, targetMovableSlotIndex);
             AudioManager.PlaySe(ReplaceCardSeKey);
+            SnapTimelineMarkersToLayout();
             AnimateCardsToLayout(card);
         }
 
@@ -375,6 +383,35 @@ namespace U1W.Game
 
                 card.View.SetAnchoredPosition(GetCardPosition(i));
             }
+
+            SnapTimelineMarkersToLayout();
+        }
+
+        private void RebuildTimelineMarkers()
+        {
+            ClearTimelineMarkers();
+
+            if (timelineMarkerPrefab == null || cardAreaRoot == null)
+            {
+                return;
+            }
+
+            int markerCount = Mathf.Max(0, activeCards.Count - 1);
+            for (int i = 0; i < markerCount; i++)
+            {
+                GameObject markerObject = UnityEngine.Object.Instantiate(timelineMarkerPrefab, cardAreaRoot);
+                RectTransform marker = markerObject.GetComponent<RectTransform>();
+                if (marker == null)
+                {
+                    UnityEngine.Object.Destroy(markerObject);
+                    continue;
+                }
+
+                marker.SetSiblingIndex(i * 2 + 1);
+                timelineMarkers.Add(marker);
+            }
+
+            SnapTimelineMarkersToLayout();
         }
 
         private void AnimateCardsToLayout(CardRuntime skippedCard)
@@ -403,6 +440,8 @@ namespace U1W.Game
                     card.View.AnimateTo(GetCardPosition(i), cardSlideDuration, cardSlideEase);
                 }
             }
+
+            AnimateTimelineMarkersToLayout();
         }
 
         private Vector2 GetCardPosition(int index)
@@ -417,6 +456,18 @@ namespace U1W.Game
             float totalWidth = cardWidth + stride * Mathf.Max(0, activeCards.Count - 1);
             float startX = -totalWidth * 0.5f + cardWidth * 0.5f;
             return new Vector2(startX + stride * index, 0f);
+        }
+
+        private Vector2 GetTimelineMarkerPosition(int index)
+        {
+            if (index < 0 || index >= activeCards.Count - 1)
+            {
+                return Vector2.zero;
+            }
+
+            Vector2 leftPosition = GetCardPosition(index);
+            Vector2 rightPosition = GetCardPosition(index + 1);
+            return new Vector2((leftPosition.x + rightPosition.x) * 0.5f, 0f);
         }
 
         private int GetClosestReorderableSlotIndex(float anchoredX)
@@ -502,6 +553,50 @@ namespace U1W.Game
             }
 
             draggedCard.View.SetAnchoredPosition(new Vector2(localPoint.x, 0f));
+        }
+
+        private void SnapTimelineMarkersToLayout()
+        {
+            for (int i = 0; i < timelineMarkers.Count; i++)
+            {
+                RectTransform marker = timelineMarkers[i];
+                if (marker == null)
+                {
+                    continue;
+                }
+
+                marker.anchoredPosition = GetTimelineMarkerPosition(i);
+                marker.SetSiblingIndex(Mathf.Min(i * 2 + 1, cardAreaRoot.childCount - 1));
+            }
+        }
+
+        private void AnimateTimelineMarkersToLayout()
+        {
+            for (int i = 0; i < timelineMarkers.Count; i++)
+            {
+                RectTransform marker = timelineMarkers[i];
+                if (marker == null)
+                {
+                    continue;
+                }
+
+                marker.DOAnchorPos(GetTimelineMarkerPosition(i), cardSlideDuration).SetEase(cardSlideEase);
+                marker.SetSiblingIndex(Mathf.Min(i * 2 + 1, cardAreaRoot.childCount - 1));
+            }
+        }
+
+        private void ClearTimelineMarkers()
+        {
+            for (int i = 0; i < timelineMarkers.Count; i++)
+            {
+                RectTransform marker = timelineMarkers[i];
+                if (marker != null)
+                {
+                    UnityEngine.Object.Destroy(marker.gameObject);
+                }
+            }
+
+            timelineMarkers.Clear();
         }
 
         private void ShowCardDescription(CardRuntime card)
