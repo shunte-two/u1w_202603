@@ -28,6 +28,8 @@ namespace U1W.Title
         [SerializeField] private Button chapter2Button;
         [SerializeField] private Button chapter3Button;
         [SerializeField] private Button settingsButton;
+        [SerializeField] private Button developerLinkButton;
+        [SerializeField] private string developerLinkUrl = string.Empty;
         [SerializeField] private bool hideUnavailableChapterButtons;
 
         private bool listenersBound;
@@ -96,6 +98,11 @@ namespace U1W.Title
             {
                 Debug.LogWarning("TitleManager requires Settings Button to be assigned via SerializeField.", this);
             }
+
+            if (developerLinkButton == null)
+            {
+                Debug.LogWarning("TitleManager requires Developer Link Button to be assigned via SerializeField.", this);
+            }
         }
 
         private void ApplyButtonState()
@@ -103,6 +110,7 @@ namespace U1W.Title
             ConfigureChapterButton(chapter1Button, gameSceneName);
             ConfigureChapterButton(chapter2Button, gameSceneName);
             ConfigureChapterButton(chapter3Button, gameSceneName);
+            ConfigureButton(developerLinkButton, !string.IsNullOrWhiteSpace(developerLinkUrl));
         }
 
         private void ConfigureChapterButton(Button button, string sceneName)
@@ -121,6 +129,16 @@ namespace U1W.Title
             }
         }
 
+        private static void ConfigureButton(Button button, bool interactable)
+        {
+            if (button == null)
+            {
+                return;
+            }
+
+            button.interactable = interactable;
+        }
+
         private void BindListeners()
         {
             if (listenersBound)
@@ -133,6 +151,7 @@ namespace U1W.Title
             BindButton(chapter2Button, StartChapter2);
             BindButton(chapter3Button, StartChapter3);
             BindButton(settingsButton, ToggleOptions);
+            BindButton(developerLinkButton, OpenDeveloperLink);
             listenersBound = true;
         }
 
@@ -148,6 +167,7 @@ namespace U1W.Title
             UnbindButton(chapter2Button, StartChapter2);
             UnbindButton(chapter3Button, StartChapter3);
             UnbindButton(settingsButton, ToggleOptions);
+            UnbindButton(developerLinkButton, OpenDeveloperLink);
             listenersBound = false;
         }
 
@@ -184,6 +204,17 @@ namespace U1W.Title
             }
 
             optionUI.ToggleOptions();
+        }
+
+        private void OpenDeveloperLink()
+        {
+            if (string.IsNullOrWhiteSpace(developerLinkUrl))
+            {
+                Debug.LogWarning("TitleManager.OpenDeveloperLink skipped: Developer Link URL was not assigned.", this);
+                return;
+            }
+
+            Application.OpenURL(developerLinkUrl);
         }
 
         private void PlayTitleBgmIfNeeded()

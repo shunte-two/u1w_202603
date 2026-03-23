@@ -24,6 +24,7 @@ namespace U1W.Game
     {
         private const string FlipCardSeKey = "FlipCard";
         private const string ReplaceCardSeKey = "ReplaceCard";
+        private const float HoverExitConfirmDelaySeconds = 0.2f;
 
         private sealed class CardRuntime
         {
@@ -40,48 +41,54 @@ namespace U1W.Game
         private readonly RectTransform cardAreaRoot;
         private readonly OperationCardView cardViewPrefab;
         private readonly GameObject timelineMarkerPrefab;
-        private readonly RectTransform cardDescriptionPopupRoot;
+        private readonly GameObject cardDescriptionAreaRoot;
         private readonly TextMeshProUGUI cardDescriptionText;
         private readonly float cardSpacing;
         private readonly float cardSlideDuration;
         private readonly Ease cardSlideEase;
-        private readonly float popupVerticalOffset;
         private readonly string emptyDescriptionFallback;
+        private readonly string idleDescriptionFallback;
+        private readonly Color idleDescriptionTextColor;
+        private readonly Color activeDescriptionTextColor;
         private readonly List<CardRuntime> activeCards = new();
         private readonly List<RectTransform> timelineMarkers = new();
-        
+
         private CardRuntime draggedCard;
-        private Tween popupTween;
+        private CardRuntime hoveredCard;
+        private int hoverStateVersion;
 
         public OperationCardInteractionController(
             RectTransform cardAreaRoot,
             OperationCardView cardViewPrefab,
             GameObject timelineMarkerPrefab,
-            RectTransform cardDescriptionPopupRoot,
+            GameObject cardDescriptionAreaRoot,
             TextMeshProUGUI cardDescriptionText,
             float cardSpacing,
             float cardSlideDuration,
             Ease cardSlideEase,
-            float popupVerticalOffset,
-            string emptyDescriptionFallback)
+            string emptyDescriptionFallback,
+            string idleDescriptionFallback,
+            Color idleDescriptionTextColor,
+            Color activeDescriptionTextColor)
         {
             this.cardAreaRoot = cardAreaRoot;
             this.cardViewPrefab = cardViewPrefab;
             this.timelineMarkerPrefab = timelineMarkerPrefab;
-            this.cardDescriptionPopupRoot = cardDescriptionPopupRoot;
+            this.cardDescriptionAreaRoot = cardDescriptionAreaRoot;
             this.cardDescriptionText = cardDescriptionText;
             this.cardSpacing = cardSpacing;
             this.cardSlideDuration = cardSlideDuration;
             this.cardSlideEase = cardSlideEase;
-            this.popupVerticalOffset = popupVerticalOffset;
             this.emptyDescriptionFallback = emptyDescriptionFallback;
+            this.idleDescriptionFallback = idleDescriptionFallback;
+            this.idleDescriptionTextColor = idleDescriptionTextColor;
+            this.activeDescriptionTextColor = activeDescriptionTextColor;
         }
 
         public bool HasCards => activeCards.Count > 0;
 
         public void Dispose()
         {
-            popupTween?.Kill();
             Clear();
         }
 
@@ -134,6 +141,8 @@ namespace U1W.Game
         public void Clear()
         {
             draggedCard = null;
+            hoveredCard = null;
+            hoverStateVersion++;
 
             for (int i = 0; i < activeCards.Count; i++)
             {
@@ -224,11 +233,7 @@ namespace U1W.Game
 
             card.IsFlipped = !card.IsFlipped;
             PlayCardFlip(card, playSe: true);
-
-            if (cardDescriptionPopupRoot != null && cardDescriptionPopupRoot.gameObject.activeSelf)
-            {
-                ShowCardDescription(card);
-            }
+            ShowCardDescription(card);
         }
 
         public void HandleCardHoverStarted(OperationCardView view)
@@ -239,6 +244,8 @@ namespace U1W.Game
                 return;
             }
 
+            hoveredCard = card;
+            hoverStateVersion++;
             ShowCardDescription(card);
         }
 
@@ -250,7 +257,8 @@ namespace U1W.Game
                 return;
             }
 
-            HideCardDescription();
+            int exitVersion = ++hoverStateVersion;
+            ConfirmHoverExitAsync(card, exitVersion).Forget();
         }
 
         public void HandleCardBeginDrag(OperationCardView view, PointerEventData eventData)
@@ -264,6 +272,8 @@ namespace U1W.Game
             draggedCard = card;
             draggedCard.View.SetDragging(true);
             draggedCard.View.transform.SetAsLastSibling();
+            hoveredCard = null;
+            hoverStateVersion++;
             HideCardDescription();
             UpdateDraggedCardPosition(eventData);
         }
@@ -313,10 +323,15 @@ namespace U1W.Game
 
         public void HideCardDescription()
         {
-            popupTween?.Kill();
-            if (cardDescriptionPopupRoot != null)
+            if (cardDescriptionAreaRoot != null && !cardDescriptionAreaRoot.activeSelf)
             {
-                cardDescriptionPopupRoot.gameObject.SetActive(false);
+                cardDescriptionAreaRoot.SetActive(true);
+            }
+
+            if (cardDescriptionText != null)
+            {
+                cardDescriptionText.text = idleDescriptionFallback;
+                cardDescriptionText.color = idleDescriptionTextColor;
             }
         }
 
@@ -601,7 +616,7 @@ namespace U1W.Game
 
         private void ShowCardDescription(CardRuntime card)
         {
-            if (cardDescriptionPopupRoot == null || cardDescriptionText == null || card?.View == null)
+            if (cardDescriptionText == null || card == null)
             {
                 return;
             }
@@ -609,17 +624,22 @@ namespace U1W.Game
             cardDescriptionText.text = string.IsNullOrWhiteSpace(card.Description)
                 ? emptyDescriptionFallback
                 : card.Description;
-            cardDescriptionPopupRoot.anchoredPosition =
-                new Vector2(card.View.RectTransform.anchoredPosition.x, popupVerticalOffset);
+            cardDescriptionText.color = activeDescriptionTextColor;
+        }
 
-            if (!cardDescriptionPopupRoot.gameObject.activeSelf)
+        private async UniTaskVoid ConfirmHoverExitAsync(CardRuntime card, int exitVersion)
+        {
+            await UniTask.Delay(
+                TimeSpan.FromSeconds(HoverExitConfirmDelaySeconds),
+                cancellationToken: CancellationToken.None);
+
+            if (exitVersion != hoverStateVersion || hoveredCard != card || draggedCard == card)
             {
-                cardDescriptionPopupRoot.gameObject.SetActive(true);
+                return;
             }
 
-            popupTween?.Kill();
-            cardDescriptionPopupRoot.localScale = Vector3.one * 0.96f;
-            popupTween = cardDescriptionPopupRoot.DOScale(1f, 0.12f).SetEase(Ease.OutBack);
+            hoveredCard = null;
+            HideCardDescription();
         }
 
         private static int CompareByInitialOrder(CardRuntime left, CardRuntime right)

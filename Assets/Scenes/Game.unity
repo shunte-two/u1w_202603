@@ -2317,7 +2317,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 180}
+  m_AnchoredPosition: {x: 0, y: 210}
   m_SizeDelta: {x: 820, y: 72}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1127969288
@@ -2520,7 +2520,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -183}
+  m_AnchoredPosition: {x: 0, y: -220}
   m_SizeDelta: {x: 220, y: 56}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1229908146
@@ -3328,7 +3328,7 @@ MonoBehaviour:
   titleSceneName: Title
   endingTransitionBlackoutDuration: 2
   characterFocusRoot: {fileID: 26426392}
-  operationCharacterLocalOffset: {x: 0, y: 3, z: 0}
+  operationCharacterLocalOffset: {x: 0, y: 3.5, z: 0}
   characterFocusMoveDuration: 0.45
   characterFocusMoveEase: 4
   characterFocusSkipDistance: 0.001
@@ -4660,7 +4660,7 @@ MonoBehaviour:
   cardAreaRoot: {fileID: 2100000101}
   cardViewPrefab: {fileID: 100005, guid: 7c9e8b3e4bc54db7835b7b4bdfc06d51, type: 3}
   timelineMarkerPrefab: {fileID: 200000, guid: e5fe326763a6428b8af7c92c1dfe42a1, type: 3}
-  cardDescriptionPopupRoot: {fileID: 2100000201}
+  cardDescriptionAreaRoot: {fileID: 0}
   cardDescriptionText: {fileID: 2100000213}
   completeOperationButton: {fileID: 1229908146}
   resetCardsButton: {fileID: 2100000306}
@@ -4699,8 +4699,10 @@ MonoBehaviour:
   cardSpacing: 24
   cardSlideDuration: 0.2
   cardSlideEase: 5
-  popupVerticalOffset: 180
+  idleDescriptionFallback: "\u30AB\u30FC\u30C9\u306B\u30AB\u30FC\u30BD\u30EB\u3092\u5408\u308F\u305B\u308B\u3068\u88DC\u8DB3\u8AAC\u660E\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002"
   emptyDescriptionFallback: "\u8AAC\u660E\u306F\u672A\u8A2D\u5B9A\u3067\u3059\u3002"
+  idleDescriptionTextColor: {r: 1, g: 1, b: 1, a: 0.2509804}
+  activeDescriptionTextColor: {r: 1, g: 1, b: 1, a: 1}
   operationPhaseTitle:
     m_TableReference:
       m_TableCollectionName: GameText
@@ -4713,7 +4715,7 @@ MonoBehaviour:
   operationPhaseTitleFallback: "\u64CD\u4F5C\u30D1\u30FC\u30C8"
   operationInstruction:
     m_TableReference:
-      m_TableCollectionName: GameText
+      m_TableCollectionName: GUID:d3af9fdb4c9346a985c9a4f0a4e671cd
     m_TableEntryReference:
       m_KeyId: 1000000000009
       m_Key: 
@@ -4764,7 +4766,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    instructionFallback: "\u3059\u3079\u3066\u306E\u30AB\u30FC\u30C9\u3092\u88CF\u8FD4\u3057\u3001\u9055\u548C\u611F\u306E\u306A\u3044\u6642\u7CFB\u5217\u3078\u4E26\u3079\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002"
+    instructionFallback: "\u30AB\u30FC\u30C9\u3092\u30AF\u30EA\u30C3\u30AF\u3057\u3066\u89E3\u91C8\u3092\u5207\u308A\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002"
     successJudgementId: success
     defaultJudgementIdOnComplete: incorrect
   - chapterId: chapter2
@@ -4841,7 +4843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -10}
+  m_AnchoredPosition: {x: 0, y: -70}
   m_SizeDelta: {x: 800, y: 260}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2100000200
@@ -4856,12 +4858,12 @@ GameObject:
   - component: {fileID: 2100000202}
   - component: {fileID: 2100000203}
   m_Layer: 5
-  m_Name: CardDescriptionPopup
+  m_Name: CardDescriptionArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2100000201
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4879,8 +4881,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 180}
-  m_SizeDelta: {x: 360, y: 120}
+  m_AnchoredPosition: {x: 0, y: 112.149}
+  m_SizeDelta: {x: 640, y: 108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2100000202
 CanvasRenderer:
@@ -4985,7 +4987,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u30AB\u30FC\u30C9\u8AAC\u660E"
+  m_text: "\u30AB\u30FC\u30C9\u306B\u30AB\u30FC\u30BD\u30EB\u3092\u5408\u308F\u305B\u308B\u3068\u88DC\u8DB3\u8AAC\u660E\u304C\u8868\u793A\u3055\u308C\u307E\u3059\u3002"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 967e014a599b83049bf4e97dc49a6a10, type: 2}
   m_sharedMaterial: {fileID: 215843391}
@@ -5014,8 +5016,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5095,7 +5097,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 350, y: 150}
+  m_AnchoredPosition: {x: 360, y: 80}
   m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2100000306

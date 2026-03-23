@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -18,6 +19,8 @@ namespace U1W.Title
 
         [Header("References")]
         [SerializeField] private GameObject optionPanel;
+        [SerializeField] private GameObject optionWindow;
+        [SerializeField] private Graphic optionBackdropGraphic;
         [SerializeField] private Button closeButton;
         [SerializeField] private TextMeshProUGUI panelTitleText;
         [SerializeField] private Slider audioVolumeSlider;
@@ -47,18 +50,17 @@ namespace U1W.Title
             "Unity\nTextMesh Pro\nDOTween Pro\nUniTask";
 
         private bool listenersBound;
-        private bool openingRequested;
+        private bool isPreparingOpen;
+        private bool shouldBeOpen;
+        private UniTask initializationTask;
 
         private void Awake()
         {
             ValidateReferences();
             BindListeners();
             ApplySavedAudioVolume();
-            InitializeAsync(destroyCancellationToken).Forget();
-            if (!openingRequested)
-            {
-                CloseOptionsImmediate();
-            }
+            initializationTask = InitializeAsync(destroyCancellationToken).Preserve();
+            CloseOptionsImmediate();
         }
 
         private void OnValidate()
@@ -71,11 +73,6 @@ namespace U1W.Title
             UnbindListeners();
         }
 
-        private void OnEnable()
-        {
-            RefreshLocalizedTextsAsync(destroyCancellationToken).Forget();
-        }
-
         public void OpenOptions()
         {
             if (optionPanel == null)
@@ -84,19 +81,14 @@ namespace U1W.Title
                 return;
             }
 
-            openingRequested = true;
-            optionPanel.SetActive(true);
-            openingRequested = false;
+            shouldBeOpen = true;
+            OpenOptionsAsync(destroyCancellationToken).Forget();
         }
 
         public void CloseOptions()
         {
-            if (optionPanel == null)
-            {
-                return;
-            }
-
-            optionPanel.SetActive(false);
+            shouldBeOpen = false;
+            SetOptionsVisible(false);
         }
 
         public void ToggleOptions()
@@ -113,6 +105,8 @@ namespace U1W.Title
         private void ValidateReferences()
         {
             WarnIfMissing(optionPanel, nameof(optionPanel));
+            WarnIfMissing(optionWindow, nameof(optionWindow));
+            WarnIfMissing(optionBackdropGraphic, nameof(optionBackdropGraphic));
             WarnIfMissing(closeButton, nameof(closeButton));
             WarnIfMissing(panelTitleText, nameof(panelTitleText));
             WarnIfMissing(audioVolumeSlider, nameof(audioVolumeSlider));
@@ -153,21 +147,51 @@ namespace U1W.Title
 
         private bool IsOptionsOpen()
         {
-            return optionPanel != null && optionPanel.activeSelf;
+            return optionWindow != null && optionWindow.activeSelf;
         }
 
         private void CloseOptionsImmediate()
         {
-            if (optionPanel != null)
-            {
-                optionPanel.SetActive(false);
-            }
+            SetOptionsVisible(false);
         }
 
-        private async UniTaskVoid InitializeAsync(System.Threading.CancellationToken cancellationToken)
+        private async UniTask InitializeAsync(System.Threading.CancellationToken cancellationToken)
         {
             await ApplySavedLocaleAsync(cancellationToken);
             await RefreshLocalizedTextsAsync(cancellationToken);
+        }
+
+        private async UniTaskVoid OpenOptionsAsync(CancellationToken cancellationToken)
+        {
+            if (optionPanel == null || IsOptionsOpen() || isPreparingOpen)
+            {
+                return;
+            }
+
+            isPreparingOpen = true;
+            try
+            {
+                await initializationTask.AttachExternalCancellation(cancellationToken);
+                if (!shouldBeOpen)
+                {
+                    return;
+                }
+
+                await RefreshLocalizedTextsAsync(cancellationToken);
+                if (!shouldBeOpen)
+                {
+                    return;
+                }
+
+                SetOptionsVisible(true);
+            }
+            catch (OperationCanceledException)
+            {
+            }
+            finally
+            {
+                isPreparingOpen = false;
+            }
         }
 
         private void ApplySavedAudioVolume()
@@ -307,6 +331,20 @@ namespace U1W.Title
             if (textComponent != null)
             {
                 textComponent.text = value ?? string.Empty;
+            }
+        }
+
+        private void SetOptionsVisible(bool visible)
+        {
+            if (optionBackdropGraphic != null)
+            {
+                optionBackdropGraphic.enabled = visible;
+                optionBackdropGraphic.raycastTarget = visible;
+            }
+
+            if (optionWindow != null)
+            {
+                optionWindow.SetActive(visible);
             }
         }
 

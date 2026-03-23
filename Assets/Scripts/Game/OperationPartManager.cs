@@ -56,7 +56,7 @@ namespace U1W.Game
         [SerializeField] private RectTransform cardAreaRoot;
         [SerializeField] private OperationCardView cardViewPrefab;
         [SerializeField] private GameObject timelineMarkerPrefab;
-        [SerializeField] private RectTransform cardDescriptionPopupRoot;
+        [SerializeField] private GameObject cardDescriptionAreaRoot;
         [SerializeField] private TextMeshProUGUI cardDescriptionText;
         [SerializeField] private Button completeOperationButton;
         [SerializeField] private Button resetCardsButton;
@@ -75,8 +75,11 @@ namespace U1W.Game
         [SerializeField] private float cardSpacing = 24f;
         [SerializeField] private float cardSlideDuration = 0.2f;
         [SerializeField] private Ease cardSlideEase = Ease.OutCubic;
-        [SerializeField] private float popupVerticalOffset = 180f;
+        [SerializeField] [TextArea(2, 3)] private string idleDescriptionFallback =
+            "カードにカーソルを合わせると補足説明が表示されます。";
         [SerializeField] private string emptyDescriptionFallback = "説明は未設定です。";
+        [SerializeField] private Color idleDescriptionTextColor = new(1f, 1f, 1f, 0.58f);
+        [SerializeField] private Color activeDescriptionTextColor = Color.white;
 
         [Header("Default Display")]
         [SerializeField] private LocalizedString operationPhaseTitle;
@@ -196,13 +199,15 @@ namespace U1W.Game
                 cardAreaRoot,
                 cardViewPrefab,
                 timelineMarkerPrefab,
-                cardDescriptionPopupRoot,
+                cardDescriptionAreaRoot,
                 cardDescriptionText,
                 cardSpacing,
                 cardSlideDuration,
                 cardSlideEase,
-                popupVerticalOffset,
-                emptyDescriptionFallback);
+                emptyDescriptionFallback,
+                idleDescriptionFallback,
+                idleDescriptionTextColor,
+                activeDescriptionTextColor);
         }
 
         private async UniTask ShowCompletedAsync(CancellationToken cancellationToken)
@@ -484,7 +489,7 @@ namespace U1W.Game
             WarnIfMissing(cardAreaRoot, nameof(cardAreaRoot));
             WarnIfMissing(cardViewPrefab, nameof(cardViewPrefab));
             WarnIfMissing(timelineMarkerPrefab, nameof(timelineMarkerPrefab));
-            WarnIfMissing(cardDescriptionPopupRoot, nameof(cardDescriptionPopupRoot));
+            WarnIfMissing(cardDescriptionAreaRoot, nameof(cardDescriptionAreaRoot));
             WarnIfMissing(cardDescriptionText, nameof(cardDescriptionText));
             WarnIfMissing(completeOperationButton, nameof(completeOperationButton));
             WarnIfMissing(resetCardsButton, nameof(resetCardsButton));
