@@ -22,6 +22,7 @@ namespace U1W.Game
         [SerializeField] private TextMeshProUGUI advanceIndicatorText;
         [SerializeField] private GameObject titleSpriteRoot;
         [SerializeField] private Image titleSpriteImage;
+        [SerializeField] private ConversationFactCardOverlay factCardOverlay;
         [SerializeField] private StoryCharacterPortrait[] characterPortraits;
         [SerializeField] private ConversationLogPanel conversationLogPanel;
 
@@ -100,6 +101,7 @@ namespace U1W.Game
             SetButtonState(nextConversationButton, false);
             ReleaseBindings();
             SetConversationText(string.Empty);
+            factCardOverlay?.ResetImmediate();
         }
 
         private async UniTask PlayStoryAsync(
@@ -172,6 +174,34 @@ namespace U1W.Game
                     await WaitAsync(step.WaitSeconds, cancellationToken);
                     await HideTitleSpriteAsync(cancellationToken);
                     SetConversationWindowVisible(true);
+                    break;
+
+                case StoryStepType.ShowFactCard:
+                    if (factCardOverlay != null)
+                    {
+                        await factCardOverlay.ShowCardAsync(
+                            step.FactCardChapterAsset,
+                            step.FactCardId,
+                            step.FactCardFaceMode,
+                            cancellationToken);
+                    }
+
+                    break;
+
+                case StoryStepType.StackFactCard:
+                    if (factCardOverlay != null)
+                    {
+                        await factCardOverlay.StackCurrentCardAsync(cancellationToken);
+                    }
+
+                    break;
+
+                case StoryStepType.ClearFactCards:
+                    if (factCardOverlay != null)
+                    {
+                        await factCardOverlay.ClearCardsAsync(cancellationToken);
+                    }
+
                     break;
 
                 case StoryStepType.PlayBgm:
@@ -691,6 +721,7 @@ namespace U1W.Game
             WarnIfMissing(advanceIndicatorText, nameof(advanceIndicatorText));
             WarnIfMissing(titleSpriteRoot, nameof(titleSpriteRoot));
             WarnIfMissing(titleSpriteImage, nameof(titleSpriteImage));
+            WarnIfMissing(factCardOverlay, nameof(factCardOverlay));
             WarnIfMissing(conversationLogPanel, nameof(conversationLogPanel));
 
             if (characterPortraits == null)

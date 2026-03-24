@@ -31,6 +31,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
+    factCardId: card
     audioKey: Opening
     audioVolume: 1
     audioFadeSeconds: 0
@@ -53,6 +55,32 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 7
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 1
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
+    factCardId: follow
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -75,6 +103,32 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 7
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 1
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
+    factCardId: follow
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -97,6 +151,32 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 7
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 1
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
+    factCardId: search
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -119,6 +199,56 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 8
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 1
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
+    factCardId: search
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 9
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 1
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
+    factCardId: search
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -141,6 +271,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: TitleCall
     audioVolume: 1
     audioFadeSeconds: 1.5
@@ -163,6 +295,8 @@ MonoBehaviour:
     waitSeconds: 2
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -185,6 +319,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: TitleCall
     audioVolume: 1
     audioFadeSeconds: 0.6
@@ -207,6 +343,8 @@ MonoBehaviour:
     waitSeconds: 2
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 21300000, guid: df9a3742866288248990901e9beca817, type: 3}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -229,6 +367,8 @@ MonoBehaviour:
     waitSeconds: 1
     showConversationWindowDuringWait: 0
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -251,6 +391,8 @@ MonoBehaviour:
     waitSeconds: 2
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 21300000, guid: df9a3742866288248990901e9beca817, type: 3}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: Main
     audioVolume: 1
     audioFadeSeconds: 0
@@ -273,6 +415,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -295,6 +439,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -317,6 +463,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -339,6 +487,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -361,6 +511,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -383,6 +535,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -405,6 +559,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -427,6 +583,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -449,6 +607,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -471,6 +631,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -493,6 +655,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -515,6 +679,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -537,6 +703,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -559,6 +727,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -581,6 +751,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -603,6 +775,8 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0

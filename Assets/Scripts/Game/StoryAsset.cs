@@ -16,13 +16,16 @@ namespace U1W.Game
 
     public enum StoryStepType
     {
-        ShowMessage,
-        ChangeExpression,
-        Wait,
-        ShowTitleSprite,
-        PlayBgm,
-        StopBgm,
-        PlaySe
+        ShowMessage = 0,
+        ChangeExpression = 1,
+        Wait = 2,
+        ShowTitleSprite = 3,
+        PlayBgm = 4,
+        StopBgm = 5,
+        PlaySe = 6,
+        ShowFactCard = 7,
+        StackFactCard = 8,
+        ClearFactCards = 9
     }
 
     public enum StoryCharacterId
@@ -41,6 +44,13 @@ namespace U1W.Game
         Surprised
     }
 
+    public enum StoryFactCardFaceMode
+    {
+        UseCardDefault,
+        Front,
+        Back
+    }
+
     [Serializable]
     public sealed class StoryStep
     {
@@ -54,6 +64,9 @@ namespace U1W.Game
         [SerializeField] [Min(0f)] private float waitSeconds;
         [SerializeField] private bool showConversationWindowDuringWait = true;
         [SerializeField] private Sprite titleSprite;
+        [SerializeField] private OperationChapterAsset factCardChapterAsset;
+        [SerializeField] private string factCardId = "card";
+        [SerializeField] private StoryFactCardFaceMode factCardFaceMode = StoryFactCardFaceMode.UseCardDefault;
         [SerializeField] private string audioKey;
         [SerializeField] [Range(0f, 1f)] private float audioVolume = 1f;
         [SerializeField] [Min(0f)] private float audioFadeSeconds;
@@ -69,6 +82,9 @@ namespace U1W.Game
         public float WaitSeconds => waitSeconds;
         public bool ShowConversationWindowDuringWait => showConversationWindowDuringWait;
         public Sprite TitleSprite => titleSprite;
+        public OperationChapterAsset FactCardChapterAsset => factCardChapterAsset;
+        public string FactCardId => factCardId;
+        public StoryFactCardFaceMode FactCardFaceMode => factCardFaceMode;
         public string AudioKey => audioKey;
         public float AudioVolume => audioVolume;
         public float AudioFadeSeconds => audioFadeSeconds;

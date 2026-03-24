@@ -4187,6 +4187,7 @@ RectTransform:
   m_Children:
   - {fileID: 1978805990}
   - {fileID: 1422330391}
+  - {fileID: 2100000401}
   - {fileID: 625083323}
   m_Father: {fileID: 297963045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4578,6 +4579,7 @@ MonoBehaviour:
   advanceIndicatorText: {fileID: 1794274450}
   titleSpriteRoot: {fileID: 625083322}
   titleSpriteImage: {fileID: 625083324}
+  factCardOverlay: {fileID: 2100000403}
   characterPortraits:
   - {fileID: 98544242}
   conversationLogPanel: {fileID: 1811270288}
@@ -5321,6 +5323,112 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2100000311}
   m_CullTransparentMesh: 1
+--- !u!1 &2100000400
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100000401}
+  - component: {fileID: 2100000402}
+  - component: {fileID: 2100000403}
+  m_Layer: 5
+  m_Name: FactCardOverlay
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2100000401
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000400}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2100000411}
+  m_Father: {fileID: 2076038882}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &2100000402
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000400}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!114 &2100000403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000400}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13010d3e94221384e8f3298a03220e1f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.ConversationFactCardOverlay
+  overlayRoot: {fileID: 2100000400}
+  cardAreaRoot: {fileID: 2100000411}
+  factCardViewPrefab: {fileID: 100005, guid: d7d9900da1c4493498d3519ec7f43c21, type: 3}
+  centerPosition: {x: 0, y: 0}
+  stackOriginPosition: {x: -360, y: 0}
+  stackOffset: {x: 28, y: -18}
+  moveDuration: 0.35
+  moveEase: 5
+  clearStaggerSeconds: 0.04
+--- !u!1 &2100000410
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100000411}
+  m_Layer: 5
+  m_Name: CardAreaRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2100000411
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000410}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2100000401}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2112879906
 GameObject:
   m_ObjectHideFlags: 0
@@ -5425,6 +5533,6 @@ SceneRoots:
   - {fileID: 6372068617903500927}
   - {fileID: 1503877653}
   - {fileID: 2100000003}
-  - {fileID: 2100000013}
   - {fileID: 26426392}
   - {fileID: 297963045}
+  - {fileID: 2100000013}

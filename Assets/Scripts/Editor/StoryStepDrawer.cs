@@ -135,6 +135,16 @@ namespace Project.Editor
                     yield return "waitSeconds";
                     break;
 
+                case StoryStepType.ShowFactCard:
+                    yield return "factCardChapterAsset";
+                    yield return "factCardId";
+                    yield return "factCardFaceMode";
+                    break;
+
+                case StoryStepType.StackFactCard:
+                case StoryStepType.ClearFactCards:
+                    break;
+
                 case StoryStepType.PlayBgm:
                     yield return "audioKey";
                     yield return "audioVolume";

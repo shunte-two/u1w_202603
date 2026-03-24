@@ -1,0 +1,515 @@
+{
+  "ExportTimestamp": "2026-03-24 04:27:44",
+  "Context": {
+    "sceneType": "editor",
+    "sceneName": "Game",
+    "nodeCount": 33,
+    "maxDepth": 2
+  },
+  "Hierarchy": [
+    {
+      "sceneName": "Game",
+      "stats": {
+        "rootCount": 10,
+        "nodeCount": 33,
+        "maxDepth": 2
+      },
+      "componentsLut": [
+        "Transform",
+        "Camera",
+        "AudioListener",
+        "UniversalAdditionalCameraData",
+        "Light2D",
+        "EventSystem",
+        "InputSystemUIInputModule",
+        "AudioManager",
+        "SceneTransitionManager",
+        "SequenceManager",
+        "ConversationPartManager",
+        "OperationPartManager",
+        "SpriteRenderer",
+        "Animator",
+        "StoryCharacterPortrait",
+        "RectTransform",
+        "Canvas",
+        "CanvasScaler",
+        "GraphicRaycaster",
+        "CanvasRenderer",
+        "Image",
+        "Button",
+        "TextMeshProUGUI",
+        "ConversationLogPanel",
+        "CanvasGroup",
+        "ChapterIntroOverlay"
+      ],
+      "roots": [
+        {
+          "name": "Main Camera",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "siblingIndex": 0,
+          "tag": "MainCamera",
+          "layer": 0,
+          "path": "Main Camera",
+          "children": []
+        },
+        {
+          "name": "Global Light 2D",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            4
+          ],
+          "siblingIndex": 1,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "Global Light 2D",
+          "children": []
+        },
+        {
+          "name": "EventSystem",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            5,
+            6
+          ],
+          "siblingIndex": 2,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "EventSystem",
+          "children": []
+        },
+        {
+          "name": "AudioManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            7
+          ],
+          "siblingIndex": 3,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "AudioManager",
+          "children": []
+        },
+        {
+          "name": "SceneTransitionManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            8
+          ],
+          "siblingIndex": 4,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "SceneTransitionManager",
+          "children": []
+        },
+        {
+          "name": "SequenceManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            9
+          ],
+          "siblingIndex": 5,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "SequenceManager",
+          "children": []
+        },
+        {
+          "name": "ConversationPartManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            10
+          ],
+          "siblingIndex": 6,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "ConversationPartManager",
+          "children": []
+        },
+        {
+          "name": "OperationPartManager",
+          "isActive": true,
+          "componentsIdx": [
+            0,
+            11
+          ],
+          "siblingIndex": 7,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "OperationPartManager",
+          "children": []
+        },
+        {
+          "name": "BG",
+          "isActive": true,
+          "componentsIdx": [
+            0
+          ],
+          "siblingIndex": 8,
+          "tag": "Untagged",
+          "layer": 0,
+          "path": "BG",
+          "children": [
+            {
+              "name": "Square",
+              "isActive": true,
+              "componentsIdx": [
+                0,
+                12
+              ],
+              "siblingIndex": 0,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "BG/Square",
+              "children": []
+            },
+            {
+              "name": "CharacterPortraitsRoot",
+              "isActive": true,
+              "componentsIdx": [
+                0
+              ],
+              "siblingIndex": 1,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "BG/CharacterPortraitsRoot",
+              "children": [
+                {
+                  "name": "FortuneTellerPortrait",
+                  "isActive": true,
+                  "componentsIdx": [
+                    0,
+                    12,
+                    13,
+                    14
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "BG/CharacterPortraitsRoot/FortuneTellerPortrait",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "Table",
+              "isActive": true,
+              "componentsIdx": [
+                0,
+                12
+              ],
+              "siblingIndex": 2,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "BG/Table",
+              "children": []
+            },
+            {
+              "name": "candle",
+              "isActive": true,
+              "componentsIdx": [
+                0,
+                12,
+                13
+              ],
+              "siblingIndex": 3,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "BG/candle",
+              "children": []
+            },
+            {
+              "name": "candle (1)",
+              "isActive": true,
+              "componentsIdx": [
+                0,
+                12,
+                13
+              ],
+              "siblingIndex": 4,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "BG/candle (1)",
+              "children": []
+            }
+          ]
+        },
+        {
+          "name": "Canvas",
+          "isActive": true,
+          "componentsIdx": [
+            15,
+            16,
+            17,
+            18
+          ],
+          "siblingIndex": 9,
+          "tag": "Untagged",
+          "layer": 5,
+          "path": "Canvas",
+          "children": [
+            {
+              "name": "ConversationPanel",
+              "isActive": true,
+              "componentsIdx": [
+                15
+              ],
+              "siblingIndex": 0,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/ConversationPanel",
+              "children": [
+                {
+                  "name": "ConversationWindow",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/ConversationPanel/ConversationWindow",
+                  "children": []
+                },
+                {
+                  "name": "NextConversationButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20,
+                    21
+                  ],
+                  "siblingIndex": 1,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/ConversationPanel/NextConversationButton",
+                  "children": []
+                },
+                {
+                  "name": "OpeningTitleSprite",
+                  "isActive": false,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20
+                  ],
+                  "siblingIndex": 2,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "Canvas/ConversationPanel/OpeningTitleSprite",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "OperationPanel",
+              "isActive": false,
+              "componentsIdx": [
+                15,
+                19,
+                20
+              ],
+              "siblingIndex": 1,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/OperationPanel",
+              "children": [
+                {
+                  "name": "OperationBodyText",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    22
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/OperationBodyText",
+                  "children": []
+                },
+                {
+                  "name": "CardAreaRoot",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15
+                  ],
+                  "siblingIndex": 1,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/CardAreaRoot",
+                  "children": []
+                },
+                {
+                  "name": "CardDescriptionArea",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20
+                  ],
+                  "siblingIndex": 2,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/CardDescriptionArea",
+                  "children": []
+                },
+                {
+                  "name": "CompleteOperationButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20,
+                    21
+                  ],
+                  "siblingIndex": 3,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/CompleteOperationButton",
+                  "children": []
+                },
+                {
+                  "name": "ResetCardsButton",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20,
+                    21
+                  ],
+                  "siblingIndex": 4,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/ResetCardsButton",
+                  "children": []
+                },
+                {
+                  "name": "RestartSequenceButton",
+                  "isActive": false,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20,
+                    21
+                  ],
+                  "siblingIndex": 5,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/OperationPanel/RestartSequenceButton",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "PhaseTitleText",
+              "isActive": false,
+              "componentsIdx": [
+                15,
+                19,
+                22
+              ],
+              "siblingIndex": 2,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/PhaseTitleText",
+              "children": []
+            },
+            {
+              "name": "ConversationLogToggleButton",
+              "isActive": true,
+              "componentsIdx": [
+                15,
+                19,
+                20,
+                21
+              ],
+              "siblingIndex": 3,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/ConversationLogToggleButton",
+              "children": []
+            },
+            {
+              "name": "ConversationLogPanel",
+              "isActive": true,
+              "componentsIdx": [
+                15,
+                19,
+                20,
+                23,
+                24
+              ],
+              "siblingIndex": 4,
+              "tag": "Untagged",
+              "layer": 0,
+              "path": "Canvas/ConversationLogPanel",
+              "children": [
+                {
+                  "name": "Window",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 0,
+                  "path": "Canvas/ConversationLogPanel/Window",
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "ChapterIntroOverlay",
+              "isActive": false,
+              "componentsIdx": [
+                15,
+                19,
+                20,
+                25,
+                24
+              ],
+              "siblingIndex": 5,
+              "tag": "Untagged",
+              "layer": 5,
+              "path": "Canvas/ChapterIntroOverlay",
+              "children": [
+                {
+                  "name": "Banner",
+                  "isActive": true,
+                  "componentsIdx": [
+                    15,
+                    19,
+                    20,
+                    24
+                  ],
+                  "siblingIndex": 0,
+                  "tag": "Untagged",
+                  "layer": 5,
+                  "path": "Canvas/ChapterIntroOverlay/Banner",
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
