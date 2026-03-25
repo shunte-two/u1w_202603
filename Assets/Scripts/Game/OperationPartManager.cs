@@ -10,18 +10,71 @@ using UnityEngine.UI;
 
 namespace U1W.Game
 {
+    public readonly struct OperationCardStateSnapshot
+    {
+        public OperationCardStateSnapshot(string cardId, bool isFlipped, int orderIndex)
+        {
+            CardId = cardId ?? string.Empty;
+            IsFlipped = isFlipped;
+            OrderIndex = orderIndex;
+        }
+
+        public string CardId { get; }
+        public bool IsFlipped { get; }
+        public int OrderIndex { get; }
+    }
+
+    public sealed class OperationStateSnapshot
+    {
+        private static readonly OperationCardStateSnapshot[] EmptyCards =
+            Array.Empty<OperationCardStateSnapshot>();
+
+        public static OperationStateSnapshot Empty { get; } = new(EmptyCards);
+
+        public OperationStateSnapshot(OperationCardStateSnapshot[] cards)
+        {
+            Cards = cards ?? EmptyCards;
+        }
+
+        public OperationCardStateSnapshot[] Cards { get; }
+
+        public bool TryFindCard(string cardId, out OperationCardStateSnapshot card)
+        {
+            if (!string.IsNullOrWhiteSpace(cardId))
+            {
+                for (int i = 0; i < Cards.Length; i++)
+                {
+                    if (string.Equals(Cards[i].CardId, cardId, StringComparison.Ordinal))
+                    {
+                        card = Cards[i];
+                        return true;
+                    }
+                }
+            }
+
+            card = default;
+            return false;
+        }
+    }
+
     public readonly struct OperationPartResult
     {
-        public OperationPartResult(string chapterId, string judgementId, bool isSuccess)
+        public OperationPartResult(
+            string chapterId,
+            string judgementId,
+            bool isSuccess,
+            OperationStateSnapshot stateSnapshot)
         {
             ChapterId = chapterId;
             JudgementId = judgementId;
             IsSuccess = isSuccess;
+            StateSnapshot = stateSnapshot ?? OperationStateSnapshot.Empty;
         }
 
         public string ChapterId { get; }
         public string JudgementId { get; }
         public bool IsSuccess { get; }
+        public OperationStateSnapshot StateSnapshot { get; }
     }
 
     public sealed class OperationPartManager : MonoBehaviour
@@ -255,8 +308,14 @@ namespace U1W.Game
                 resolvedJudgementId,
                 successJudgementId,
                 StringComparison.Ordinal);
+            OperationStateSnapshot stateSnapshot =
+                cardInteractionController?.CaptureStateSnapshot() ?? OperationStateSnapshot.Empty;
 
-            return new OperationPartResult(currentChapterId, resolvedJudgementId, isSuccess);
+            return new OperationPartResult(
+                currentChapterId,
+                resolvedJudgementId,
+                isSuccess,
+                stateSnapshot);
         }
 
         private bool IsAwaitingComplete()

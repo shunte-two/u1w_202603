@@ -35,12 +35,14 @@ namespace U1W.Game
         [SerializeField] private string conversationTypewriterSeKey = "Conversation";
         [SerializeField, Range(0f, 1f)] private float conversationTypewriterSeVolume = 0.25f;
         [SerializeField, Min(0f)] private float conversationTypewriterSeIntervalSeconds = 0.045f;
+        [SerializeField, Min(0f)] private float conversationSkipAdvanceIntervalSeconds = 0.05f;
         [SerializeField, Min(0f)] private float advanceIndicatorFadeDuration = 0.5f;
         [SerializeField, Min(0f)] private float titleSpriteFadeOutDuration = 0.35f;
 
         private bool advanceRequested;
         private bool isAnimatingConversation;
         private bool listenersBound;
+        private bool isMessageStepActive;
         private LocalizedString boundConversationText;
         private LocalizedString boundPhaseTitle;
         private Tween activeConversationTween;
@@ -49,6 +51,7 @@ namespace U1W.Game
         private bool showAdvanceIndicatorWhenConversationCompletes;
         private int previousTypewriterTextLength;
         private float lastTypewriterSeTime = float.NegativeInfinity;
+        private float nextConversationSkipRequestTime;
 
         private void Awake()
         {
@@ -67,12 +70,19 @@ namespace U1W.Game
             Keyboard keyboard = Keyboard.current;
             if (keyboard == null || !IsAwaitingAdvance())
             {
+                nextConversationSkipRequestTime = Time.unscaledTime;
                 return;
             }
 
             if (keyboard.enterKey.wasPressedThisFrame)
             {
                 RequestAdvance();
+                return;
+            }
+
+            if (isMessageStepActive)
+            {
+                TryRequestConversationSkip(keyboard);
             }
         }
 
@@ -94,6 +104,7 @@ namespace U1W.Game
         {
             KillConversationTween(false);
             isAnimatingConversation = false;
+            isMessageStepActive = false;
             SetAdvanceIndicatorVisible(false);
             SetTitleSprite(null);
             SetConversationWindowVisible(true);
@@ -135,6 +146,7 @@ namespace U1W.Game
 
         private async UniTask PlayStepAsync(StoryStep step, CancellationToken cancellationToken)
         {
+            isMessageStepActive = step.StepType == StoryStepType.ShowMessage;
             if (step.StepType != StoryStepType.ShowMessage)
             {
                 showAdvanceIndicatorWhenConversationCompletes = false;
@@ -153,7 +165,7 @@ namespace U1W.Game
                     else
                     {
                         SetAdvanceIndicatorVisible(false);
-                        await WaitAsync(step.WaitSeconds, cancellationToken);
+                        await WaitAsync(step.WaitSeconds, allowConversationSkip: true, cancellationToken);
                     }
 
                     break;
@@ -164,14 +176,14 @@ namespace U1W.Game
 
                 case StoryStepType.Wait:
                     SetConversationWindowVisible(step.ShowConversationWindowDuringWait);
-                    await WaitAsync(step.WaitSeconds, cancellationToken);
+                    await WaitAsync(step.WaitSeconds, allowConversationSkip: true, cancellationToken);
                     SetConversationWindowVisible(true);
                     break;
 
                 case StoryStepType.ShowTitleSprite:
                     SetConversationWindowVisible(false);
                     SetTitleSprite(step.TitleSprite);
-                    await WaitAsync(step.WaitSeconds, cancellationToken);
+                    await WaitAsync(step.WaitSeconds, allowConversationSkip: false, cancellationToken);
                     await HideTitleSpriteAsync(cancellationToken);
                     SetConversationWindowVisible(true);
                     break;
@@ -224,15 +236,26 @@ namespace U1W.Game
             await UniTask.WaitUntil(() => advanceRequested, cancellationToken: cancellationToken);
         }
 
-        private static async UniTask WaitAsync(float seconds, CancellationToken cancellationToken)
+        private async UniTask WaitAsync(
+            float seconds,
+            bool allowConversationSkip,
+            CancellationToken cancellationToken)
         {
             if (seconds <= 0f)
             {
                 return;
             }
 
-            int milliseconds = Mathf.CeilToInt(seconds * 1000f);
-            await UniTask.Delay(milliseconds, cancellationToken: cancellationToken);
+            float endTime = Time.unscaledTime + seconds;
+            while (Time.unscaledTime < endTime)
+            {
+                if (allowConversationSkip && IsConversationSkipHeld())
+                {
+                    return;
+                }
+
+                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+            }
         }
 
         private void ShowConversationView()
@@ -375,6 +398,35 @@ namespace U1W.Game
             }
 
             advanceRequested = true;
+        }
+
+        private void TryRequestConversationSkip(Keyboard keyboard)
+        {
+            if (!IsConversationSkipHeld(keyboard))
+            {
+                nextConversationSkipRequestTime = Time.unscaledTime;
+                return;
+            }
+
+            float currentTime = Time.unscaledTime;
+            if (currentTime < nextConversationSkipRequestTime)
+            {
+                return;
+            }
+
+            RequestAdvance();
+            nextConversationSkipRequestTime =
+                currentTime + conversationSkipAdvanceIntervalSeconds;
+        }
+
+        private bool IsConversationSkipHeld()
+        {
+            return IsConversationSkipHeld(Keyboard.current);
+        }
+
+        private static bool IsConversationSkipHeld(Keyboard keyboard)
+        {
+            return keyboard != null && keyboard.spaceKey.isPressed;
         }
 
         private void SetRootState(bool isActive)

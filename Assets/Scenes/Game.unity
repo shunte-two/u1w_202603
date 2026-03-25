@@ -3308,7 +3308,47 @@ MonoBehaviour:
     openingStory: {fileID: 11400000, guid: 7c62da9b65c54d3996bfbf9a1f2c7d91, type: 2}
     successStory: {fileID: 11400000, guid: 2f9a1ce19d0442f798dbd8a602f3454e, type: 2}
     defaultFailureStory: {fileID: 11400000, guid: 41fb51ee4d6246f7b478f911cf59f191, type: 2}
-    failureBranches: []
+    failureBranches:
+    - judgementId: 
+      cardConditions:
+      - cardId: breaking
+        requireFaceMatch: 1
+        isFlipped: 1
+        requireOrderMatch: 0
+        orderIndex: 0
+      story: {fileID: 11400000, guid: b02bd0b450dbcd5478d68062fd697e85, type: 2}
+    - judgementId: 
+      cardConditions:
+      - cardId: rope
+        requireFaceMatch: 1
+        isFlipped: 1
+        requireOrderMatch: 0
+        orderIndex: 0
+      story: {fileID: 11400000, guid: 24445d5c68dac394bbef5841b7e6b4a0, type: 2}
+    - judgementId: 
+      cardConditions:
+      - cardId: run
+        requireFaceMatch: 1
+        isFlipped: 1
+        requireOrderMatch: 0
+        orderIndex: 0
+      story: {fileID: 11400000, guid: 918595128cf73924da00178ae18df212, type: 2}
+    - judgementId: 
+      cardConditions:
+      - cardId: arrest
+        requireFaceMatch: 1
+        isFlipped: 1
+        requireOrderMatch: 0
+        orderIndex: 0
+      story: {fileID: 11400000, guid: 2398c0eafc60df845b2dbc8fa28a6312, type: 2}
+    - judgementId: 
+      cardConditions:
+      - cardId: safe
+        requireFaceMatch: 1
+        isFlipped: 1
+        requireOrderMatch: 0
+        orderIndex: 0
+      story: {fileID: 11400000, guid: 3ed833eea94764746a1394963cc1c9bf, type: 2}
   - chapterId: chapter2
     chapterTitle:
       m_TableReference:
@@ -4310,7 +4350,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2099000000}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -4342,7 +4382,7 @@ RectTransform:
   m_GameObject: {fileID: 2099000010}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 0, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2099000021}
@@ -4607,6 +4647,7 @@ MonoBehaviour:
   conversationTypewriterSeKey: Conversation
   conversationTypewriterSeVolume: 0.25
   conversationTypewriterSeIntervalSeconds: 0.045
+  conversationSkipAdvanceIntervalSeconds: 0.05
   advanceIndicatorFadeDuration: 0.5
   titleSpriteFadeOutDuration: 0.35
   references:
@@ -5025,8 +5066,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1

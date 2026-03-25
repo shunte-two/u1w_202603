@@ -11,13 +11,71 @@ namespace U1W.Game
     public sealed class SequenceManager : MonoBehaviour
     {
         [Serializable]
+        private sealed class FailureCardCondition
+        {
+            [SerializeField] private string cardId = "card";
+            [SerializeField] private bool requireFaceMatch = true;
+            [SerializeField] private bool isFlipped;
+            [SerializeField] private bool requireOrderMatch = true;
+            [SerializeField] [Min(0)] private int orderIndex;
+
+            public bool Matches(OperationStateSnapshot operationStateSnapshot)
+            {
+                if (operationStateSnapshot == null ||
+                    string.IsNullOrWhiteSpace(cardId) ||
+                    !operationStateSnapshot.TryFindCard(cardId, out OperationCardStateSnapshot card))
+                {
+                    return false;
+                }
+
+                if (requireFaceMatch && card.IsFlipped != isFlipped)
+                {
+                    return false;
+                }
+
+                if (requireOrderMatch && card.OrderIndex != orderIndex)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
+        [Serializable]
         private sealed class ChapterFailureBranch
         {
             [SerializeField] private string judgementId = string.Empty;
+            [SerializeField] private FailureCardCondition[] cardConditions =
+                Array.Empty<FailureCardCondition>();
             [SerializeField] private StoryAsset story;
 
-            public string JudgementId => judgementId;
             public StoryAsset Story => story;
+
+            public bool Matches(OperationPartResult result)
+            {
+                if (!string.IsNullOrWhiteSpace(judgementId) &&
+                    !string.Equals(judgementId, result.JudgementId, StringComparison.Ordinal))
+                {
+                    return false;
+                }
+
+                if (cardConditions == null || cardConditions.Length == 0)
+                {
+                    return true;
+                }
+
+                for (int i = 0; i < cardConditions.Length; i++)
+                {
+                    FailureCardCondition condition = cardConditions[i];
+                    if (condition == null || !condition.Matches(result.StateSnapshot))
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
         }
 
         [Serializable]
@@ -37,9 +95,9 @@ namespace U1W.Game
             public StoryAsset OpeningStory => openingStory;
             public StoryAsset SuccessStory => successStory;
 
-            public StoryAsset ResolveFailureStory(string judgementId)
+            public StoryAsset ResolveFailureStory(OperationPartResult result)
             {
-                if (!string.IsNullOrWhiteSpace(judgementId) && failureBranches != null)
+                if (failureBranches != null)
                 {
                     for (int i = 0; i < failureBranches.Length; i++)
                     {
@@ -49,10 +107,7 @@ namespace U1W.Game
                             continue;
                         }
 
-                        if (string.Equals(
-                                branch.JudgementId,
-                                judgementId,
-                                StringComparison.Ordinal))
+                        if (branch.Matches(result))
                         {
                             return branch.Story;
                         }
@@ -195,7 +250,7 @@ namespace U1W.Game
                 }
 
                 operationPartManager.Hide(clearCardState: false);
-                StoryAsset failureStory = chapter.ResolveFailureStory(result.JudgementId);
+                StoryAsset failureStory = chapter.ResolveFailureStory(result);
                 await PlayStoryIfAssignedAsync(failureStory, cancellationToken);
             }
         }

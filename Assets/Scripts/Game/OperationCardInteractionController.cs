@@ -223,6 +223,32 @@ namespace U1W.Game
             return successJudgementId;
         }
 
+        public OperationStateSnapshot CaptureStateSnapshot()
+        {
+            if (activeCards.Count == 0)
+            {
+                return OperationStateSnapshot.Empty;
+            }
+
+            OperationCardStateSnapshot[] cards = new OperationCardStateSnapshot[activeCards.Count];
+            for (int i = 0; i < activeCards.Count; i++)
+            {
+                CardRuntime card = activeCards[i];
+                if (card?.Definition == null)
+                {
+                    cards[i] = new OperationCardStateSnapshot(string.Empty, false, i);
+                    continue;
+                }
+
+                cards[i] = new OperationCardStateSnapshot(
+                    card.Definition.Id,
+                    card.IsFlipped,
+                    i);
+            }
+
+            return new OperationStateSnapshot(cards);
+        }
+
         public void HandleCardClicked(OperationCardView view)
         {
             CardRuntime card = FindCard(view);

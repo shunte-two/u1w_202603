@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab1f3a7e0d2b4c5d8e9f0123456789ab, type: 3}
+  m_Name: C1_Failure_2
+  m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
+  steps:
+  - stepType: 1
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u89E3\u91C8\u304B\u6642\u7CFB\u5217\u306E\u3069\u3061\u3089\u304B\u304C\u565B\u307F\u5408\u3063\u3066\u3044\u306A\u3044\u3002\u64CD\u4F5C\u30D1\u30FC\u30C8\u306B\u623B\u3063\u3066\u3001\u602A\u3057\u3044\u7B87\u6240\u3092\u6D17\u3044\u76F4\u305D\u3046\u3002"
+    waitForAdvance: 1
+    characterId: 1
+    expressionId: 3
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u6BBA\u305D\u3046\u3068\u3057\u305F\u306E\u3067\u306F\u306A\u304F\u52A9\u3051\u3088\u3046\u3068\u3057\u305F\u3002\n\u7A81\u98DB\u306A\u767A\u60F3\u3060\u306D\u2015\u2015\u5C11\u306A\u304F\u3068\u3082\u3001\u4ECA\u306F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 1
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u89E3\u91C8\u304B\u6642\u7CFB\u5217\u306E\u3069\u3061\u3089\u304B\u304C\u565B\u307F\u5408\u3063\u3066\u3044\u306A\u3044\u3002\u64CD\u4F5C\u30D1\u30FC\u30C8\u306B\u623B\u3063\u3066\u3001\u602A\u3057\u3044\u7B87\u6240\u3092\u6D17\u3044\u76F4\u305D\u3046\u3002"
+    waitForAdvance: 1
+    characterId: 1
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u3042\u308B\u3044\u306F\u305F\u3060\u306E\u5984\u60F3\u304B\u3082\u3057\u308C\u306A\u3044\u304C\u2015\u2015\n\u3044\u305A\u308C\u306B\u3057\u308D\u3001\u305D\u308C\u306F\u79C1\u306E\u4ED5\u4E8B\u3060\u3088\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  references:
+    version: 2
+    RefIds: []

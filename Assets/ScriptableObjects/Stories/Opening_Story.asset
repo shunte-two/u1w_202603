@@ -33,6 +33,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: Opening
     audioVolume: 1
     audioFadeSeconds: 0
@@ -57,6 +58,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -80,7 +82,8 @@ MonoBehaviour:
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
-    factCardId: follow
+    factCardId: run
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -105,6 +108,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -129,6 +133,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
     factCardId: follow
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -153,6 +158,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -176,7 +182,8 @@ MonoBehaviour:
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
-    factCardId: search
+    factCardId: arrest
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -201,6 +208,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -225,6 +233,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
     factCardId: search
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -249,6 +258,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 11400000, guid: 19e53409f8f644d7ba3c62dbb5bd14c5, type: 2}
     factCardId: search
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -273,6 +283,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: TitleCall
     audioVolume: 1
     audioFadeSeconds: 1.5
@@ -297,6 +308,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -321,6 +333,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: TitleCall
     audioVolume: 1
     audioFadeSeconds: 0.6
@@ -345,6 +358,7 @@ MonoBehaviour:
     titleSprite: {fileID: 21300000, guid: df9a3742866288248990901e9beca817, type: 3}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -369,6 +383,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -393,6 +408,7 @@ MonoBehaviour:
     titleSprite: {fileID: 21300000, guid: df9a3742866288248990901e9beca817, type: 3}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: Main
     audioVolume: 1
     audioFadeSeconds: 0
@@ -417,6 +433,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -441,6 +458,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -465,6 +483,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -489,6 +508,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -513,6 +533,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -537,6 +558,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -561,6 +583,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -585,6 +608,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -609,6 +633,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -633,6 +658,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -657,6 +683,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -681,6 +708,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -705,6 +733,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -729,6 +758,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -753,6 +783,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -777,6 +808,7 @@ MonoBehaviour:
     titleSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
+    factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
