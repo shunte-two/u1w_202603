@@ -135,6 +135,11 @@ namespace Project.Editor
                     yield return "waitSeconds";
                     break;
 
+                case StoryStepType.ShowEndSprite:
+                    yield return "endSprite";
+                    yield return "waitSeconds";
+                    break;
+
                 case StoryStepType.ShowFactCard:
                     yield return "factCardChapterAsset";
                     yield return "factCardId";

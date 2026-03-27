@@ -18,6 +18,7 @@ namespace U1W.Game
         [SerializeField] private RectTransform rectTransform;
         [SerializeField] private CanvasGroup canvasGroup;
         [SerializeField] private Image backgroundImage;
+        [SerializeField] private Image lockImage;
         [SerializeField] private TextMeshProUGUI factText;
         [SerializeField] private TextMeshProUGUI interpretationText;
         [SerializeField] private Sprite frontSprite;
@@ -33,12 +34,18 @@ namespace U1W.Game
         [SerializeField] private float disabledAlpha = 0.72f;
         [SerializeField] private float flipDuration = 0.24f;
         [SerializeField] private Ease flipEase = Ease.OutCubic;
+        [SerializeField] private float blockedShakeDuration = 0.18f;
+        [SerializeField] private float blockedShakeStrength = 10f;
+        [SerializeField] private int blockedShakeVibrato = 18;
 
         private IOperationCardInteractionHandler owner;
         private bool canFlip = true;
         private bool canReorder = true;
         private bool suppressNextClick;
         private Tween flipTween;
+        private Tween blockedFeedbackTween;
+        private Vector2 blockedFeedbackBasePosition;
+        private bool hasBlockedFeedbackBasePosition;
 
         public RectTransform RectTransform => rectTransform;
 
@@ -52,6 +59,7 @@ namespace U1W.Game
         private void OnDestroy()
         {
             flipTween?.Kill();
+            blockedFeedbackTween?.Kill();
         }
 
         public void Bind(IOperationCardInteractionHandler interactionHandler)
@@ -91,12 +99,15 @@ namespace U1W.Game
             }
 
             ApplyVisualState(isFlipped);
+            UpdateLockVisual();
         }
 
         public void SetAnchoredPosition(Vector2 position)
         {
             if (rectTransform != null)
             {
+                blockedFeedbackTween?.Kill();
+                SetBlockedFeedbackBasePosition(position);
                 rectTransform.anchoredPosition = position;
             }
         }
@@ -108,6 +119,8 @@ namespace U1W.Game
                 return null;
             }
 
+            blockedFeedbackTween?.Kill();
+            SetBlockedFeedbackBasePosition(position);
             return rectTransform.DOAnchorPos(position, duration).SetEase(ease);
         }
 
@@ -142,6 +155,32 @@ namespace U1W.Game
             flipTween = sequence;
         }
 
+        public void PlayBlockedFlipFeedback()
+        {
+            if (rectTransform == null)
+            {
+                return;
+            }
+
+            if (!hasBlockedFeedbackBasePosition)
+            {
+                SetBlockedFeedbackBasePosition(rectTransform.anchoredPosition);
+            }
+
+            blockedFeedbackTween?.Kill();
+            rectTransform.anchoredPosition = blockedFeedbackBasePosition;
+            blockedFeedbackTween = rectTransform
+                .DOShakeAnchorPos(
+                    blockedShakeDuration,
+                    new Vector2(blockedShakeStrength, 0f),
+                    blockedShakeVibrato,
+                    randomness: 0f,
+                    snapping: false,
+                    fadeOut: true)
+                .SetUpdate(true)
+                .OnComplete(() => rectTransform.anchoredPosition = blockedFeedbackBasePosition);
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             if (suppressNextClick)
@@ -152,6 +191,7 @@ namespace U1W.Game
 
             if (!canFlip)
             {
+                PlayBlockedFlipFeedback();
                 return;
             }
 
@@ -225,6 +265,22 @@ namespace U1W.Game
                     ? backInterpretationTextColor
                     : frontInterpretationTextColor;
             }
+        }
+
+        private void UpdateLockVisual()
+        {
+            if (lockImage == null)
+            {
+                return;
+            }
+
+            lockImage.enabled = !canFlip;
+        }
+
+        private void SetBlockedFeedbackBasePosition(Vector2 position)
+        {
+            blockedFeedbackBasePosition = position;
+            hasBlockedFeedbackBasePosition = true;
         }
     }
 }

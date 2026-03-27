@@ -10,10 +10,61 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d38d1e35791c1f445822c9122be26daa, type: 3}
-  m_Name: Chapter2Operation
+  m_Name: Chapter3Operation
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.OperationChapterAsset
-  ignoreFaceStateInJudgement: 1
+  ignoreFaceStateInJudgement: 0
   cards:
+  - id: breaking
+    factText:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u7A93\u304C\u5272\u3089\u308C\u3066\u3044\u305F"
+    frontInterpretation:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u4FB5\u5165\u3057\u305F"
+    backInterpretation:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u9003\u4EA1\u3057\u305F"
+    description:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u5272\u308C\u3066\u3044\u305F\u306E\u306F\u66F8\u658E\u306E\u7A93\u3002"
+    canFlip: 1
+    canReorder: 1
+    startsFlipped: 0
+    correctIsFlipped: 1
+    correctTimelineOrder: 4
+    tags: []
   - id: safe
     factText:
       localizedString:
@@ -116,6 +167,57 @@ MonoBehaviour:
     correctIsFlipped: 0
     correctTimelineOrder: 1
     tags: []
+  - id: bedroom
+    factText:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u5411\u304B\u3063\u305F"
+    frontInterpretation:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u88AB\u5BB3\u8005\u306E\u69D8\u5B50\u3092\u898B\u306B\u884C\u3063\u305F"
+    backInterpretation:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u88AB\u5BB3\u8005\u3092\u6BBA\u5BB3\u3057\u306B\u884C\u3063\u305F"
+    description:
+      localizedString:
+        m_TableReference:
+          m_TableCollectionName: 
+        m_TableEntryReference:
+          m_KeyId: 0
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+        m_LocalVariables: []
+      fallback: "\u5BDD\u5BA4\u8FD1\u304F\u3067\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3053\u3068\u304B\u3089\u3001\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u884C\u304F\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
+    canFlip: 1
+    canReorder: 1
+    startsFlipped: 0
+    correctIsFlipped: 0
+    correctTimelineOrder: 2
+    tags: []
   - id: rope
     factText:
       localizedString:
@@ -164,7 +266,7 @@ MonoBehaviour:
     canFlip: 1
     canReorder: 1
     startsFlipped: 0
-    correctIsFlipped: 0
+    correctIsFlipped: 1
     correctTimelineOrder: 3
     tags: []
   - id: run
@@ -215,59 +317,8 @@ MonoBehaviour:
     canFlip: 1
     canReorder: 1
     startsFlipped: 0
-    correctIsFlipped: 0
-    correctTimelineOrder: 4
-    tags: []
-  - id: bedroom
-    factText:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u5411\u304B\u3063\u305F"
-    frontInterpretation:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u88AB\u5BB3\u8005\u306E\u69D8\u5B50\u3092\u898B\u306B\u884C\u3063\u305F"
-    backInterpretation:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u88AB\u5BB3\u8005\u3092\u6BBA\u5BB3\u3057\u306B\u884C\u3063\u305F"
-    description:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u5BDD\u5BA4\u8FD1\u304F\u3067\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3053\u3068\u304B\u3089\u3001\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u884C\u304F\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
-    canFlip: 1
-    canReorder: 1
-    startsFlipped: 0
     correctIsFlipped: 1
-    correctTimelineOrder: 2
+    correctTimelineOrder: 5
     tags: []
   references:
     version: 2

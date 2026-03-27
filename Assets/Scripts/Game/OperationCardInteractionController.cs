@@ -52,6 +52,7 @@ namespace U1W.Game
         private readonly Color activeDescriptionTextColor;
         private readonly List<CardRuntime> activeCards = new();
         private readonly List<RectTransform> timelineMarkers = new();
+        private bool ignoreFaceStateInJudgement;
 
         private CardRuntime draggedCard;
         private CardRuntime hoveredCard;
@@ -101,6 +102,7 @@ namespace U1W.Game
         {
             Clear();
             HideCardDescription();
+            ignoreFaceStateInJudgement = operationAsset != null && operationAsset.IgnoreFaceStateInJudgement;
 
             if (operationAsset == null || operationAsset.Cards == null || operationAsset.Cards.Length == 0)
             {
@@ -143,6 +145,7 @@ namespace U1W.Game
             draggedCard = null;
             hoveredCard = null;
             hoverStateVersion++;
+            ignoreFaceStateInJudgement = false;
 
             for (int i = 0; i < activeCards.Count; i++)
             {
@@ -209,7 +212,8 @@ namespace U1W.Game
                     continue;
                 }
 
-                if (card.IsFlipped != card.Definition.CorrectIsFlipped)
+                if (!ignoreFaceStateInJudgement &&
+                    card.IsFlipped != card.Definition.CorrectIsFlipped)
                 {
                     return defaultJudgementId;
                 }

@@ -23,12 +23,21 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u884C\u52D5\u306E\u610F\u5473\u3068\u9806\u756A\u304C\u7E4B\u304C\u3063\u305F\u3002\u5BB9\u7591\u8005\u306F\u9003\u3052\u305F\u306E\u3067\u306F\u306A\u304F\u3001\u6700\u5F8C\u307E\u3067\u8AB0\u304B\u3092\u5B88\u308D\u3046\u3068\u3057\u3066\u3044\u305F\u3002"
+    messageFallback: "\u884C\u52D5\u306E\u610F\u5473\u3068\u9806\u756A\u304C\u7E4B\u304C\u3063\u305F\u3002\u5BB9\u7591\u8005\u306F\u9003\u3052\u305F\u306E\u3067\u306F\u306A\u304F\u3001\u88AB\u5BB3\u8005\u3092\u5B88\u308D\u3046\u3068\u3057\u3066\u3044\u305F\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -45,3 +54,15 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  references:
+    version: 2
+    RefIds: []

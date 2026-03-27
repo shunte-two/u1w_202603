@@ -9,8 +9,10 @@ namespace U1W.Game
         menuName = "U1W/Game/Operation Chapter Asset")]
     public sealed class OperationChapterAsset : ScriptableObject
     {
+        [SerializeField] private bool ignoreFaceStateInJudgement;
         [SerializeField] private OperationCardDefinition[] cards = Array.Empty<OperationCardDefinition>();
 
+        public bool IgnoreFaceStateInJudgement => ignoreFaceStateInJudgement;
         public OperationCardDefinition[] Cards => cards;
     }
 

@@ -188,6 +188,14 @@ namespace U1W.Game
                     SetConversationWindowVisible(true);
                     break;
 
+                case StoryStepType.ShowEndSprite:
+                    SetConversationWindowVisible(false);
+                    SetTitleSprite(step.EndSprite);
+                    await WaitAsync(step.WaitSeconds, allowConversationSkip: false, cancellationToken);
+                    await HideTitleSpriteAsync(cancellationToken);
+                    SetConversationWindowVisible(true);
+                    break;
+
                 case StoryStepType.ShowFactCard:
                     if (factCardOverlay != null)
                     {

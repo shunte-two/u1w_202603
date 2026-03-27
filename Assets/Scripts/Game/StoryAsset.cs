@@ -25,7 +25,8 @@ namespace U1W.Game
         PlaySe = 6,
         ShowFactCard = 7,
         StackFactCard = 8,
-        ClearFactCards = 9
+        ClearFactCards = 9,
+        ShowEndSprite = 10
     }
 
     public enum StoryCharacterId
@@ -64,6 +65,7 @@ namespace U1W.Game
         [SerializeField] [Min(0f)] private float waitSeconds;
         [SerializeField] private bool showConversationWindowDuringWait = true;
         [SerializeField] private Sprite titleSprite;
+        [SerializeField] private Sprite endSprite;
         [SerializeField] private OperationChapterAsset factCardChapterAsset;
         [SerializeField] private string factCardId = "card";
         [SerializeField] private StoryFactCardFaceMode factCardFaceMode = StoryFactCardFaceMode.UseCardDefault;
@@ -82,6 +84,7 @@ namespace U1W.Game
         public float WaitSeconds => waitSeconds;
         public bool ShowConversationWindowDuringWait => showConversationWindowDuringWait;
         public Sprite TitleSprite => titleSprite;
+        public Sprite EndSprite => endSprite;
         public OperationChapterAsset FactCardChapterAsset => factCardChapterAsset;
         public string FactCardId => factCardId;
         public StoryFactCardFaceMode FactCardFaceMode => factCardFaceMode;
