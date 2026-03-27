@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
@@ -39,6 +40,9 @@ namespace U1W.Game
         [SerializeField, Min(0f)] private float advanceIndicatorFadeDuration = 0.5f;
         [SerializeField, Min(0f)] private float titleSpriteFadeOutDuration = 0.35f;
 
+        private static readonly Regex NameTokenRegex =
+            new(@"\{(?<key>[^{}\s]+)\}", RegexOptions.Compiled);
+
         private bool advanceRequested;
         private bool isAnimatingConversation;
         private bool listenersBound;
@@ -52,6 +56,7 @@ namespace U1W.Game
         private int previousTypewriterTextLength;
         private float lastTypewriterSeTime = float.NegativeInfinity;
         private float nextConversationSkipRequestTime;
+        private StoryNameTable activeNameTable;
 
         private void Awake()
         {
@@ -113,6 +118,7 @@ namespace U1W.Game
             ReleaseBindings();
             SetConversationText(string.Empty);
             factCardOverlay?.ResetImmediate();
+            activeNameTable = null;
         }
 
         private async UniTask PlayStoryAsync(
@@ -127,6 +133,7 @@ namespace U1W.Game
                 await SetConversationTextAsync(
                     emptyConversationMessage,
                     emptyConversationMessageFallback,
+                    storyAsset != null ? storyAsset.NameTable : null,
                     cancellationToken);
                 await WaitForAdvanceAsync(cancellationToken);
                 return;
@@ -140,11 +147,14 @@ namespace U1W.Game
                     continue;
                 }
 
-                await PlayStepAsync(step, cancellationToken);
+                await PlayStepAsync(step, storyAsset.NameTable, cancellationToken);
             }
         }
 
-        private async UniTask PlayStepAsync(StoryStep step, CancellationToken cancellationToken)
+        private async UniTask PlayStepAsync(
+            StoryStep step,
+            StoryNameTable nameTable,
+            CancellationToken cancellationToken)
         {
             isMessageStepActive = step.StepType == StoryStepType.ShowMessage;
             if (step.StepType != StoryStepType.ShowMessage)
@@ -157,7 +167,11 @@ namespace U1W.Game
             {
                 case StoryStepType.ShowMessage:
                     showAdvanceIndicatorWhenConversationCompletes = step.WaitForAdvance;
-                    await SetConversationTextAsync(step.Message, step.MessageFallback, cancellationToken);
+                    await SetConversationTextAsync(
+                        step.Message,
+                        step.MessageFallback,
+                        nameTable,
+                        cancellationToken);
                     if (step.WaitForAdvance)
                     {
                         await WaitForAdvanceAsync(cancellationToken);
@@ -475,9 +489,11 @@ namespace U1W.Game
         private async UniTask SetConversationTextAsync(
             LocalizedString localizedString,
             string fallbackValue,
+            StoryNameTable nameTable,
             CancellationToken cancellationToken)
         {
             ReleaseConversationBinding();
+            activeNameTable = nameTable;
 
             if (conversationText == null)
             {
@@ -486,8 +502,9 @@ namespace U1W.Game
 
             if (IsMissing(localizedString))
             {
-                AppendConversationLogEntry(fallbackValue);
-                await AnimateConversationTextAsync(fallbackValue, cancellationToken);
+                string processedFallback = ResolveNameTokens(fallbackValue, nameTable);
+                AppendConversationLogEntry(processedFallback);
+                await AnimateConversationTextAsync(processedFallback, cancellationToken);
                 return;
             }
 
@@ -495,8 +512,9 @@ namespace U1W.Game
             boundConversationText.StringChanged += HandleConversationTextChanged;
             string resolvedValue =
                 await ResolveLocalizedStringAsync(localizedString, cancellationToken);
-            AppendConversationLogEntry(resolvedValue);
-            await AnimateConversationTextAsync(resolvedValue, cancellationToken);
+            string processedValue = ResolveNameTokens(resolvedValue, nameTable);
+            AppendConversationLogEntry(processedValue);
+            await AnimateConversationTextAsync(processedValue, cancellationToken);
         }
 
         public void ResetConversationLog()
@@ -530,7 +548,7 @@ namespace U1W.Game
             isAnimatingConversation = false;
             SetAdvanceIndicatorVisible(true);
             ResetConversationTypewriterSeState();
-            SetConversationText(value);
+            SetConversationText(ResolveNameTokens(value, activeNameTable));
         }
 
         private void HandlePhaseTitleChanged(string value)
@@ -605,7 +623,8 @@ namespace U1W.Game
             value ??= string.Empty;
             SetConversationText(string.Empty);
 
-            if (string.IsNullOrEmpty(value) || conversationCharactersPerSecond <= 0f)
+            int visibleCharacterCount = CountVisibleCharacters(value);
+            if (visibleCharacterCount <= 0 || conversationCharactersPerSecond <= 0f)
             {
                 SetConversationText(value);
                 SetAdvanceIndicatorVisible(showAdvanceIndicatorWhenConversationCompletes);
@@ -613,7 +632,7 @@ namespace U1W.Game
             }
 
             isAnimatingConversation = true;
-            float duration = value.Length / conversationCharactersPerSecond;
+            float duration = visibleCharacterCount / conversationCharactersPerSecond;
             activeConversationTween = conversationText
                 .DOText(value, duration, true, ScrambleMode.None, null)
                 .SetEase(Ease.Linear)
@@ -677,21 +696,14 @@ namespace U1W.Game
             }
 
             string currentText = conversationText.text ?? string.Empty;
-            int currentLength = currentText.Length;
+            int currentLength = CountVisibleCharacters(currentText);
             if (currentLength <= previousTypewriterTextLength)
             {
                 return;
             }
 
-            bool hasNewAudibleCharacter = false;
-            for (int i = previousTypewriterTextLength; i < currentLength; i++)
-            {
-                if (!char.IsWhiteSpace(currentText[i]))
-                {
-                    hasNewAudibleCharacter = true;
-                    break;
-                }
-            }
+            bool hasNewAudibleCharacter =
+                HasNewAudibleVisibleCharacter(currentText, previousTypewriterTextLength);
 
             previousTypewriterTextLength = currentLength;
             if (!hasNewAudibleCharacter || string.IsNullOrWhiteSpace(conversationTypewriterSeKey))
@@ -836,6 +848,108 @@ namespace U1W.Game
         private void AppendConversationLogEntry(string value)
         {
             conversationLogPanel?.AppendMessage(value);
+        }
+
+        private static string ResolveNameTokens(string value, StoryNameTable nameTable)
+        {
+            if (string.IsNullOrEmpty(value) || nameTable == null)
+            {
+                return value ?? string.Empty;
+            }
+
+            return NameTokenRegex.Replace(
+                value,
+                match =>
+                {
+                    string key = match.Groups["key"].Value;
+                    if (!nameTable.TryGetEntry(key, out StoryNameEntry entry))
+                    {
+                        return match.Value;
+                    }
+
+                    string displayName = entry.DisplayName;
+                    if (string.IsNullOrEmpty(displayName))
+                    {
+                        return match.Value;
+                    }
+
+                    string colorCode = ColorUtility.ToHtmlStringRGBA(entry.NameColor);
+                    return $"<color=#{colorCode}>{displayName}</color>";
+                });
+        }
+
+        private static int CountVisibleCharacters(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return 0;
+            }
+
+            int count = 0;
+            bool insideTag = false;
+            for (int i = 0; i < value.Length; i++)
+            {
+                char current = value[i];
+                if (current == '<')
+                {
+                    insideTag = true;
+                    continue;
+                }
+
+                if (insideTag)
+                {
+                    if (current == '>')
+                    {
+                        insideTag = false;
+                    }
+
+                    continue;
+                }
+
+                count++;
+            }
+
+            return count;
+        }
+
+        private static bool HasNewAudibleVisibleCharacter(string value, int previousVisibleCharacterCount)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return false;
+            }
+
+            int visibleCharacterIndex = 0;
+            bool insideTag = false;
+            for (int i = 0; i < value.Length; i++)
+            {
+                char current = value[i];
+                if (current == '<')
+                {
+                    insideTag = true;
+                    continue;
+                }
+
+                if (insideTag)
+                {
+                    if (current == '>')
+                    {
+                        insideTag = false;
+                    }
+
+                    continue;
+                }
+
+                if (visibleCharacterIndex >= previousVisibleCharacterCount &&
+                    !char.IsWhiteSpace(current))
+                {
+                    return true;
+                }
+
+                visibleCharacterIndex++;
+            }
+
+            return false;
         }
     }
 }

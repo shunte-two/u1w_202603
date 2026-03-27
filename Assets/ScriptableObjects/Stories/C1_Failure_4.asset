@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1f3a7e0d2b4c5d8e9f0123456789ab, type: 3}
   m_Name: C1_Failure_4
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
+  nameTable: {fileID: 11400000, guid: d4cc9ee2db714009bece630c8f37e505, type: 2}
   steps:
   - stepType: 1
     message:

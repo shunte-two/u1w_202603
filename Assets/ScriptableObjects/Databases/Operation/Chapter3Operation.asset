@@ -58,7 +58,7 @@ MonoBehaviour:
         m_FallbackState: 0
         m_WaitForCompletion: 0
         m_LocalVariables: []
-      fallback: "\u5272\u308C\u3066\u3044\u305F\u306E\u306F\u66F8\u658E\u306E\u7A93\u3002"
+      fallback: "\u5272\u308C\u3066\u3044\u305F\u306E\u306F\u3001\u91D1\u5EAB\u306E\u3042\u308B\u57F7\u52D9\u5BA4\u306E\u7A93\u3002"
     canFlip: 1
     canReorder: 1
     startsFlipped: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
         m_WaitForCompletion: 0
         m_LocalVariables: []
       fallback: "\u5C4B\u6577\u306E\u4F7F\u7528\u4EBA\u304C\u88AB\u5BB3\u8005\u306E\u53EB\u3073\u58F0\u3092\u805E\u3044\u3066\u3044\u308B\u3002"
-    canFlip: 1
+    canFlip: 0
     canReorder: 1
     startsFlipped: 0
     correctIsFlipped: 0
@@ -211,7 +211,7 @@ MonoBehaviour:
         m_FallbackState: 0
         m_WaitForCompletion: 0
         m_LocalVariables: []
-      fallback: "\u5BDD\u5BA4\u8FD1\u304F\u3067\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3053\u3068\u304B\u3089\u3001\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u884C\u304F\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
+      fallback: "\u5BDD\u5BA4\u8FD1\u304F\u3067\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3053\u3068\u304B\u3089\u3001\n\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u884C\u304F\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
     canFlip: 1
     canReorder: 1
     startsFlipped: 0

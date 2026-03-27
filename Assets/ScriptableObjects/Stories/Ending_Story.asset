@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1f3a7e0d2b4c5d8e9f0123456789ab, type: 3}
   m_Name: Ending_Story
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
+  nameTable: {fileID: 11400000, guid: d4cc9ee2db714009bece630c8f37e505, type: 2}
   steps:
   - stepType: 0
     message:
@@ -23,7 +24,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u2015\u2015\u3069\u3046\u3084\u3089\u3001\u4E8B\u4EF6\u306E\u88CF\u304C\u898B\u3048\u305F\u3088\u3046\u3060\u306D\u3002\n\u3053\u306E\u4E8B\u4EF6\u3092\u52D5\u304B\u3057\u305F\u306E\u306F\u3001\u5225\u306E\u4EBA\u9593\u2015\u2015C\u3060\u3002"
+    messageFallback: "\u2015\u2015\u3069\u3046\u3084\u3089\u3001\u4E8B\u4EF6\u306E\u88CF\u304C\u898B\u3048\u305F\u3088\u3046\u3060\u306D\u3002\n\u3053\u306E\u4E8B\u4EF6\u3092\u52D5\u304B\u3057\u305F\u306E\u306F\u3001\u5225\u306E\u4EBA\u9593\u2015\u2015{name_2}\u3060\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -49,7 +50,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3067\u306F\u3001\u305D\u306EC\u306F\u4F55\u8005\u306A\u306E\u304B\u3002"
+    messageFallback: "\u3067\u306F\u3001\u305D\u306E{name_2}\u306F\u4F55\u8005\u306A\u306E\u304B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -75,7 +76,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "B\u306E\u4F1A\u793E\u306B\u306F\u3001\u8868\u306B\u51FA\u305B\u306A\u3044\u53D6\u5F15\u304C\u3042\u3063\u305F\u3002\n\u7D44\u7E54\u3068\u7E4B\u304C\u3063\u3066\u3044\u305F\u3002"
+    messageFallback: "{name_1}\u306E\u4F1A\u793E\u306B\u306F\u3001\u8868\u306B\u51FA\u305B\u306A\u3044\u53D6\u5F15\u304C\u3042\u3063\u305F\u3002\n\u7D44\u7E54\u3068\u7E4B\u304C\u3063\u3066\u3044\u305F\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -153,7 +154,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3044\u305A\u308C\u306B\u305B\u3088\u2015\u2015\nB\u306F\u201C\u6D88\u3055\u308C\u308B\u5074\u201D\u306B\u56DE\u3063\u305F\u3002"
+    messageFallback: "\u3044\u305A\u308C\u306B\u305B\u3088\u2015\u2015\n{name_1}\u306F\u201C\u6D88\u3055\u308C\u308B\u5074\u201D\u306B\u56DE\u3063\u305F\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -205,7 +206,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "C\u306F\u3001\u305D\u306E\u7D44\u7E54\u306B\u5C5E\u3059\u308B\u4EBA\u9593\u3002\n\u2026\u2026\u3042\u308B\u3044\u306F\u3001\u51E6\u7406\u3092\u4EFB\u3055\u308C\u305F\u201C\u5B9F\u884C\u5F79\u201D\u3060\u3002"
+    messageFallback: "{name_2}\u306F\u3001\u305D\u306E\u7D44\u7E54\u306B\u5C5E\u3059\u308B\u4EBA\u9593\u3002\n\u2026\u2026\u3042\u308B\u3044\u306F\u3001\u51E6\u7406\u3092\u4EFB\u3055\u308C\u305F\u201C\u5B9F\u884C\u5F79\u201D\u3060\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -231,7 +232,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3060\u304B\u3089\u3053\u305D\u3002\nA\u306F\u53E3\u3092\u9589\u3056\u3057\u305F\u3002"
+    messageFallback: "\u3060\u304B\u3089\u3053\u305D\u3002\n{name_0}\u306F\u53E3\u3092\u9589\u3056\u3057\u305F\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -309,7 +310,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u7D44\u7E54\u306E\u5B58\u5728\u3092\u660E\u304B\u305B\u3070\u3001\n\u6B21\u306B\u72D9\u308F\u308C\u308B\u306E\u306F\u81EA\u5206\u304B\u3001\u3042\u308B\u3044\u306F\u2015\u2015D\u3060\u3002"
+    messageFallback: "\u7D44\u7E54\u306E\u5B58\u5728\u3092\u660E\u304B\u305B\u3070\u3001\n\u6B21\u306B\u72D9\u308F\u308C\u308B\u306E\u306F\u81EA\u5206\u304B\u3001\u3042\u308B\u3044\u306F\u2015\u2015{name_3}\u3060\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -673,7 +674,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "A\u304C\u5C4B\u6577\u306B\u5165\u3063\u305F\u3001\u305D\u306E\u30BF\u30A4\u30DF\u30F3\u30B0\u3002\nB\u304C\u8972\u6483\u3055\u308C\u305F\u3001\u305D\u306E\u591C\u3002"
+    messageFallback: "{name_0}\u304C\u5C4B\u6577\u306B\u5165\u3063\u305F\u3001\u305D\u306E\u30BF\u30A4\u30DF\u30F3\u30B0\u3002\n{name_1}\u304C\u8972\u6483\u3055\u308C\u305F\u3001\u305D\u306E\u591C\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -751,7 +752,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u8AB0\u304C\u305D\u306E\u65E5\u3092\u77E5\u3063\u3066\u3044\u305F\u306E\u304B\u3002\n\u8AB0\u304CA\u3092\u52D5\u304B\u3059\u3053\u3068\u304C\u3067\u304D\u305F\u306E\u304B\u3002"
+    messageFallback: "\u8AB0\u304C\u305D\u306E\u65E5\u3092\u77E5\u3063\u3066\u3044\u305F\u306E\u304B\u3002\n\u8AB0\u304C{name_0}\u3092\u52D5\u304B\u3059\u3053\u3068\u304C\u3067\u304D\u305F\u306E\u304B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -777,7 +778,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "C\u306F\u3001\u305F\u3060\u306E\u5B9F\u884C\u5F79\u306B\u3059\u304E\u306A\u3044\u3002\n\u547D\u3058\u3089\u308C\u305F\u901A\u308A\u306B\u52D5\u3044\u305F\u3060\u3051\u306E\u5B58\u5728\u3060\u3002"
+    messageFallback: "{name_2}\u306F\u3001\u305F\u3060\u306E\u5B9F\u884C\u5F79\u306B\u3059\u304E\u306A\u3044\u3002\n\u547D\u3058\u3089\u308C\u305F\u901A\u308A\u306B\u52D5\u3044\u305F\u3060\u3051\u306E\u5B58\u5728\u3060\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -829,7 +830,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3060\u304CB\u306F\u4E88\u60F3\u4EE5\u4E0A\u306B\u62B5\u6297\u3057\u305F\u3002\n\u60B2\u9CF4\u304C\u4E0A\u304C\u308A\u3001\u305D\u3053\u3078A\u304C\u73FE\u308C\u308B\u3002"
+    messageFallback: "\u3060\u304C{name_1}\u306F\u4E88\u60F3\u4EE5\u4E0A\u306B\u62B5\u6297\u3057\u305F\u3002\n\u60B2\u9CF4\u304C\u4E0A\u304C\u308A\u3001\u305D\u3053\u3078{name_0}\u304C\u73FE\u308C\u308B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -855,7 +856,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u60F3\u5B9A\u5916\u304C\u91CD\u306A\u308A\u3001C\u306F\u51E6\u5206\u3092\u65AD\u5FF5\u3057\u3066\u305D\u306E\u5834\u3092\u96E2\u308C\u305F\u3002\n\u305D\u3057\u3066\u5C4B\u6577\u306F\u5C01\u9396\u3055\u308C\u308B\u3002"
+    messageFallback: "\u60F3\u5B9A\u5916\u304C\u91CD\u306A\u308A\u3001{name_2}\u306F\u51E6\u5206\u3092\u65AD\u5FF5\u3057\u3066\u305D\u306E\u5834\u3092\u96E2\u308C\u305F\u3002\n\u305D\u3057\u3066\u5C4B\u6577\u306F\u5C01\u9396\u3055\u308C\u308B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -881,7 +882,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u5E33\u7C3F\u306F\u6B8B\u3063\u305F\u304C\u3001\nA\u306F\u73FE\u5834\u306B\u5C45\u5408\u308F\u305B\u3001\u3082\u3063\u3068\u3082\u7591\u308F\u308C\u308B\u5F62\u3067\u76EE\u6483\u3055\u308C\u308B\u3002"
+    messageFallback: "\u5E33\u7C3F\u306F\u6B8B\u3063\u305F\u304C\u3001\n{name_0}\u306F\u73FE\u5834\u306B\u5C45\u5408\u308F\u305B\u3001\u3082\u3063\u3068\u3082\u7591\u308F\u308C\u308B\u5F62\u3067\u76EE\u6483\u3055\u308C\u308B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1

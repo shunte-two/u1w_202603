@@ -114,7 +114,7 @@ MonoBehaviour:
     canReorder: 1
     startsFlipped: 0
     correctIsFlipped: 0
-    correctTimelineOrder: 1
+    correctTimelineOrder: 2
     tags: []
   - id: rope
     factText:
@@ -167,57 +167,6 @@ MonoBehaviour:
     correctIsFlipped: 0
     correctTimelineOrder: 3
     tags: []
-  - id: run
-    factText:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u5BB9\u7591\u8005\u306F\u73FE\u5834\u304B\u3089\u8D70\u308A\u53BB\u3063\u305F"
-    frontInterpretation:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u9003\u4EA1\u3057\u305F"
-    backInterpretation:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u8FFD\u3044\u304B\u3051\u305F"
-    description:
-      localizedString:
-        m_TableReference:
-          m_TableCollectionName: 
-        m_TableEntryReference:
-          m_KeyId: 0
-          m_Key: 
-        m_FallbackState: 0
-        m_WaitForCompletion: 0
-        m_LocalVariables: []
-      fallback: "\u73FE\u5834\u306E\u5C4B\u6577\u304B\u3089\u8D70\u308A\u53BB\u308B\u5BB9\u7591\u8005\u306E\u59FF\u304C\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3002"
-    canFlip: 1
-    canReorder: 1
-    startsFlipped: 0
-    correctIsFlipped: 0
-    correctTimelineOrder: 4
-    tags: []
   - id: bedroom
     factText:
       localizedString:
@@ -262,12 +211,12 @@ MonoBehaviour:
         m_FallbackState: 0
         m_WaitForCompletion: 0
         m_LocalVariables: []
-      fallback: "\u5BDD\u5BA4\u8FD1\u304F\u3067\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3053\u3068\u304B\u3089\u3001\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u884C\u304F\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
+      fallback: "\u5BDD\u5BA4\u8FD1\u304F\u3067\u76EE\u6483\u3055\u308C\u3066\u3044\u308B\u3053\u3068\u304B\u3089\u3001\n\u5BB9\u7591\u8005\u306F\u5BDD\u5BA4\u306B\u884C\u304F\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
     canFlip: 1
     canReorder: 1
     startsFlipped: 0
     correctIsFlipped: 1
-    correctTimelineOrder: 2
+    correctTimelineOrder: 1
     tags: []
   references:
     version: 2

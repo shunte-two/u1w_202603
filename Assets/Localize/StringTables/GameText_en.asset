@@ -35,7 +35,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000005
-    m_Localized: Next, inspect the scene conditions and see where the contradiction begins.
+    m_Localized: 
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000006
@@ -43,7 +43,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000007
-    m_Localized: The project is now ready for interaction steps tied to flipping card meanings and reordering the timeline.
+    m_Localized: The project is now ready for interaction steps tied to flipping
+      card meanings and reordering the timeline.
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000008
@@ -51,7 +52,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000009
-    m_Localized: This is a temporary operation phase. Use the button or Enter key to proceed in place of the real investigation or card controls.
+    m_Localized: This is a temporary operation phase. Use the button or Enter key
+      to proceed in place of the real investigation or card controls.
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000010
@@ -59,7 +61,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000011
-    m_Localized: Temporary sequence complete. Use Restart to review the conversation phase again.
+    m_Localized: Temporary sequence complete. Use Restart to review the conversation
+      phase again.
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000012
@@ -83,11 +86,70 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000017
-    m_Localized: Credits
+    m_Localized: Licenses
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000018
-    m_Localized: "Unity 6\\nTextMesh Pro\\nDOTween Pro\\nUniTask\\nMaruMonica Font"
+    m_Localized: 'UniTask
+
+      
+
+      The MIT License (MIT)
+
+      
+
+      Copyright
+      (c) 2019 Yoshifumi Kawai / Cysharp, Inc.
+
+      
+
+      Permission is hereby
+      granted, free of charge, to any person obtaining a copy
+
+      of this software
+      and associated documentation files (the "Software"), to deal
+
+      in the
+      Software without restriction, including without limitation the rights
+
+      to
+      use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+
+      copies
+      of the Software, and to permit persons to whom the Software is
+
+      furnished
+      to do so, subject to the following conditions:
+
+      
+
+      The above copyright
+      notice and this permission notice shall be included in all
+
+      copies or
+      substantial portions of the Software.
+
+      
+
+      THE SOFTWARE IS PROVIDED
+      "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+
+      IMPLIED, INCLUDING
+      BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+
+      FITNESS FOR A
+      PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+
+      AUTHORS
+      OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+
+      LIABILITY,
+      WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+
+      OUT
+      OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE3
+
+      SOFTWARE.'
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000019
@@ -95,4 +157,5 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   references:
-    version: 1
+    version: 2
+    RefIds: []

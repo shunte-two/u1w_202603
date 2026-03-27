@@ -9,8 +9,10 @@ namespace U1W.Game
         menuName = "U1W/Game/Story Asset")]
     public sealed class StoryAsset : ScriptableObject
     {
+        [SerializeField] private StoryNameTable nameTable;
         [SerializeField] private StoryStep[] steps = Array.Empty<StoryStep>();
 
+        public StoryNameTable NameTable => nameTable;
         public StoryStep[] Steps => steps;
     }
 

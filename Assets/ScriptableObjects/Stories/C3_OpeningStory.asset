@@ -12,7 +12,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab1f3a7e0d2b4c5d8e9f0123456789ab, type: 3}
   m_Name: C3_OpeningStory
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
+  nameTable: {fileID: 11400000, guid: d4cc9ee2db714009bece630c8f37e505, type: 2}
   steps:
+  - stepType: 4
+    message:
+      m_TableReference:
+        m_TableCollectionName: GameText
+      m_TableEntryReference:
+        m_KeyId: 1000000000005
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: Main
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -49,7 +76,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u305D\u308C\u3089\u306F\u672C\u5F53\u306B\u3001\u3059\u3079\u3066A\u306E\u884C\u52D5\u306E\u7D50\u679C\u306A\u306E\u304B\u3002\n\u2015\u2015\u305D\u3046\u6C7A\u3081\u3066\u3057\u307E\u3046\u306B\u306F\u3001\u307E\u3060\u65E9\u3044\u3002"
+    messageFallback: "\u305D\u308C\u3089\u306F\u672C\u5F53\u306B\u3001\u3059\u3079\u3066{name_0}\u306E\u884C\u52D5\u306E\u7D50\u679C\u306A\u306E\u304B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -75,7 +102,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u5225\u306E\u4EBA\u9593\u306E\u75D5\u8DE1\u304C\u6DF7\u3056\u3063\u3066\u3044\u308B\u3068\u8003\u3048\u305F\u307B\u3046\u304C\u3001\n\u3080\u3057\u308D\u81EA\u7136\u3060\u308D\u3046\u3002"
+    messageFallback: "\u3082\u306F\u3084\u541B\u306F\u305D\u3046\u601D\u3063\u3066\u3044\u306A\u3044\u3060\u308D\u3046\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -153,7 +180,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3059\u3079\u3066\u3092\u7E4B\u304E\u5408\u308F\u305B\u3066\u304F\u308C\u3002"
+    messageFallback: "\u3055\u3042\u3001\u63A2\u5075\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -179,7 +206,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u63A2\u5075\u3002\n\u541B\u306E\u63A8\u7406\u3092\u805E\u3053\u3046\u3002"
+    messageFallback: "\u541B\u306E\u63A8\u7406\u3092\u805E\u3053\u3046\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1

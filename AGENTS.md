@@ -321,4 +321,13 @@
 
 ## 2026-03-27 Ending_Story 追記メモ
 
-- エンディング用 StoryAsset には本編結末とエピローグ文を steps 末尾へ追記し、既存の会話アセット構成を崩さず追加する。
+- エンディング用 StoryAsset には本編結末とエピローグ文を steps 末尾へ追記し、既存の会話アセット構成を崩さず追加する。## 2026-03-27 StoryAsset 名前参照メモ
+
+- StoryAsset の会話文では {name_0} のようなプレースホルダを使い、名前本体は専用 
+ameTable ScriptableObject から解決する。
+- 
+ameTable は各エントリごとに表示名と色を持ち、会話表示時に <color> タグ付き文字列へ展開する。
+- 仮名 A B C D を直接書いている既存 StoryAsset は、順次 {name_0} 
+ame_1 
+ame_2 
+ame_3 参照へ置き換える。

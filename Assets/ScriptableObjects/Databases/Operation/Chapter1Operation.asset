@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d38d1e35791c1f445822c9122be26daa, type: 3}
   m_Name: Chapter1Operation
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.OperationChapterAsset
+  ignoreFaceStateInJudgement: 0
   cards:
   - id: breaking
     factText:
@@ -57,7 +58,7 @@ MonoBehaviour:
         m_FallbackState: 0
         m_WaitForCompletion: 0
         m_LocalVariables: []
-      fallback: "\u5272\u308C\u3066\u3044\u305F\u306E\u306F\u66F8\u658E\u306E\u7A93\u3002"
+      fallback: "\u5272\u308C\u3066\u3044\u305F\u306E\u306F\u3001\u91D1\u5EAB\u306E\u3042\u308B\u57F7\u52D9\u5BA4\u306E\u7A93\u3002"
     canFlip: 1
     canReorder: 0
     startsFlipped: 0
