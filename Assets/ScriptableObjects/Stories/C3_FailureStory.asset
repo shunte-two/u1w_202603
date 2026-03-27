@@ -23,7 +23,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u77DB\u76FE\u3057\u3066\u3044\u308B\u3002"
+    messageFallback: "\u3053\u308C\u3067\u306F\u77DB\u76FE\u3057\u3066\u3044\u308B\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -31,6 +31,7 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
@@ -48,7 +49,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3082\u3046\u4E00\u5EA6\u64CD\u4F5C\u30D1\u30FC\u30C8\u306B\u623B\u3063\u3066\u3001\u30AB\u30FC\u30C9\u306E\u524D\u5F8C\u95A2\u4FC2\u3068\u610F\u56F3\u306E\u53CD\u8EE2\u3092\u5408\u308F\u305B\u76F4\u305D\u3046\u3002"
+    messageFallback: "\u3082\u3046\u4E00\u5EA6\u4E8B\u5B9F\u306E\u6642\u7CFB\u5217\u3068\u89E3\u91C8\u306E\u53CD\u8EE2\u3092\u5408\u308F\u305B\u76F4\u305D\u3046\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -56,6 +57,7 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0

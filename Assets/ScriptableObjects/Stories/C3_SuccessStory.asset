@@ -23,7 +23,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3059\u3079\u3066\u306E\u7DDA\u304C\u3064\u306A\u304C\u3063\u305F\u3002"
+    messageFallback: "\u3059\u3070\u3089\u3057\u3044\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -31,6 +31,7 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
@@ -48,7 +49,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u30C1\u30E3\u30D7\u30BF\u30FC3\u7D42\u4E86\u3002"
+    messageFallback: "\u3069\u3046\u3084\u3089\u3001\u4E8B\u4EF6\u306E\u6D41\u308C\u304C\u898B\u3048\u3066\u304D\u305F\u3088\u3046\u3060\u306D\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -56,6 +57,319 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "A\u306F\u544A\u767A\u306E\u305F\u3081\u3001\u91D1\u5EAB\u306B\u4E0D\u6B63\u53D6\u5F15\u306E\u8A3C\u62E0\u3092\u6B8B\u3057\u305F\u3002\n\u672C\u6765\u306F\u3001\u305D\u306E\u307E\u307E\u8AB0\u306B\u3082\u6C17\u3065\u304B\u308C\u305A\u5F15\u304D\u4E0A\u3052\u308B\u3064\u3082\u308A\u3060\u3063\u305F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u3060\u304C\u540C\u3058\u9803\u3001\u5225\u306E\u8AB0\u304B\u304C\u5C4B\u6577\u306B\u5165\u308A\u3001\nB\u3092\u8972\u3063\u3066\u3044\u305F\u3068\u8003\u3048\u308C\u3070\u2015\u2015"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u60B2\u9CF4\u3092\u805E\u3044\u305FA\u306F\u3001\u7570\u5909\u306B\u6C17\u3065\u304F\u3002\n\u305D\u3057\u3066\u6301\u3061\u524D\u306E\u6B63\u7FA9\u611F\u304B\u3001B\u306E\u3082\u3068\u3078\u99C6\u3051\u3064\u3051\u305F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u9996\u306B\u5DFB\u304B\u308C\u305F\u30ED\u30FC\u30D7\u3002\nA\u306F\u305D\u308C\u3092\u89E3\u304D\u3001B\u3092\u6551\u304A\u3046\u3068\u3057\u305F\u3002\n\u3060\u304C\u3001\u624B\u9045\u308C\u3060\u3063\u305F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u305D\u306E\u76F4\u5F8C\u3002\u73FE\u5834\u304B\u3089\u96E2\u308C\u308B\u4F55\u8005\u304B\u306E\u6C17\u914D\u306B\u6C17\u3065\u304D\u3001\nA\u304C\u3068\u3063\u3055\u306B\u5F8C\u3092\u8FFD\u3063\u305F\u306E\u3060\u3068\u3057\u3066\u3082\u4E0D\u81EA\u7136\u3058\u3083\u306A\u3044\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u57F7\u52D9\u5BA4\u3078\u5411\u304B\u3063\u305FC\u306F\u3001\u7A93\u304B\u3089\u8131\u51FA\u3057\u305F\u3002\n\u5272\u3089\u308C\u3066\u3044\u305F\u7A93\u306F\u3001\u4FB5\u5165\u306E\u75D5\u8DE1\u3067\u306F\u306A\u3044\u3002\nC\u304C\u8131\u51FA\u3059\u308B\u305F\u3081\u306B\u7834\u3063\u305F\u3082\u306E\u3060\u3063\u305F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "A\u306F\u305D\u3053\u304B\u3089\u5916\u3078\u51FA\u3066\u3001\u306A\u304A\u3082\u5F71\u3092\u8FFD\u3046\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u305D\u3057\u3066\u3001\u305D\u306E\u59FF\u3053\u305D\u304C\u3001\n\u6700\u3082\u7591\u308F\u308C\u308B\u5F62\u3067\u76EE\u6483\u3055\u308C\u305F\u3068\u3044\u3046\u308F\u3051\u3060\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u3059\u3079\u3066\u306E\u6D41\u308C\u304C\u3001\u3072\u3068\u3064\u306B\u7E4B\u304C\u308B\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "A\u306F\u596A\u3063\u3066\u3044\u306A\u3044\u3002\n\u6BBA\u3057\u3066\u3082\u3044\u306A\u3044\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u305F\u3060\u2015\u2015\n\u4E8B\u4EF6\u306E\u53EA\u4E2D\u306B\u8E0F\u307F\u8FBC\u3093\u3067\u3057\u307E\u3063\u305F\u3060\u3051\u3060\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
+  - stepType: 0
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: "\u3055\u3066\u3002\n\u3053\u308C\u3067\u3001\u4E8B\u4EF6\u306E\u9AA8\u683C\u306F\u63C3\u3063\u305F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0

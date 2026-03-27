@@ -29,6 +29,16 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 1
     message:
       m_TableReference:
@@ -42,9 +52,19 @@ MonoBehaviour:
     messageFallback: 
     waitForAdvance: 1
     characterId: 1
-    expressionId: 2
+    expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -61,6 +81,16 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 1
     message:
       m_TableReference:
@@ -77,6 +107,16 @@ MonoBehaviour:
     expressionId: 3
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -93,6 +133,16 @@ MonoBehaviour:
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
     waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    loopBgm: 1
   references:
     version: 2
     RefIds: []
