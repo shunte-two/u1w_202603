@@ -52,8 +52,8 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000009
-    m_Localized: This is a temporary operation phase. Use the button or Enter key
-      to proceed in place of the real investigation or card controls.
+    m_Localized: This is a temporary operation phase. Use the button to proceed
+      in place of the real investigation or card controls.
     m_Metadata:
       m_Items: []
   - m_Id: 1000000000010

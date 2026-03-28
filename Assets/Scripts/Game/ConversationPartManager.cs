@@ -21,6 +21,8 @@ namespace U1W.Game
         [SerializeField] private TextMeshProUGUI conversationText;
         [SerializeField] private Button nextConversationButton;
         [SerializeField] private TextMeshProUGUI advanceIndicatorText;
+        [SerializeField] private GameObject screenFadeRoot;
+        [SerializeField] private CanvasGroup screenFadeCanvasGroup;
         [SerializeField] private GameObject titleSpriteRoot;
         [SerializeField] private Image titleSpriteImage;
         [SerializeField] private ConversationFactCardOverlay factCardOverlay;
@@ -51,7 +53,9 @@ namespace U1W.Game
         private LocalizedString boundPhaseTitle;
         private Tween activeConversationTween;
         private Tween advanceIndicatorTween;
+        private Tween screenFadeTween;
         private Tween titleSpriteFadeTween;
+        private bool keepConversationWindowHiddenUntilMessage;
         private bool showAdvanceIndicatorWhenConversationCompletes;
         private int previousTypewriterTextLength;
         private float lastTypewriterSeTime = float.NegativeInfinity;
@@ -79,12 +83,6 @@ namespace U1W.Game
                 return;
             }
 
-            if (keyboard.enterKey.wasPressedThisFrame)
-            {
-                RequestAdvance();
-                return;
-            }
-
             if (isMessageStepActive)
             {
                 TryRequestConversationSkip(keyboard);
@@ -95,6 +93,7 @@ namespace U1W.Game
         {
             KillConversationTween(false);
             KillAdvanceIndicatorTween();
+            KillScreenFadeTween(false);
             KillTitleSpriteFadeTween(false);
             ReleaseBindings();
             UnbindListeners();
@@ -110,6 +109,7 @@ namespace U1W.Game
             KillConversationTween(false);
             isAnimatingConversation = false;
             isMessageStepActive = false;
+            keepConversationWindowHiddenUntilMessage = false;
             SetAdvanceIndicatorVisible(false);
             SetTitleSprite(null);
             SetConversationWindowVisible(true);
@@ -166,6 +166,8 @@ namespace U1W.Game
             switch (step.StepType)
             {
                 case StoryStepType.ShowMessage:
+                    keepConversationWindowHiddenUntilMessage = false;
+                    SetConversationWindowVisible(true);
                     showAdvanceIndicatorWhenConversationCompletes = step.WaitForAdvance;
                     await SetConversationTextAsync(
                         step.Message,
@@ -191,23 +193,26 @@ namespace U1W.Game
                 case StoryStepType.Wait:
                     SetConversationWindowVisible(step.ShowConversationWindowDuringWait);
                     await WaitAsync(step.WaitSeconds, allowConversationSkip: true, cancellationToken);
-                    SetConversationWindowVisible(true);
+                    if (!keepConversationWindowHiddenUntilMessage)
+                    {
+                        SetConversationWindowVisible(true);
+                    }
                     break;
 
                 case StoryStepType.ShowTitleSprite:
+                    keepConversationWindowHiddenUntilMessage = true;
                     SetConversationWindowVisible(false);
                     SetTitleSprite(step.TitleSprite);
                     await WaitAsync(step.WaitSeconds, allowConversationSkip: false, cancellationToken);
                     await HideTitleSpriteAsync(cancellationToken);
-                    SetConversationWindowVisible(true);
                     break;
 
                 case StoryStepType.ShowEndSprite:
+                    keepConversationWindowHiddenUntilMessage = true;
                     SetConversationWindowVisible(false);
                     SetTitleSprite(step.EndSprite);
                     await WaitAsync(step.WaitSeconds, allowConversationSkip: false, cancellationToken);
                     await HideTitleSpriteAsync(cancellationToken);
-                    SetConversationWindowVisible(true);
                     break;
 
                 case StoryStepType.ShowFactCard:
@@ -252,6 +257,14 @@ namespace U1W.Game
 
                 case StoryStepType.PlaySe:
                     AudioManager.PlaySe(step.AudioKey, step.AudioVolume);
+                    break;
+
+                case StoryStepType.FadeToBlack:
+                    await FadeScreenAsync(1f, step.ScreenFadeSeconds, cancellationToken);
+                    break;
+
+                case StoryStepType.FadeFromBlack:
+                    await FadeScreenAsync(0f, step.ScreenFadeSeconds, cancellationToken);
                     break;
             }
         }
@@ -320,6 +333,58 @@ namespace U1W.Game
             if (titleSpriteRoot != null)
             {
                 titleSpriteRoot.SetActive(sprite != null);
+            }
+        }
+
+        private async UniTask FadeScreenAsync(
+            float targetAlpha,
+            float duration,
+            CancellationToken cancellationToken)
+        {
+            if (screenFadeCanvasGroup == null)
+            {
+                return;
+            }
+
+            KillScreenFadeTween(false);
+            SetScreenFadeRootActive(true);
+            SetScreenFadeInputBlocked(true);
+
+            if (duration <= 0f)
+            {
+                SetScreenFadeAlpha(targetAlpha);
+                if (targetAlpha <= 0f)
+                {
+                    SetScreenFadeInputBlocked(false);
+                }
+
+                return;
+            }
+
+            bool completed = false;
+            screenFadeTween = screenFadeCanvasGroup
+                .DOFade(targetAlpha, duration)
+                .SetEase(Ease.Linear)
+                .OnComplete(() => completed = true)
+                .OnKill(() =>
+                {
+                    screenFadeTween = null;
+                    completed = true;
+                });
+
+            try
+            {
+                await UniTask.WaitUntil(() => completed, cancellationToken: cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+                KillScreenFadeTween(false);
+                throw;
+            }
+
+            if (targetAlpha <= 0f)
+            {
+                SetScreenFadeInputBlocked(false);
             }
         }
 
@@ -450,9 +515,19 @@ namespace U1W.Game
             return IsConversationSkipHeld(Keyboard.current);
         }
 
-        private static bool IsConversationSkipHeld(Keyboard keyboard)
+        private bool IsConversationSkipHeld(Keyboard keyboard)
         {
-            return keyboard != null && keyboard.spaceKey.isPressed;
+            if (keyboard == null)
+            {
+                return false;
+            }
+
+            if (conversationLogPanel != null && conversationLogPanel.IsOpen)
+            {
+                return false;
+            }
+
+            return keyboard.spaceKey.isPressed;
         }
 
         private void SetRootState(bool isActive)
@@ -772,6 +847,56 @@ namespace U1W.Game
             }
         }
 
+        private void SetScreenFadeImmediate(float alpha)
+        {
+            KillScreenFadeTween(false);
+            SetScreenFadeRootActive(true);
+            SetScreenFadeAlpha(alpha);
+            SetScreenFadeInputBlocked(alpha > 0f);
+        }
+
+        private void SetScreenFadeRootActive(bool isActive)
+        {
+            if (screenFadeRoot != null)
+            {
+                screenFadeRoot.SetActive(isActive);
+            }
+        }
+
+        private void SetScreenFadeAlpha(float alpha)
+        {
+            if (screenFadeCanvasGroup != null)
+            {
+                screenFadeCanvasGroup.alpha = Mathf.Clamp01(alpha);
+            }
+        }
+
+        private void SetScreenFadeInputBlocked(bool isBlocked)
+        {
+            if (screenFadeCanvasGroup == null)
+            {
+                return;
+            }
+
+            screenFadeCanvasGroup.interactable = false;
+            screenFadeCanvasGroup.blocksRaycasts = isBlocked;
+        }
+
+        private void KillScreenFadeTween(bool complete)
+        {
+            if (screenFadeTween == null)
+            {
+                return;
+            }
+
+            Tween tween = screenFadeTween;
+            screenFadeTween = null;
+            if (tween.IsActive())
+            {
+                tween.Kill(complete);
+            }
+        }
+
         private void KillTitleSpriteFadeTween(bool complete)
         {
             if (titleSpriteFadeTween == null)
@@ -795,6 +920,8 @@ namespace U1W.Game
             WarnIfMissing(conversationText, nameof(conversationText));
             WarnIfMissing(nextConversationButton, nameof(nextConversationButton));
             WarnIfMissing(advanceIndicatorText, nameof(advanceIndicatorText));
+            WarnIfMissing(screenFadeRoot, nameof(screenFadeRoot));
+            WarnIfMissing(screenFadeCanvasGroup, nameof(screenFadeCanvasGroup));
             WarnIfMissing(titleSpriteRoot, nameof(titleSpriteRoot));
             WarnIfMissing(titleSpriteImage, nameof(titleSpriteImage));
             WarnIfMissing(factCardOverlay, nameof(factCardOverlay));

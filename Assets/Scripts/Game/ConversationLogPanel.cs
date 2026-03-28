@@ -34,6 +34,8 @@ namespace U1W.Game
         private readonly StringBuilder logBuilder = new();
         private bool listenersBound;
 
+        public bool IsOpen => IsPanelVisible();
+
         private void Awake()
         {
             ValidateReferences();

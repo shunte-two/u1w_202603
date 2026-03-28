@@ -345,7 +345,33 @@ ame_3 QÆ‚Ö’u‚«Š·‚¦‚éB
 
 - ƒ^ƒCƒgƒ‹‰æ–Ê‚Ìƒ`ƒƒƒvƒ^[‘I‘ğ‚Í chapter1 ‚ğŠÜ‚ß“’BÏ‚İ‚¾‚¯•\¦‚µA–¢“’Bƒ`ƒƒƒvƒ^[‚Í–³Œø‰»‚Å‚Í‚È‚­”ñ•\¦‚Åˆµ‚¤AE
 
-## 2026-03-28 ä¼šè©±ã‚¹ã‚­ãƒƒãƒ—æ¡ˆå†…ãƒ¡ãƒ¢
+## 2026-03-28 ä¼šè©±ã‚¹ã‚­ãƒEEæ¡ˆåEãƒ¡ãƒ¢
 
-- PlayerPrefs ã® chapter1 åˆ°é”ãƒ•ãƒ©ã‚°ãŒ ON ã®å ´åˆã€Game ã‚·ãƒ¼ãƒ³é–‹å§‹æ™‚ã«ç”»é¢å·¦ä¸Šã¸ã€Œã‚¹ãƒšãƒ¼ã‚¹ã‚­ãƒ¼é•·æŠ¼ã—ã§ä¼šè©±ã‚¹ã‚­ãƒƒãƒ—ã€ã‚’ 2 ç§’è¡¨ç¤ºã—ã€ãã®å¾Œãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã™ã‚‹ã€‚
-- ã“ã®æ¡ˆå†…è¡¨ç¤ºã¯ Game ã‚·ãƒ¼ãƒ³å†…ã®å°‚ç”¨ UI ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆã§ç®¡ç†ã—ã€è¡¨ç¤ºæ¡ä»¶åˆ¤å®šã¯æ—¢å­˜ã®ãƒãƒ£ãƒ—ã‚¿ãƒ¼åˆ°é”ä¿å­˜ API ã‚’å‚ç…§ã™ã‚‹ã€‚- ConversationSkipHintOverlay ã¯ã‚³ãƒ³ãƒãƒ¼ãƒãƒ³ãƒˆæœ¬ä½“ã‚’éæ´»æ€§åŒ–ã›ãšã€CanvasGroup ã® alpha ã®ã¿ã§åˆæœŸéè¡¨ç¤ºã¨ãƒ•ã‚§ãƒ¼ãƒ‰åˆ¶å¾¡ã‚’è¡Œã„ã€Start æœªå®Ÿè¡Œã«ã‚ˆã‚‹å†ç”Ÿæ¼ã‚Œã‚’é˜²ãã€‚
+- PlayerPrefs ã® chapter1 åˆ°é”ãƒ•ãƒ©ã‚°ãEON ã®å ´åˆã€Game ã‚·ãƒ¼ãƒ³é–‹å§‹æ™‚ã«ç”»é¢å·¦ä¸Šã¸ã€Œã‚¹ãƒšãEã‚¹ã‚­ãƒ¼é•·æŠ¼ã—ã§ä¼šè©±ã‚¹ã‚­ãƒEEã€ã‚’ 2 ç§’è¡¨ç¤ºã—ã€ãã®å¾Œãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆã™ã‚‹ã€E
+- ã“ãEæ¡ˆåEè¡¨ç¤ºã¯ Game ã‚·ãƒ¼ãƒ³å†EEå°‚ç”¨ UI ã‚³ãƒ³ãƒãEãƒãƒ³ãƒˆã§ç®¡çE—ã€è¡¨ç¤ºæ¡ä»¶åˆ¤å®šãEæ—¢å­˜ãEãƒãƒ£ãƒ—ã‚¿ãƒ¼åˆ°é”ä¿å­EAPI ã‚’å‚ç…§ã™ã‚‹ã€E ConversationSkipHintOverlay ã¯ã‚³ãƒ³ãƒãEãƒãƒ³ãƒˆæœ¬ä½“ã‚’éæ´»æ€§åŒ–ã›ãšã€CanvasGroup ã® alpha ã®ã¿ã§åˆæœŸéè¡¨ç¤ºã¨ãƒ•ã‚§ãƒ¼ãƒ‰åˆ¶å¾¡ã‚’è¡Œã„ã€Start æœªå®Ÿè¡Œã«ã‚ˆã‚‹å†ç”Ÿæ¼ã‚Œã‚’é˜²ãã€
+## 2026-03-28 StoryAsset screen fade memo
+
+- Add StoryAsset steps for fade-to-black and fade-from-black.
+- Fade duration is stored per step in StoryAsset serialized data.
+- Story playback uses SceneTransitionManager overlay for blackout/clear so input blocking stays in one place.
+
+## 2026-03-28 StoryAsset screen fade layer memo
+
+- StoryAsset fade-to-black and fade-from-black use a dedicated panel under ConversationPartManager instead of SceneTransitionManager overlay.
+- The dedicated fade panel is placed below OpeningTitleSprite in Game scene sibling order so title sprites stay visible above blackout.
+- Fade panel references are wired by SerializeField in the scene and are not resolved by scene search at runtime.
+
+## 2026-03-28 ƒGƒ“ƒfƒBƒ“ƒO‘JˆÚƒƒ‚
+
+- ƒGƒ“ƒfƒBƒ“ƒOƒXƒg[ƒŠ[Š®—¹Œã‚É `Title` ƒV[ƒ“‚Ö–ß‚é‘JˆÚ‚Å‚ÍA`SequenceManager` ‚©‚ç `SceneTransitionManager` ‚Öê—p‚ÌƒtƒF[ƒhƒCƒ“•b”‚ğ“n‚¹‚é‚æ‚¤‚É‚·‚éB
+- ƒ^ƒCƒgƒ‹•œ‹A‚ÌƒtƒF[ƒhƒCƒ“•b”‚Í `SequenceManager` ‚Ì `SerializeField` ‚ÅŠÇ—‚µA‰Šú’l‚Í 0 •b‚Æ‚µ‚Äˆµ‚¤B
+
+## 2026-03-28 ƒoƒbƒNƒƒO“ü—Í§Œäƒƒ‚
+
+- ‰ï˜bƒoƒbƒNƒƒO•\¦’†‚ÍAƒXƒy[ƒXƒL[’·‰Ÿ‚µ‚É‚æ‚é‰ï˜b‘—‚è‚Æ©“®isƒXƒLƒbƒv‚ğ–³Œø‰»‚·‚éB
+- ƒoƒbƒNƒƒO•\¦ó‘Ô‚Í ConversationLogPanel ‚ÌŒöŠJó‘ÔQÆ‚©‚ç ConversationPartManager ‚ªó‚¯æ‚èAŠù‘¶‚Ì SerializeField \¬‚Ì‚Ü‚Ü“ü—Í”»’è‚¾‚¯‚ğØ‚è‘Ö‚¦‚éB
+
+## 2026-03-28 ‰ï˜bEnter–³Œø‰»ƒƒ‚
+
+- ‰ï˜bƒp[ƒg‚ÌŸ‘—‚è“ü—Í‚©‚ç Enter ƒL[‚ğŠO‚µAƒNƒŠƒbƒN‘€ì‚ÆŠù‘¶‚Ì Space ’·‰Ÿ‚µƒXƒLƒbƒv‚¾‚¯‚ğˆÛ‚·‚éB
+- Enter ƒL[–³Œø‰»‚Í ConversationPartManager ‚Ì“ü—Í”»’è‚ÉŒÀ’è‚µA‘¼ƒp[ƒg‚Ì Enter “ü—Í‚âƒ{ƒ^ƒ“”zü‚Í‚±‚Ì‘Î‰‚Å‚Í•ÏX‚µ‚È‚¢B

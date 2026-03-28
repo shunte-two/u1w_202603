@@ -39,6 +39,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -50,7 +51,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3059\u3070\u3089\u3057\u3044\u3002"
+    messageFallback: "\u8208\u5473\u6DF1\u3044\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -65,6 +66,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -91,6 +93,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 1
     message:
@@ -117,6 +120,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -143,6 +147,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -169,6 +174,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -195,6 +201,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -221,6 +228,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -247,6 +255,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -273,6 +282,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -299,6 +309,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 1
     message:
@@ -325,6 +336,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -351,6 +363,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 1
     message:
@@ -377,6 +390,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   references:
     version: 2

@@ -32,12 +32,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -57,12 +59,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -74,7 +78,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3053\u306E\u4E8B\u4EF6\u306E\u300C\u88CF\u300D\u3092\u898B\u3064\u3051\u306B\u3001\u3053\u3053\u306B\u6765\u305F\u3093\u3058\u3083\u306A\u3044\u306E\u304B\u306A\uFF1F"
+    messageFallback: "\u3053\u306E\u4E8B\u4EF6\u306E\u300C\u88CF\u300D\u3092\u898B\u3064\u3051\u306B\u3001\u3053\u3053\u306B\u6765\u305F\u306E\u3067\u306F\u306A\u3044\u306E\u304B\u306A\uFF1F"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -82,12 +86,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 1
     message:
@@ -107,12 +113,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   references:
     version: 2

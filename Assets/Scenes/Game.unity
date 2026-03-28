@@ -1103,6 +1103,8 @@ RectTransform:
   - {fileID: 1811270287}
   - {fileID: 2099000001}
   - {fileID: 1293939174}
+  - {fileID: 2100000501}
+  - {fileID: 625083323}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1802,12 +1804,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 625083322}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2076038882}
+  m_Father: {fileID: 297963045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3322,7 +3324,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293939173}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -3601,7 +3603,8 @@ MonoBehaviour:
     failureBranches: []
   endingStory: {fileID: 11400000, guid: 36f32cb5cb7d408ba9062f8d66888de3, type: 2}
   titleSceneName: Title
-  endingTransitionBlackoutDuration: 2
+  endingTransitionBlackoutDuration: 0
+  endingTransitionFadeInDuration: 2
   characterFocusRoot: {fileID: 26426392}
   operationCharacterLocalOffset: {x: 0, y: 3.5, z: 0}
   characterFocusMoveDuration: 0.45
@@ -4463,7 +4466,6 @@ RectTransform:
   - {fileID: 1978805990}
   - {fileID: 1422330391}
   - {fileID: 2100000401}
-  - {fileID: 625083323}
   m_Father: {fileID: 297963045}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4852,6 +4854,8 @@ MonoBehaviour:
   conversationText: {fileID: 1291123148}
   nextConversationButton: {fileID: 1422330392}
   advanceIndicatorText: {fileID: 1794274450}
+  screenFadeRoot: {fileID: 2100000500}
+  screenFadeCanvasGroup: {fileID: 2100000504}
   titleSpriteRoot: {fileID: 625083322}
   titleSpriteImage: {fileID: 625083324}
   factCardOverlay: {fileID: 2100000403}
@@ -5000,7 +5004,7 @@ MonoBehaviour:
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
-  operationInstructionFallback: "\u30AB\u30FC\u30C9\u3092\u30AF\u30EA\u30C3\u30AF\u3057\u3066\u89E3\u91C8\u3092\u5207\u308A\u66FF\u3048\u3001\u30C9\u30E9\u30C3\u30B0\u3067\u9806\u756A\u3092\u5165\u308C\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002"
+  operationInstructionFallback: "<color=#FF7700>\u30AB\u30FC\u30C9\u3092\u30AF\u30EA\u30C3\u30AF</color>\u3057\u3066\u89E3\u91C8\u3092\u5207\u308A\u66FF\u3048\u3001\u30C9\u30E9\u30C3\u30B0\u3067\u9806\u756A\u3092\u5165\u308C\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002"
   completedPhaseTitle:
     m_TableReference:
       m_TableCollectionName: GameText
@@ -5044,7 +5048,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    instructionFallback: "\u30AB\u30FC\u30C9\u3092\u30AF\u30EA\u30C3\u30AF\u3057\u3066\u89E3\u91C8\u3092\u5207\u308A\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002"
+    instructionFallback: "<color=#FF7700>\u30AB\u30FC\u30C9\u3092\u30AF\u30EA\u30C3\u30AF</color>\u3057\u3066\u89E3\u91C8\u3092\u5207\u308A\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002"
     successJudgementId: success
     defaultJudgementIdOnComplete: incorrect
   - chapterId: chapter2
@@ -5068,7 +5072,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    instructionFallback: "\u4E8B\u4EF6\u306E\u6D41\u308C\u304C\u901A\u308B\u4E26\u3073\u3078\u5165\u308C\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002\u30AB\u30FC\u30C9\u306E\u88CF\u8868\u306F\u554F\u3044\u307E\u305B\u3093\u3002"
+    instructionFallback: "<color=#FF7700>\u30AB\u30FC\u30C9\u3092\u30C9\u30E9\u30C3\u30B0</color>\u3057\u3066\u4E8B\u4EF6\u306E\u6D41\u308C\u304C\u901A\u308B\u4E26\u3073\u3078\u5165\u308C\u66FF\u3048\u3066\u304F\u3060\u3055\u3044\u3002\n\u30AB\u30FC\u30C9\u306E\u88CF\u8868\u306F\u554F\u3044\u307E\u305B\u3093\u3002"
     successJudgementId: success
     defaultJudgementIdOnComplete: incorrect
   - chapterId: chapter3
@@ -5729,6 +5733,94 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2100000500
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2100000501}
+  - component: {fileID: 2100000502}
+  - component: {fileID: 2100000503}
+  - component: {fileID: 2100000504}
+  m_Layer: 5
+  m_Name: StoryScreenFadePanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2100000501
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000500}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 297963045}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2100000502
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000500}
+  m_CullTransparentMesh: 1
+--- !u!114 &2100000503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!225 &2100000504
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100000500}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!1 &2112879906
 GameObject:
   m_ObjectHideFlags: 0

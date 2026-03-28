@@ -132,6 +132,7 @@ namespace U1W.Game
         [SerializeField] private StoryAsset endingStory;
         [SerializeField] private string titleSceneName = "Title";
         [SerializeField] [Min(0f)] private float endingTransitionBlackoutDuration;
+        [SerializeField] [Min(0f)] private float endingTransitionFadeInDuration;
 
         [Header("Character Focus")]
         [SerializeField] private Transform characterFocusRoot;
@@ -309,7 +310,8 @@ namespace U1W.Game
 
             SceneTransitionManager.LoadScene(
                 titleSceneName,
-                blackoutDuration: endingTransitionBlackoutDuration);
+                blackoutDuration: endingTransitionBlackoutDuration,
+                fadeInDurationOverride: endingTransitionFadeInDuration);
         }
 
         private void ApplyIdleView()

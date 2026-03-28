@@ -9,6 +9,7 @@ namespace U1W.SceneManagement
     public sealed class SceneTransitionManager : MonoBehaviour
     {
         private const float DefaultBlackoutDuration = 0f;
+        private const float UseDefaultFadeInDuration = -1f;
 
         private static SceneTransitionManager instance;
 
@@ -28,7 +29,8 @@ namespace U1W.SceneManagement
         public static void LoadScene(
             string sceneName,
             LoadSceneMode loadSceneMode = LoadSceneMode.Single,
-            float blackoutDuration = DefaultBlackoutDuration)
+            float blackoutDuration = DefaultBlackoutDuration,
+            float fadeInDurationOverride = UseDefaultFadeInDuration)
         {
             if (string.IsNullOrWhiteSpace(sceneName))
             {
@@ -42,13 +44,19 @@ namespace U1W.SceneManagement
                 return;
             }
 
-            manager.StartTransition(new SceneLoadRequest(sceneName, loadSceneMode, blackoutDuration));
+            manager.StartTransition(
+                new SceneLoadRequest(
+                    sceneName,
+                    loadSceneMode,
+                    blackoutDuration,
+                    fadeInDurationOverride));
         }
 
         public static void LoadScene(
             int buildIndex,
             LoadSceneMode loadSceneMode = LoadSceneMode.Single,
-            float blackoutDuration = DefaultBlackoutDuration)
+            float blackoutDuration = DefaultBlackoutDuration,
+            float fadeInDurationOverride = UseDefaultFadeInDuration)
         {
             SceneTransitionManager manager = EnsureInstance();
             if (manager == null)
@@ -56,13 +64,23 @@ namespace U1W.SceneManagement
                 return;
             }
 
-            manager.StartTransition(new SceneLoadRequest(buildIndex, loadSceneMode, blackoutDuration));
+            manager.StartTransition(
+                new SceneLoadRequest(
+                    buildIndex,
+                    loadSceneMode,
+                    blackoutDuration,
+                    fadeInDurationOverride));
         }
 
-        public static void ReloadCurrentScene(float blackoutDuration = DefaultBlackoutDuration)
+        public static void ReloadCurrentScene(
+            float blackoutDuration = DefaultBlackoutDuration,
+            float fadeInDurationOverride = UseDefaultFadeInDuration)
         {
             Scene currentScene = SceneManager.GetActiveScene();
-            LoadScene(currentScene.buildIndex, blackoutDuration: blackoutDuration);
+            LoadScene(
+                currentScene.buildIndex,
+                blackoutDuration: blackoutDuration,
+                fadeInDurationOverride: fadeInDurationOverride);
         }
 
         public static SceneTransitionManager EnsureInstance()
@@ -220,6 +238,7 @@ namespace U1W.SceneManagement
             isTransitioning = true;
             fadeImage.color = fadeColor;
             SetInputBlockerActive(true);
+            float resolvedFadeInDuration = request.ResolveFadeInDuration(fadeInDuration);
 
             await FadeAsync(0f, 1f, fadeOutDuration, version);
             if (!IsCurrentTransition(version))
@@ -240,7 +259,7 @@ namespace U1W.SceneManagement
             if (loadOperation == null)
             {
                 Debug.LogError("SceneTransitionManager.LoadScene failed: Unity did not return an AsyncOperation.");
-                await FadeAsync(1f, 0f, fadeInDuration, version);
+                await FadeAsync(1f, 0f, resolvedFadeInDuration, version);
                 if (IsCurrentTransition(version))
                 {
                     CompleteTransition();
@@ -257,7 +276,7 @@ namespace U1W.SceneManagement
                 return;
             }
 
-            await FadeAsync(1f, 0f, fadeInDuration, version);
+            await FadeAsync(1f, 0f, resolvedFadeInDuration, version);
 
             if (IsCurrentTransition(version))
             {
@@ -357,29 +376,41 @@ namespace U1W.SceneManagement
             public SceneLoadRequest(
                 string sceneName,
                 LoadSceneMode loadSceneMode,
-                float blackoutDuration)
+                float blackoutDuration,
+                float fadeInDurationOverride)
             {
                 SceneName = sceneName;
                 BuildIndex = -1;
                 LoadSceneMode = loadSceneMode;
                 BlackoutDuration = Mathf.Max(0f, blackoutDuration);
+                FadeInDurationOverride = fadeInDurationOverride;
             }
 
             public SceneLoadRequest(
                 int buildIndex,
                 LoadSceneMode loadSceneMode,
-                float blackoutDuration)
+                float blackoutDuration,
+                float fadeInDurationOverride)
             {
                 SceneName = null;
                 BuildIndex = buildIndex;
                 LoadSceneMode = loadSceneMode;
                 BlackoutDuration = Mathf.Max(0f, blackoutDuration);
+                FadeInDurationOverride = fadeInDurationOverride;
             }
 
             public string SceneName { get; }
             public int BuildIndex { get; }
             public LoadSceneMode LoadSceneMode { get; }
             public float BlackoutDuration { get; }
+            public float FadeInDurationOverride { get; }
+
+            public float ResolveFadeInDuration(float defaultDuration)
+            {
+                return FadeInDurationOverride >= 0f
+                    ? FadeInDurationOverride
+                    : Mathf.Max(0f, defaultDuration);
+            }
         }
     }
 }

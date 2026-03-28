@@ -164,6 +164,11 @@ namespace Project.Editor
                     yield return "audioKey";
                     yield return "audioVolume";
                     break;
+
+                case StoryStepType.FadeToBlack:
+                case StoryStepType.FadeFromBlack:
+                    yield return "screenFadeSeconds";
+                    break;
             }
         }
     }

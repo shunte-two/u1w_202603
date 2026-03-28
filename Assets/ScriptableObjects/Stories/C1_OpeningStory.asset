@@ -39,6 +39,7 @@ MonoBehaviour:
     audioKey: Main
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 1
     message:
@@ -65,6 +66,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -91,6 +93,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -117,6 +120,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -128,7 +132,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u3044\u304F\u3064\u304B\u306E\u30AB\u30FC\u30C9\u3092\u88CF\u8FD4\u3057\u3001\n\u3042\u308A\u3048\u308B\u89E3\u91C8\u3092\u898B\u3064\u3051\u51FA\u305D\u3046\u3002"
+    messageFallback: "\u3044\u304F\u3064\u304B\u306E\u30AB\u30FC\u30C9\u3092\u88CF\u8FD4\u3057\u3001\n\u3042\u308A\u3048\u308B\u89E3\u91C8\u3092\u898B\u3064\u3051\u51FA\u3057\u3066\u307B\u3057\u3044\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -143,6 +147,7 @@ MonoBehaviour:
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   references:
     version: 2
