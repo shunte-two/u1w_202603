@@ -46,4 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::U1W.SceneManagement.SceneTransitionManager
   fadeColor: {r: 0, g: 0, b: 0, a: 1}
   fadeOutDuration: 0.8
-  fadeInDuration: 0.8
+  fadeInDuration: 1.5

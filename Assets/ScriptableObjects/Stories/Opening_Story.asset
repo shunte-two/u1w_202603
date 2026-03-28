@@ -222,6 +222,32 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     loopBgm: 1
+  - stepType: 6
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: Reverse
+    audioVolume: 0.08
+    audioFadeSeconds: 0.6
+    loopBgm: 1
   - stepType: 5
     message:
       m_TableReference:
@@ -263,7 +289,7 @@ MonoBehaviour:
     characterId: 0
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
-    waitSeconds: 2
+    waitSeconds: 1.7
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
     endSprite: {fileID: 0}

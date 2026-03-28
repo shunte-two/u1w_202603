@@ -107,26 +107,24 @@ namespace U1W.Title
 
         private void ApplyButtonState()
         {
-            ConfigureChapterButton(chapter1Button, gameSceneName);
-            ConfigureChapterButton(chapter2Button, gameSceneName);
-            ConfigureChapterButton(chapter3Button, gameSceneName);
+            ConfigureChapterButton(chapter1Button, gameSceneName, Chapter1Id);
+            ConfigureChapterButton(chapter2Button, gameSceneName, Chapter2Id);
+            ConfigureChapterButton(chapter3Button, gameSceneName, Chapter3Id);
             ConfigureButton(developerLinkButton, !string.IsNullOrWhiteSpace(developerLinkUrl));
         }
 
-        private void ConfigureChapterButton(Button button, string sceneName)
+        private void ConfigureChapterButton(Button button, string sceneName, string chapterId)
         {
             if (button == null)
             {
                 return;
             }
 
-            bool available = !string.IsNullOrWhiteSpace(sceneName);
-            button.interactable = available;
-
-            if (hideUnavailableChapterButtons)
-            {
-                button.gameObject.SetActive(available);
-            }
+            bool visible =
+                !string.IsNullOrWhiteSpace(sceneName) &&
+                ChapterProgressStore.CanSelectFromTitle(chapterId);
+            button.gameObject.SetActive(visible);
+            button.interactable = visible;
         }
 
         private static void ConfigureButton(Button button, bool interactable)

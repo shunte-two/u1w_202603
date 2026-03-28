@@ -233,6 +233,7 @@ namespace U1W.Game
                 return;
             }
 
+            ChapterProgressStore.MarkReached(chapter.ChapterId);
             await PlayChapterIntroAsync(chapter, currentChapterIndex, cancellationToken);
             await PlayStoryIfAssignedAsync(chapter.OpeningStory, cancellationToken);
 

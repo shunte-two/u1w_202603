@@ -114,7 +114,7 @@ MonoBehaviour:
     canReorder: 1
     startsFlipped: 0
     correctIsFlipped: 0
-    correctTimelineOrder: 2
+    correctTimelineOrder: 1
     tags: []
   - id: rope
     factText:
@@ -216,7 +216,7 @@ MonoBehaviour:
     canReorder: 1
     startsFlipped: 0
     correctIsFlipped: 1
-    correctTimelineOrder: 1
+    correctTimelineOrder: 2
     tags: []
   references:
     version: 2

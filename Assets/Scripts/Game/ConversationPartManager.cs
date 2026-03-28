@@ -239,7 +239,11 @@ namespace U1W.Game
                     break;
 
                 case StoryStepType.PlayBgm:
-                    AudioManager.PlayBgm(step.AudioKey, step.AudioVolume, step.LoopBgm);
+                    if (!AudioManager.IsBgmPlaying(step.AudioKey))
+                    {
+                        AudioManager.PlayBgm(step.AudioKey, step.AudioVolume, step.LoopBgm);
+                    }
+
                     break;
 
                 case StoryStepType.StopBgm:
