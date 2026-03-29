@@ -240,7 +240,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "{name_0}\u3088\u308A\u524D\u306B\u3001\u3059\u3067\u306B\u5BDD\u5BA4\u306B\u306F\u300C\u8AB0\u304B\u300D\u304C\u3044\u305F\u3053\u3068\u306B\u306A\u308B\u3002"
+    messageFallback: "{name_0}\u3088\u308A\u524D\u306B\u3001\u3059\u3067\u306B\u5BDD\u5BA4\u306B\u306F\u300C\u8AB0\u304B\u300D\u304C\u3044\u305F\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1

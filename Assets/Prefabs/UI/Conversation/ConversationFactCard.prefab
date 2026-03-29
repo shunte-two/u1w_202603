@@ -110,8 +110,8 @@ MonoBehaviour:
   interpretationText: {fileID: 100033}
   frontSprite: {fileID: 21300000, guid: 3e0f6d4aab35e77498856c9493db4342, type: 3}
   backSprite: {fileID: 21300000, guid: 11fa13c712ae1014084cb67d5b4d4a16, type: 3}
-  frontColor: {r: 1, g: 1, b: 1, a: 0.98}
-  backColor: {r: 1, g: 1, b: 1, a: 0.98}
+  frontColor: {r: 1, g: 1, b: 1, a: 1}
+  backColor: {r: 1, g: 1, b: 1, a: 1}
   frontFactTextColor: {r: 1, g: 0, b: 0, a: 1}
   backFactTextColor: {r: 1, g: 0.37254903, b: 0.6392157, a: 1}
   frontInterpretationTextColor: {r: 0.10840156, g: 0.13565773, b: 0.26415092, a: 1}

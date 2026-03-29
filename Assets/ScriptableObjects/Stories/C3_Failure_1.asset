@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab1f3a7e0d2b4c5d8e9f0123456789ab, type: 3}
-  m_Name: C3_FailureStory
+  m_Name: C3_Failure_1
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
   nameTable: {fileID: 11400000, guid: d4cc9ee2db714009bece630c8f37e505, type: 2}
   steps:
@@ -51,7 +51,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u89E3\u91C8\u306E\u77DB\u76FE\u306F\u306A\u3055\u305D\u3046\u3060\u304C\u2015\u2015\n\u3053\u308C\u3067\u306F\u6642\u7CFB\u5217\u304C\u6210\u308A\u7ACB\u305F\u306A\u3044\u3002"
+    messageFallback: "{name_0}\u304C\u9003\u4EA1\u3057\u305F\u3001\u3068\u3044\u3046\u306E\u306F\u9593\u9055\u3044\u3067\u306F\u306A\u3044\u3060\u308D\u3046\u304C\u2015\u2015\r\n\u3082\u3063\u3068\u9069\u5207\u306A\u89E3\u91C8\u304C\u3042\u308B\u306F\u305A\u3060\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -105,7 +105,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u8AE6\u3081\u308B\u306A\u3002\n\u3082\u3046\u4E00\u606F\u3060\u3002"
+    messageFallback: "\u5C11\u306A\u304F\u3068\u3082\u3001\u8B66\u5BDF\u306E\u898B\u7ACB\u3066\u3068\u306F\u7570\u306A\u308B\u89E3\u91C8\u306B\u306A\u308B\u3060\u308D\u3046\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1

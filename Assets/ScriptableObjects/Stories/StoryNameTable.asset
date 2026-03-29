@@ -17,7 +17,7 @@ MonoBehaviour:
     displayName: "\u30DF\u30CF\u30A4\u30EB"
     nameColor: {r: 0.42, g: 0.84, b: 1, a: 1}
   - key: name_1
-    displayName: "\u30B0\u30EA\u30B4\u30FC\u30EB"
+    displayName: "\u30B0\u30EC\u30B4\u30FC\u30EB"
     nameColor: {r: 1, g: 0.56, b: 0.56, a: 1}
   - key: name_2
     displayName: "\u771F\u72AF\u4EBA"
