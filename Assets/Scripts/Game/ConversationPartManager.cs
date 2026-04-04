@@ -23,6 +23,7 @@ namespace U1W.Game
         [SerializeField] private TextMeshProUGUI advanceIndicatorText;
         [SerializeField] private GameObject screenFadeRoot;
         [SerializeField] private CanvasGroup screenFadeCanvasGroup;
+        [SerializeField] private Image screenFadeImage;
         [SerializeField] private GameObject titleSpriteRoot;
         [SerializeField] private Image titleSpriteImage;
         [SerializeField] private ConversationFactCardOverlay factCardOverlay;
@@ -266,6 +267,10 @@ namespace U1W.Game
                 case StoryStepType.FadeFromBlack:
                     await FadeScreenAsync(0f, step.ScreenFadeSeconds, cancellationToken);
                     break;
+
+                case StoryStepType.ScreenFlash:
+                    await FlashScreenAsync(step, cancellationToken);
+                    break;
             }
         }
 
@@ -347,6 +352,7 @@ namespace U1W.Game
             }
 
             KillScreenFadeTween(false);
+            SetScreenFadeColor(Color.black);
             SetScreenFadeRootActive(true);
             SetScreenFadeInputBlocked(true);
 
@@ -385,6 +391,79 @@ namespace U1W.Game
             if (targetAlpha <= 0f)
             {
                 SetScreenFadeInputBlocked(false);
+            }
+        }
+
+        private async UniTask FlashScreenAsync(
+            StoryStep step,
+            CancellationToken cancellationToken)
+        {
+            if (screenFadeCanvasGroup == null)
+            {
+                return;
+            }
+
+            KillScreenFadeTween(false);
+            SetScreenFadeColor(step.ScreenFlashColor);
+            SetScreenFadeRootActive(true);
+            SetScreenFadeInputBlocked(true);
+            SetScreenFadeAlpha(0f);
+
+            float targetAlpha = Mathf.Clamp01(step.ScreenFlashAlpha);
+            float fadeInSeconds = step.ScreenFlashFadeInSeconds;
+            float fadeOutSeconds = step.ScreenFlashFadeOutSeconds;
+
+            if (fadeInSeconds <= 0f && fadeOutSeconds <= 0f)
+            {
+                SetScreenFadeInputBlocked(false);
+                SetScreenFadeColor(Color.black);
+                return;
+            }
+
+            bool completed = false;
+            Sequence flashSequence = DOTween.Sequence()
+                .SetUpdate(true)
+                .SetEase(Ease.Linear);
+
+            if (fadeInSeconds > 0f)
+            {
+                flashSequence.Append(screenFadeCanvasGroup.DOFade(targetAlpha, fadeInSeconds));
+            }
+            else
+            {
+                SetScreenFadeAlpha(targetAlpha);
+            }
+
+            if (fadeOutSeconds > 0f)
+            {
+                flashSequence.Append(screenFadeCanvasGroup.DOFade(0f, fadeOutSeconds));
+            }
+            else
+            {
+                flashSequence.AppendCallback(() => SetScreenFadeAlpha(0f));
+            }
+
+            screenFadeTween = flashSequence
+                .OnComplete(() => completed = true)
+                .OnKill(() =>
+                {
+                    screenFadeTween = null;
+                    completed = true;
+                });
+
+            try
+            {
+                await UniTask.WaitUntil(() => completed, cancellationToken: cancellationToken);
+            }
+            catch (OperationCanceledException)
+            {
+                KillScreenFadeTween(false);
+                throw;
+            }
+            finally
+            {
+                SetScreenFadeInputBlocked(false);
+                SetScreenFadeColor(Color.black);
             }
         }
 
@@ -850,6 +929,7 @@ namespace U1W.Game
         private void SetScreenFadeImmediate(float alpha)
         {
             KillScreenFadeTween(false);
+            SetScreenFadeColor(Color.black);
             SetScreenFadeRootActive(true);
             SetScreenFadeAlpha(alpha);
             SetScreenFadeInputBlocked(alpha > 0f);
@@ -868,6 +948,14 @@ namespace U1W.Game
             if (screenFadeCanvasGroup != null)
             {
                 screenFadeCanvasGroup.alpha = Mathf.Clamp01(alpha);
+            }
+        }
+
+        private void SetScreenFadeColor(Color color)
+        {
+            if (screenFadeImage != null)
+            {
+                screenFadeImage.color = color;
             }
         }
 
@@ -922,6 +1010,7 @@ namespace U1W.Game
             WarnIfMissing(advanceIndicatorText, nameof(advanceIndicatorText));
             WarnIfMissing(screenFadeRoot, nameof(screenFadeRoot));
             WarnIfMissing(screenFadeCanvasGroup, nameof(screenFadeCanvasGroup));
+            WarnIfMissing(screenFadeImage, nameof(screenFadeImage));
             WarnIfMissing(titleSpriteRoot, nameof(titleSpriteRoot));
             WarnIfMissing(titleSpriteImage, nameof(titleSpriteImage));
             WarnIfMissing(factCardOverlay, nameof(factCardOverlay));

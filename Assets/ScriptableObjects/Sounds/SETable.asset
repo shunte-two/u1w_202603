@@ -25,3 +25,5 @@ MonoBehaviour:
     Clip: {fileID: 8300000, guid: 6e2fa684522cc2b45927c3b9cc5c8dc0, type: 3}
   - Key: Reverse
     Clip: {fileID: 8300000, guid: 8f19a73bd74739d48bcbc33655d0b37b, type: 3}
+  - Key: Correct
+    Clip: {fileID: 8300000, guid: a496330d8cf957949a86b7d941768b9f, type: 3}

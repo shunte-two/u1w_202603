@@ -30,7 +30,8 @@ namespace U1W.Game
         ClearFactCards = 9,
         ShowEndSprite = 10,
         FadeToBlack = 11,
-        FadeFromBlack = 12
+        FadeFromBlack = 12,
+        ScreenFlash = 13
     }
 
     public enum StoryCharacterId
@@ -77,6 +78,10 @@ namespace U1W.Game
         [SerializeField] [Range(0f, 1f)] private float audioVolume = 1f;
         [SerializeField] [Min(0f)] private float audioFadeSeconds;
         [SerializeField] [Min(0f)] private float screenFadeSeconds = 0.35f;
+        [SerializeField] private Color screenFlashColor = Color.white;
+        [SerializeField] [Range(0f, 1f)] private float screenFlashAlpha = 1f;
+        [SerializeField] [Min(0f)] private float screenFlashFadeInSeconds = 0.08f;
+        [SerializeField] [Min(0f)] private float screenFlashFadeOutSeconds = 0.12f;
         [SerializeField] private bool loopBgm = true;
 
         public StoryStepType StepType => stepType;
@@ -97,6 +102,10 @@ namespace U1W.Game
         public float AudioVolume => audioVolume;
         public float AudioFadeSeconds => audioFadeSeconds;
         public float ScreenFadeSeconds => screenFadeSeconds;
+        public Color ScreenFlashColor => screenFlashColor;
+        public float ScreenFlashAlpha => screenFlashAlpha;
+        public float ScreenFlashFadeInSeconds => screenFlashFadeInSeconds;
+        public float ScreenFlashFadeOutSeconds => screenFlashFadeOutSeconds;
         public bool LoopBgm => loopBgm;
     }
 }

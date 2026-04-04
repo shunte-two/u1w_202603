@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ab1f3a7e0d2b4c5d8e9f0123456789ab, type: 3}
-  m_Name: C2_Failure_0
+  m_Name: C2_Failure_2
   m_EditorClassIdentifier: Assembly-CSharp::U1W.Game.StoryAsset
   nameTable: {fileID: 11400000, guid: d4cc9ee2db714009bece630c8f37e505, type: 2}
   steps:
@@ -51,7 +51,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u30ED\u30FC\u30D7\u3092\u6301\u3063\u305F{name_0}\u306E\u59FF\u304C\u76EE\u6483\u3055\u308C\u305F\u306E\u306F\n{name_1}\u306E\u60B2\u9CF4\u304C\u805E\u3053\u3048\u305F\u5F8C\u2015\u2015\n\u3053\u308C\u306F\u3001\u78BA\u5B9A\u3057\u3066\u3044\u308B\u4E8B\u5B9F\u3060\u3002"
+    messageFallback: "\u30ED\u30FC\u30D7\u3092\u6301\u3063\u305F{name_0}\u306E\u59FF\u304C\u76EE\u6483\u3055\u308C\u305F\u306E\u306F\u5BDD\u5BA4\u4ED8\u8FD1\u2015\u2015\n\u3064\u307E\u308A\u3001\u305D\u308C\u4EE5\u524D\u306B\n\u5F7C\u304C\u5BDD\u5BA4\u306B\u5411\u304B\u3046\u30BF\u30A4\u30DF\u30F3\u30B0\u304C\u3042\u3063\u305F\u306F\u305A\u3060\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1

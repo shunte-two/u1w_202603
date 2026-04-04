@@ -10,6 +10,13 @@ namespace U1W.Game
 {
     public sealed class SequenceManager : MonoBehaviour
     {
+        private enum RelativeOrderRequirement
+        {
+            Any = 0,
+            BeforeReferenceCard = 1,
+            AfterReferenceCard = 2
+        }
+
         [Serializable]
         private sealed class FailureCardCondition
         {
@@ -18,6 +25,8 @@ namespace U1W.Game
             [SerializeField] private bool isFlipped;
             [SerializeField] private bool requireOrderMatch = true;
             [SerializeField] [Min(0)] private int orderIndex;
+            [SerializeField] private RelativeOrderRequirement relativeOrderRequirement;
+            [SerializeField] private string referenceCardId = "card";
 
             public bool Matches(OperationStateSnapshot operationStateSnapshot)
             {
@@ -38,7 +47,40 @@ namespace U1W.Game
                     return false;
                 }
 
+                if (!MatchesRelativeOrder(operationStateSnapshot, card))
+                {
+                    return false;
+                }
+
                 return true;
+            }
+
+            private bool MatchesRelativeOrder(
+                OperationStateSnapshot operationStateSnapshot,
+                OperationCardStateSnapshot card)
+            {
+                if (relativeOrderRequirement == RelativeOrderRequirement.Any)
+                {
+                    return true;
+                }
+
+                if (string.IsNullOrWhiteSpace(referenceCardId) ||
+                    string.Equals(cardId, referenceCardId, StringComparison.Ordinal) ||
+                    !operationStateSnapshot.TryFindCard(
+                        referenceCardId,
+                        out OperationCardStateSnapshot referenceCard))
+                {
+                    return false;
+                }
+
+                return relativeOrderRequirement switch
+                {
+                    RelativeOrderRequirement.BeforeReferenceCard =>
+                        card.OrderIndex < referenceCard.OrderIndex,
+                    RelativeOrderRequirement.AfterReferenceCard =>
+                        card.OrderIndex > referenceCard.OrderIndex,
+                    _ => true
+                };
             }
         }
 

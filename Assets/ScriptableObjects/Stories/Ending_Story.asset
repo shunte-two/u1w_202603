@@ -40,6 +40,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -67,6 +71,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -94,6 +102,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -121,6 +133,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -148,6 +164,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -175,6 +195,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -202,6 +226,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -229,6 +257,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -256,6 +288,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -283,6 +319,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -310,6 +350,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -337,6 +381,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -364,6 +412,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -391,6 +443,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -418,6 +474,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -445,6 +505,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -472,6 +536,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -499,6 +567,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 5
     message:
@@ -526,6 +598,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 1.5
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 2
     message:
@@ -553,6 +629,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -580,6 +660,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -607,6 +691,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 6
     message:
@@ -634,6 +722,10 @@ MonoBehaviour:
     audioVolume: 0.08
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -661,6 +753,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 6
     message:
@@ -688,6 +784,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 11
     message:
@@ -715,6 +815,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 3
     message:
@@ -742,6 +846,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 2
     message:
@@ -769,6 +877,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 4
     message:
@@ -796,6 +908,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 3
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 12
     message:
@@ -823,6 +939,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 3
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -850,6 +970,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -877,6 +1001,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -904,6 +1032,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -931,6 +1063,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -958,6 +1094,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -985,6 +1125,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1012,6 +1156,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1039,6 +1187,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1066,6 +1218,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1093,6 +1249,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1120,6 +1280,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1147,6 +1311,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1174,6 +1342,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1201,6 +1373,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1228,6 +1404,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1255,6 +1435,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1282,6 +1466,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1309,6 +1497,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1336,6 +1528,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 6
     message:
@@ -1363,6 +1559,10 @@ MonoBehaviour:
     audioVolume: 0.4
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 0
     message:
@@ -1379,7 +1579,7 @@ MonoBehaviour:
     characterId: 0
     expressionId: 1
     hideCharacterWhenExpressionMissing: 0
-    waitSeconds: 1.8
+    waitSeconds: 1.6
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
     endSprite: {fileID: 0}
@@ -1390,6 +1590,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 5
     message:
@@ -1417,6 +1621,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 11
     message:
@@ -1444,6 +1652,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   - stepType: 2
     message:
@@ -1471,6 +1683,10 @@ MonoBehaviour:
     audioVolume: 1
     audioFadeSeconds: 0
     screenFadeSeconds: 0
+    screenFlashColor: {r: 1, g: 1, b: 1, a: 1}
+    screenFlashAlpha: 1
+    screenFlashFadeInSeconds: 0.08
+    screenFlashFadeOutSeconds: 0.12
     loopBgm: 1
   references:
     version: 2

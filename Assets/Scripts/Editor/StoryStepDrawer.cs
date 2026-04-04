@@ -169,6 +169,13 @@ namespace Project.Editor
                 case StoryStepType.FadeFromBlack:
                     yield return "screenFadeSeconds";
                     break;
+
+                case StoryStepType.ScreenFlash:
+                    yield return "screenFlashColor";
+                    yield return "screenFlashAlpha";
+                    yield return "screenFlashFadeInSeconds";
+                    yield return "screenFlashFadeOutSeconds";
+                    break;
             }
         }
     }
