@@ -51,33 +51,6 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u8208\u5473\u6DF1\u3044\u3002"
-    waitForAdvance: 1
-    characterId: 0
-    expressionId: 1
-    hideCharacterWhenExpressionMissing: 0
-    waitSeconds: 0
-    showConversationWindowDuringWait: 1
-    titleSprite: {fileID: 0}
-    endSprite: {fileID: 0}
-    factCardChapterAsset: {fileID: 0}
-    factCardId: card
-    factCardFaceMode: 0
-    audioKey: 
-    audioVolume: 1
-    audioFadeSeconds: 0
-    screenFadeSeconds: 0.35
-    loopBgm: 1
-  - stepType: 0
-    message:
-      m_TableReference:
-        m_TableCollectionName: 
-      m_TableEntryReference:
-        m_KeyId: 0
-        m_Key: 
-      m_FallbackState: 0
-      m_WaitForCompletion: 0
-      m_LocalVariables: []
     messageFallback: "\u6D41\u308C\u304C\u7E4B\u304C\u3063\u305F\u3088\u3046\u3060\u306D\u3002"
     waitForAdvance: 1
     characterId: 0
@@ -122,6 +95,33 @@ MonoBehaviour:
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
     loopBgm: 1
+  - stepType: 7
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 9387ea5c9bea4bfebc71f17c6c69df75, type: 2}
+    factCardId: safe
+    factCardFaceMode: 2
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -144,6 +144,33 @@ MonoBehaviour:
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
+    loopBgm: 1
+  - stepType: 7
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 9387ea5c9bea4bfebc71f17c6c69df75, type: 2}
+    factCardId: scream
+    factCardFaceMode: 1
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
@@ -176,6 +203,33 @@ MonoBehaviour:
     audioFadeSeconds: 0
     screenFadeSeconds: 0.35
     loopBgm: 1
+  - stepType: 7
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
+    waitForAdvance: 0
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 11400000, guid: 9387ea5c9bea4bfebc71f17c6c69df75, type: 2}
+    factCardId: bedroom
+    factCardFaceMode: 1
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
+    loopBgm: 1
   - stepType: 0
     message:
       m_TableReference:
@@ -187,6 +241,33 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     messageFallback: "\u305D\u308C\u3092\u805E\u3044\u3066{name_0}\u306F\u614C\u3066\u3066\u5BDD\u5BA4\u3078\u5411\u304B\u3063\u305F\u3002\n\u91D1\u5EAB\u304C\u958B\u3051\u653E\u305F\u308C\u305F\u307E\u307E\u3067\u3042\u308B\u3053\u3068\u3082\u5FD8\u308C\u3066\u306D\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
+    loopBgm: 1
+  - stepType: 8
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -241,6 +322,33 @@ MonoBehaviour:
       m_WaitForCompletion: 0
       m_LocalVariables: []
     messageFallback: "{name_0}\u3088\u308A\u524D\u306B\u3001\u3059\u3067\u306B\u5BDD\u5BA4\u306B\u306F\u300C\u8AB0\u304B\u300D\u304C\u3044\u305F\u3002"
+    waitForAdvance: 1
+    characterId: 0
+    expressionId: 1
+    hideCharacterWhenExpressionMissing: 0
+    waitSeconds: 0
+    showConversationWindowDuringWait: 1
+    titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
+    factCardChapterAsset: {fileID: 0}
+    factCardId: card
+    factCardFaceMode: 0
+    audioKey: 
+    audioVolume: 1
+    audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
+    loopBgm: 1
+  - stepType: 9
+    message:
+      m_TableReference:
+        m_TableCollectionName: 
+      m_TableEntryReference:
+        m_KeyId: 0
+        m_Key: 
+      m_FallbackState: 0
+      m_WaitForCompletion: 0
+      m_LocalVariables: []
+    messageFallback: 
     waitForAdvance: 1
     characterId: 0
     expressionId: 1

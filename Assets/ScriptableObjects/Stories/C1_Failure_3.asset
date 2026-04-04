@@ -32,12 +32,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -57,12 +59,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 1
     message:
@@ -82,12 +86,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   - stepType: 0
     message:
@@ -99,7 +105,7 @@ MonoBehaviour:
       m_FallbackState: 0
       m_WaitForCompletion: 0
       m_LocalVariables: []
-    messageFallback: "\u4E00\u8DB3\u98DB\u3073\u306B\u7269\u4E8B\u3092\u8003\u3048\u3059\u304E\u3066\u3044\u308B\u306D\u3002\n\u3082\u3063\u3068\u8DB3\u5143\u3092\u56FA\u3081\u3066\u307B\u3057\u3044\u3082\u306E\u3060\u3088\u3002"
+    messageFallback: "\u4E00\u8DB3\u98DB\u3073\u306B\u7269\u4E8B\u3092\u8003\u3048\u3059\u304E\u3066\u3044\u308B\u306D\u3002\n\u307E\u305A\u306F\u8DB3\u5143\u3092\u56FA\u3081\u3066\u307B\u3057\u3044\u3082\u306E\u3060\u3088\u3002"
     waitForAdvance: 1
     characterId: 0
     expressionId: 1
@@ -107,12 +113,14 @@ MonoBehaviour:
     waitSeconds: 0
     showConversationWindowDuringWait: 1
     titleSprite: {fileID: 0}
+    endSprite: {fileID: 0}
     factCardChapterAsset: {fileID: 0}
     factCardId: card
     factCardFaceMode: 0
     audioKey: 
     audioVolume: 1
     audioFadeSeconds: 0
+    screenFadeSeconds: 0.35
     loopBgm: 1
   references:
     version: 2
